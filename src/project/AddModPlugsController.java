@@ -1,14 +1,12 @@
 package project;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -17,46 +15,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/3/2015.
+ * Created by cj on 10/4/2015.
  */
-public class SettingsController implements Initializable {
-
-    @FXML
-    private Button backbtn;
-
-
-    //private ScreensController myController;
+public class AddModPlugsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 
     @FXML
-    public void goToMain() {
-        goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
-    }
-    @FXML
-    public void goToOS() {
-        Platform.exit();
+    public void addPlugs() {
+        goToNextScreen("/fxml/AddPlugs.fxml");
     }
 
     @FXML
-    public void goToChangePw() {
-        goToNextScreen("/fxml/Password.fxml");
+    public void modPlugs() {
+        goToNextScreen("/fxml/ModPlugs.fxml");
     }
 
     @FXML
-    public void goToAddModPlugs() {
-    goToNextScreen("/fxml/AddModPlugs.fxml");
-
-    }
-
-    @FXML
-    public  void goToGreeting() {
-        goToNextScreen("/fxml/Greeting.fxml");
+    public void goToSettings() {
+        goToNextScreen("/fxml/Settings.fxml");
     }
 
     private void goToNextScreen(String fxml) {

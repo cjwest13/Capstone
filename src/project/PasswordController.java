@@ -1,14 +1,12 @@
 package project;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -17,52 +15,44 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/3/2015.
+ * Created by cj on 10/4/2015.
  */
-public class SettingsController implements Initializable {
+public class PasswordController implements Initializable{
 
     @FXML
-    private Button backbtn;
+    private PasswordField password;
 
+    Dialog<String> dialog = new Dialog<>();
 
-    //private ScreensController myController;
+    private ButtonType close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 
     @FXML
-    public void goToMain() {
-        goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
-    }
-    @FXML
-    public void goToOS() {
-        Platform.exit();
-    }
+    public void changePassword() {
+        if (password.getText() == null) {
+            dialog("Incorrect Information", "Enter A Password.");
+        } else {
+            AuthorizeController.adminpw = password.getText();
+            dialog("Confirmation", "Password was changed!");
+        }
+     }
 
-    @FXML
-    public void goToChangePw() {
-        goToNextScreen("/fxml/Password.fxml");
-    }
-
-    @FXML
-    public void goToAddModPlugs() {
-    goToNextScreen("/fxml/AddModPlugs.fxml");
-
+    private void dialog(String title, String message) {
+        dialog.getDialogPane().getButtonTypes().add(close);
+        dialog.setTitle(title);
+        dialog.setHeight(200);
+        dialog.setContentText(message);
+        dialog.showAndWait();
     }
 
     @FXML
-    public  void goToGreeting() {
-        goToNextScreen("/fxml/Greeting.fxml");
-    }
-
-    private void goToNextScreen(String fxml) {
+    public void goBack() {
         Parent loadScreen;
         try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
+            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
             FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);

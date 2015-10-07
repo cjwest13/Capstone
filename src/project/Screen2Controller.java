@@ -1,14 +1,12 @@
 package project;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -17,14 +15,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/3/2015.
+ * Created by cj on 9/29/2015.
  */
-public class SettingsController implements Initializable {
-
-    @FXML
-    private Button backbtn;
-
-
+public class Screen2Controller implements Initializable {
     //private ScreensController myController;
 
     @Override
@@ -37,26 +30,6 @@ public class SettingsController implements Initializable {
     public void goToMain() {
         goToNextScreen("/fxml/Main.fxml");
         //myController.setScreen(MainScreen.screen1);
-    }
-    @FXML
-    public void goToOS() {
-        Platform.exit();
-    }
-
-    @FXML
-    public void goToChangePw() {
-        goToNextScreen("/fxml/Password.fxml");
-    }
-
-    @FXML
-    public void goToAddModPlugs() {
-    goToNextScreen("/fxml/AddModPlugs.fxml");
-
-    }
-
-    @FXML
-    public  void goToGreeting() {
-        goToNextScreen("/fxml/Greeting.fxml");
     }
 
     private void goToNextScreen(String fxml) {
@@ -77,4 +50,5 @@ public class SettingsController implements Initializable {
         }
 
     }
+
 }

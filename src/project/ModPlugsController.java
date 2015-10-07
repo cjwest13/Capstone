@@ -2,7 +2,6 @@ package project;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +18,7 @@ import java.util.ResourceBundle;
 /**
  * Created by cj on 10/3/2015.
  */
-public class SettingsController implements Initializable {
-
-    @FXML
-    private Button backbtn;
+public class ModPlugsController implements Initializable {
 
 
     //private ScreensController myController;
@@ -34,35 +30,20 @@ public class SettingsController implements Initializable {
     }
 
     @FXML
-    public void goToMain() {
-        goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
-    }
-    @FXML
-    public void goToOS() {
-        Platform.exit();
-    }
-
-    @FXML
-    public void goToChangePw() {
-        goToNextScreen("/fxml/Password.fxml");
-    }
-
-    @FXML
-    public void goToAddModPlugs() {
-    goToNextScreen("/fxml/AddModPlugs.fxml");
+    public void editPlugin() {
 
     }
 
     @FXML
-    public  void goToGreeting() {
-        goToNextScreen("/fxml/Greeting.fxml");
+    public void deletePlugin() {
+
     }
 
-    private void goToNextScreen(String fxml) {
+    @FXML
+    public void goToSettings() {
         Parent loadScreen;
         try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
+            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
             FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
