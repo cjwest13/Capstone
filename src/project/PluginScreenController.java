@@ -15,23 +15,44 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 9/29/2015.
+ * Controller for the PluginScreen.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 3, 2015
  */
-public class Screen2Controller implements Initializable {
-    //private ScreensController myController;
+public class PluginScreenController implements Initializable {
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Main.fxml screen.
+     */
     @FXML
     public void goToMain() {
         goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
     }
 
+    /**
+     * Function assigned to a fxml grid that loads the plugin's main screen.
+     * @param fxml path to an fxml file.
+     */
+    public void goToPlugin(String fxml) {
+       goToNextScreen(fxml);
+    }
+
+    /**
+     * Goes to the screen according to the fxml file that is passed.
+     * @param fxml path to an fxml file.
+     */
     private void goToNextScreen(String fxml) {
         Parent loadScreen;
         try {
@@ -43,7 +64,7 @@ public class Screen2Controller implements Initializable {
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
             stage.setScene(scene);
-            //stage.setFullScreen(true);
+            stage.setFullScreen(true);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");

@@ -15,29 +15,50 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/4/2015.
+ * Controller for AddModPlugs.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 4, 2015
  */
 public class AddModPlugsController implements Initializable {
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the AddPlugs.fxml screen.
+     */
     @FXML
     public void addPlugs() {
         goToNextScreen("/fxml/AddPlugs.fxml");
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the ModPlugs.fxml screen.
+     */
     @FXML
     public void modPlugs() {
         goToNextScreen("/fxml/ModPlugs.fxml");
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Settings.fxml screen.
+     */
     @FXML
     public void goToSettings() {
         goToNextScreen("/fxml/Settings.fxml");
     }
 
+    /**
+     * Goes to the screen according to the fxml file that is passed.
+     * @param fxml path to an fxml file.
+     */
     private void goToNextScreen(String fxml) {
         Parent loadScreen;
         try {
@@ -49,7 +70,7 @@ public class AddModPlugsController implements Initializable {
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
             stage.setScene(scene);
-            //stage.setFullScreen(true);
+            stage.setFullScreen(true);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");

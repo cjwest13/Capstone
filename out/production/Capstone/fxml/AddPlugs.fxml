@@ -21,10 +21,10 @@
                 <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Enter Username" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label text="Add Plugin" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <Button mnemonicParsing="false" onAction="#addPlugin" prefHeight="25.0" prefWidth="80.0" text="Submit" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-                  <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="42.0" prefWidth="285.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                   <Button mnemonicParsing="false" onAction="#findPlugin" prefHeight="25.0" prefWidth="81.0" text="Find" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <TextField fx:id="textArea" editable="false" maxWidth="-Infinity" prefHeight="39.0" prefWidth="264.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
          </center>

@@ -1,0 +1,4 @@
+Run this line to activate javafx keyboard.
+
+java -Dcom.sun.javafx.virtualKeyboard=javafx -Dcom.sun.javafx.touch=true -jar Capstone.jar
+
