@@ -6,38 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99a98901-e26b-4e71-b252-47bfc62f21d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AddModPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AddModPlugsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AddPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AddPlugsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AuthorizeController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AuthorizeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/GreetingController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/GreetingController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainController$1.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainScreen.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainScreen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/ModPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/ModPlugsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/PasswordController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/PasswordController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/SettingsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/SettingsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AddModPlugsController.java" afterPath="$PROJECT_DIR$/src/project/AddModPlugsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/AddPlugs.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/AddPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/AddPlugs.fxml" afterPath="$PROJECT_DIR$/src/fxml/AddPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AddPlugsController.java" afterPath="$PROJECT_DIR$/src/project/AddPlugsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Authorization.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Authorization.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Authorization.fxml" afterPath="$PROJECT_DIR$/src/fxml/Authorization.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AuthorizeController.java" afterPath="$PROJECT_DIR$/src/project/AuthorizeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Greeting.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Greeting.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Greeting.fxml" afterPath="$PROJECT_DIR$/src/fxml/Greeting.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/GreetingController.java" afterPath="$PROJECT_DIR$/src/project/GreetingController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/MainController.java" afterPath="$PROJECT_DIR$/src/project/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/MainScreen.java" afterPath="$PROJECT_DIR$/src/project/MainScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/ModPlugsController.java" afterPath="$PROJECT_DIR$/src/project/ModPlugsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/PasswordController.java" afterPath="$PROJECT_DIR$/src/project/PasswordController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Settings.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Settings.fxml" afterPath="$PROJECT_DIR$/src/fxml/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/SettingsController.java" afterPath="$PROJECT_DIR$/src/project/SettingsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/styles/main.css" afterPath="$PROJECT_DIR$/out/production/Capstone/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/main.css" afterPath="$PROJECT_DIR$/src/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="99a98901-e26b-4e71-b252-47bfc62f21d9" name="Default" comment="" />
     <ignored path="Capstone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -68,21 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GreetingController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/project/GreetingController.java">
+      <file leaf-file-name="PluginBase.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/plugins/PluginBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3196986">
-              <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="34" selection-start-line="99" selection-start-column="34" selection-end-line="99" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.64705884">
+              <caret line="28" column="0" selection-start-line="27" selection-start-column="28" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,6 +53,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -122,6 +82,7 @@
         <option value="$PROJECT_DIR$/src/project/Main.java" />
         <option value="$PROJECT_DIR$/src/project/MainController.java" />
         <option value="$PROJECT_DIR$/src/project/GreetingController.java" />
+        <option value="$PROJECT_DIR$/src/plugins/PluginBase.java" />
       </list>
     </option>
   </component>
@@ -211,24 +172,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fxml" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -593,7 +536,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="0" width="3204" height="1714" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -603,10 +546,10 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3369345" sideWeight="0.498125" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18365969" sideWeight="0.498125" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17465322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17465322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -832,6 +775,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/GreetingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/PluginScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2079832">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/PasswordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2079832">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/project/MainScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -840,10 +807,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/GreetingController.java">
+    <entry file="file://$PROJECT_DIR$/src/plugins/PluginBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3196986">
-          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.64705884">
+          <caret line="28" column="0" selection-start-line="27" selection-start-column="28" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
