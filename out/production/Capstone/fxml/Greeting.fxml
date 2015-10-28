@@ -48,9 +48,9 @@
                      <font>
                         <Font name="CoolveticaRg-Regular" size="18.0" />
                      </font></Label>
-                  <TextField fx:id="greettxt" alignment="TOP_CENTER" maxWidth="-Infinity" onAction="#greeting" prefHeight="25.0" prefWidth="383.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <TextField fx:id="greettxt" maxWidth="-Infinity" onAction="#greeting" prefHeight="25.0" prefWidth="383.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Button mnemonicParsing="false" onAction="#greeting" prefHeight="25.0" prefWidth="109.0" text="Submit" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Find" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#findFile" prefHeight="25.0" prefWidth="70.0" text="Find" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </center>

@@ -1,7 +1,5 @@
 package project;
-/**
- * Created by cj on 10/3/2015.
- */
+
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -9,30 +7,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
 
+/**
+ * Makes the main and first screen showed.
+ * @author  Clifton West, John Burrell
+ * @version October 3, 2015
+ */
 public class MainScreen extends Application {
-    /**
-    static String screen1 = "main";
-    static String screen1fxml = "/fxml/Main.fxml";
-    static String screen2 = "screen2";
-    static String screen2fxml = "/fxml/Screen2.fxml";
-    static String screen3 = "settings";
-    static String screen3fxml = "/fxml/Settings.fxml";
-    */
 
-
+    /** A static variable containing the current stage */
     private static Stage stage;
+
+    /**
+     * Initializes the Main screen.
+     * @param primaryStage  The current Stage.
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-
             FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
             ft.setFromValue(0.0);
             ft.setToValue(1.0);
@@ -40,19 +41,26 @@ public class MainScreen extends Application {
             Scene scene = new Scene(root, 600, 400);
             scene.getStylesheets().add("/styles/main.css");
             primaryStage.setScene(scene);
-            //primaryStage.setFullScreen(true);
+            primaryStage.setFullScreen(true);
             primaryStage.setFullScreenExitHint("");
             primaryStage.show();
         } catch(IOException ioe) {
-            System.out.println("gahhh");
-
+            System.out.println("Error In Showing the Main Screen.");
         }
     }
 
+    /**
+     * Returns the current stage.
+     * @return stage    The current stage.
+     */
     public static Stage getStage() {
         return stage;
     }
 
+    /**
+     * Entry point into the program.
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

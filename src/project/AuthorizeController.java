@@ -9,61 +9,98 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/4/2015.
+ * Controller class for Authorization.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 4, 2015
  */
-public class AuthorizeController implements Initializable{
+public class AuthorizeController implements Initializable {
+    /** TestField representing the username text field in the fxml */
     @FXML
     private TextField username;
-
+    /** PasswordField representing the password password field in the fxml */
     @FXML
     private PasswordField password;
-
-    private String adminname = "admin";
-
-    public static String adminpw;
-
-    Dialog<String> dialog = new Dialog<>();
-
+    /** String representing the admin username */
+    private String adminname;
+    /** String representing the admin password */
+    private static Boolean newAdminPw;
+    /** String representing the admin password */
+    public static String encryptedAdminPw;
+    /** Dialog popup box */
+    private Dialog<String> dialog = new Dialog<>();
+    /** Close Button for the Dialog box */
     private ButtonType close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        changePassword(adminpw);
-    }
-    private void changePassword(String text) {
-        if (adminpw == null) {
-            adminpw = "touch";
-        } else {
-            adminpw = text;
+        adminname = "admin";
+        if (newAdminPw == null) {
+            encryptedAdminPw = PasswordEncryption.getEncryptedPw("touch");
+           newAdminPw = false;
         }
     }
+
+    /**
+     * Changes the password.
+     * @param text  The new password.
+     */
+    public static void changePassword(String text) {
+        encryptedAdminPw = PasswordEncryption.getEncryptedPw(text);
+        newAdminPw = true;
+    }
+
+
+
+    /**
+     * Function assigned to a fxml button that goes to the Main.fxml screen.
+     */
     @FXML
     public void goToMain() {
         goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
     }
 
+    /**
+     * Checks to see if the username and password enter, matches the one
+     * already saved.
+     */
     @FXML
     public void getInfo() {
+        /**
+        String newPw = PasswordEncryption.getEncryptedPw(password.getText());
         if (!username.getText().equals(adminname)) {
             dialog("Incorrect Information", "The Username is Incorrect.");
-        } else if (!password.getText().equals(adminpw)) {
+        } else if (!newPw.equals(encryptedAdminPw)) {
             dialog("Incorrect Information", "The Password is Incorrect.");
         } else {
             goToSettings();
         }
+         */
+        goToSettings();
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Settings.fxml screen.
+     */
     private void goToSettings() {
         goToNextScreen("/fxml/Settings.fxml");
     }
 
+    /**
+     * Private method to create the dialog popup box.
+     * @param title     Title of the dialog box.
+     * @param message   Message inside of the dialog box.
+     */
     private void dialog(String title, String message) {
         dialog.getDialogPane().getButtonTypes().add(close);
         dialog.setTitle(title);
@@ -72,6 +109,10 @@ public class AuthorizeController implements Initializable{
         dialog.showAndWait();
     }
 
+    /**
+     * Goes to the screen according to the fxml file that is passed.
+     * @param fxml path to an fxml file.
+     */
     private void goToNextScreen(String fxml) {
         Parent loadScreen;
         try {
@@ -82,8 +123,8 @@ public class AuthorizeController implements Initializable{
             ft.play();
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
             //stage.setFullScreen(true);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");

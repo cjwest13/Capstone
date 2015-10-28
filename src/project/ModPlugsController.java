@@ -16,29 +16,43 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/3/2015.
+ * Controller class for ModPlugs.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 3, 2015
  */
 public class ModPlugsController implements Initializable {
 
-
-    //private ScreensController myController;
-
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
     }
 
+    /**
+     * Changes the following plugin.
+     */
     @FXML
     public void editPlugin() {
 
     }
 
+    /**
+     * Deletes the following plugin.
+     */
     @FXML
     public void deletePlugin() {
 
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Settings.fxml screen.
+     */
     @FXML
     public void goToSettings() {
         Parent loadScreen;
@@ -50,8 +64,8 @@ public class ModPlugsController implements Initializable {
             ft.play();
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
             //stage.setFullScreen(true);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");

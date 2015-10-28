@@ -15,31 +15,50 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/4/2015.
+ * Controller class for Password.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 4, 2015
  */
-public class PasswordController implements Initializable{
+public class PasswordController extends AuthorizeController implements Initializable{
 
+    /** PasswordField representing the password password field in the fxml */
     @FXML
     private PasswordField password;
+    /** Dialog popup box */
+    private Dialog<String> dialog;
+    /** Close Button for the Dialog box */
+    private ButtonType close;
 
-    Dialog<String> dialog = new Dialog<>();
-
-    private ButtonType close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
-
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dialog = new Dialog<>();
+        close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
     }
 
+    /**
+     * Changes the Password for the admin.
+     */
     @FXML
     public void changePassword() {
         if (password.getText() == null) {
             dialog("Incorrect Information", "Enter A Password.");
         } else {
-            AuthorizeController.adminpw = password.getText();
+            changePassword(password.getText());
             dialog("Confirmation", "Password was changed!");
         }
      }
 
+    /**
+     * Private method to create the dialog popup box.
+     * @param title     Title of the dialog box.
+     * @param message   Message inside of the dialog box.
+     */
     private void dialog(String title, String message) {
         dialog.getDialogPane().getButtonTypes().add(close);
         dialog.setTitle(title);
@@ -48,6 +67,9 @@ public class PasswordController implements Initializable{
         dialog.showAndWait();
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Settings.fxml screen.
+     */
     @FXML
     public void goBack() {
         Parent loadScreen;
@@ -59,8 +81,8 @@ public class PasswordController implements Initializable{
             ft.play();
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
             //stage.setFullScreen(true);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");

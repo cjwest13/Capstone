@@ -17,48 +17,70 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cj on 10/3/2015.
+ * Controller class for Password.fxml file.
+ * @author  Clifton West, John Burrell
+ * @version October 3, 2015
  */
 public class SettingsController implements Initializable {
-
+    /** Button representing the back Button in the fxml */
     @FXML
     private Button backbtn;
 
-
-    //private ScreensController myController;
-
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Main.fxml screen.
+     */
     @FXML
     public void goToMain() {
         goToNextScreen("/fxml/Main.fxml");
-        //myController.setScreen(MainScreen.screen1);
     }
+
+    /**
+     * Function assigned to a fxml button closes the application.
+     */
     @FXML
     public void goToOS() {
         Platform.exit();
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Password.fxml screen.
+     */
     @FXML
     public void goToChangePw() {
         goToNextScreen("/fxml/Password.fxml");
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the AddModPlugs.fxml screen.
+     */
     @FXML
     public void goToAddModPlugs() {
     goToNextScreen("/fxml/AddModPlugs.fxml");
 
     }
 
+    /**
+     * Function assigned to a fxml button that goes to the Greeting.fxml screen.
+     */
     @FXML
     public  void goToGreeting() {
         goToNextScreen("/fxml/Greeting.fxml");
     }
 
+    /**
+     * Goes to the screen according to the fxml file that is passed.
+     * @param fxml path to an fxml file.
+     */
     private void goToNextScreen(String fxml) {
         Parent loadScreen;
         try {
@@ -69,8 +91,8 @@ public class SettingsController implements Initializable {
             ft.play();
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
             //stage.setFullScreen(true);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException ioe) {
             System.err.println("File not found");
