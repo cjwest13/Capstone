@@ -76,7 +76,7 @@ public class AuthorizeController implements Initializable {
      */
     @FXML
     public void getInfo() {
-        /**
+        
         String newPw = PasswordEncryption.getEncryptedPw(password.getText());
         if (!username.getText().equals(adminname)) {
             dialog("Incorrect Information", "The Username is Incorrect.");
@@ -85,7 +85,7 @@ public class AuthorizeController implements Initializable {
         } else {
             goToSettings();
         }
-         */
+         
         goToSettings();
     }
 
