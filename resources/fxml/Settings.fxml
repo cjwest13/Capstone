@@ -43,7 +43,7 @@
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToAddModPlugs" prefHeight="25.0" prefWidth="132.0" textAlignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Return To the O.S." textAlignment="CENTER" GridPane.valignment="BOTTOM" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Change Greeting" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="134.0" text="Add/Modify Plugins" textAlignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="108.0" text="Add/Modify Plugins" textAlignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Label alignment="BOTTOM_CENTER" text="Change Password" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToChangePw" prefHeight="25.0" prefWidth="131.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" textAlignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
