@@ -1,4 +1,4 @@
-package sample;
+package project;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,15 +16,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.SwipeEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.ClosingSwipe;
+import utilities.NextScreen;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable, NextScreen, ClosingSwipe {
 
+    @FXML
+    private AnchorPane anchorPane;
     @FXML
     private ChoiceBox choiceBox;
 
@@ -42,7 +50,14 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         pictures = new ImageView[3];
         addImages();
-        start();
+        startSlideShow();
+        //closes application on swipeDown
+        anchorPane.setOnSwipeDown(new EventHandler<SwipeEvent>() {
+            @Override
+            public void handle(SwipeEvent event) {
+                CloseTheApp();
+            }
+        });
 
         choiceBox.setItems(getCurrentPeople());
         choiceBox.setTooltip((new Tooltip("Select a CS Professor :D")));
@@ -56,6 +71,7 @@ public class MainController implements Initializable {
         });
 
 
+
     }
     private void addImages() {
         Image image1 = new Image(getClass().getResource("/pictures/pic1.jpg").toExternalForm(), 400, 400, true, true);
@@ -66,8 +82,7 @@ public class MainController implements Initializable {
         pictures[2] = new ImageView(image3);
     }
 
-    private void start() {
-
+    private void startSlideShow() {
         SequentialTransition slideshow = new SequentialTransition();
 
         for (ImageView slide : pictures) {
@@ -103,29 +118,4 @@ public class MainController implements Initializable {
 
         return people;
     }
-    private void createSlideShow() {
-
-    }
-
-    /**
-     * Function assigned to a fxml button that goes to the Settings.fxml screen.
-     */
-    private void goToNextScreen(String fxml) {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = Main.getStage();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-
-    }
-
 }

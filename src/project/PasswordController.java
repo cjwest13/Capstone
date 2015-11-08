@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 4, 2015
  */
-public class PasswordController extends AuthorizeController implements Initializable{
+public class PasswordController extends AuthorizeController implements Initializable, NextScreen {
 
     /** PasswordField representing the password password field in the fxml */
     @FXML
@@ -70,21 +71,6 @@ public class PasswordController extends AuthorizeController implements Initializ
      */
     @FXML
     public void goBack() {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-
+        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 3, 2015
  */
-public class ModPlugsController implements Initializable {
+public class ModPlugsController implements Initializable, NextScreen {
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -55,21 +56,6 @@ public class ModPlugsController implements Initializable {
      */
     @FXML
     public void goToSettings() {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-
+        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 3, 2015
  */
-public class SettingsController implements Initializable {
+public class SettingsController implements Initializable, NextScreen {
     /** Button representing the back Button in the fxml */
     @FXML
     private Button backbtn;
@@ -41,7 +42,7 @@ public class SettingsController implements Initializable {
      */
     @FXML
     public void goToMain() {
-        goToNextScreen("/fxml/Main.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Main.fxml");
     }
 
     /**
@@ -57,7 +58,7 @@ public class SettingsController implements Initializable {
      */
     @FXML
     public void goToChangePw() {
-        goToNextScreen("/fxml/Password.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Password.fxml");
     }
 
     /**
@@ -65,7 +66,7 @@ public class SettingsController implements Initializable {
      */
     @FXML
     public void goToAddModPlugs() {
-    goToNextScreen("/fxml/AddModPlugs.fxml");
+        NextScreen.super.goToNextScreen("/fxml/AddModPlugs.fxml");
 
     }
 
@@ -74,29 +75,6 @@ public class SettingsController implements Initializable {
      */
     @FXML
     public  void goToGreeting() {
-        goToNextScreen("/fxml/Greeting.fxml");
-    }
-
-    /**
-     * Goes to the screen according to the fxml file that is passed.
-     * @param fxml path to an fxml file.
-     */
-    private void goToNextScreen(String fxml) {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-
+        NextScreen.super.goToNextScreen("/fxml/Greeting.fxml");
     }
 }

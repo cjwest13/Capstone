@@ -29,4 +29,7 @@ public interface PluginBase {
 
     /** This method gets the javafx system keyboard if available */
     public void getKeyboard();
+
+    /** Gets the stage of the Applicaton */
+    public void getAppMainScreen();
 }

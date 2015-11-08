@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.*;
 import java.net.URL;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
  * @author  Clifton West, John Burrell
  * @version October 5, 2015
  */
-public class GreetingController implements Initializable {
+public class GreetingController implements Initializable, NextScreen {
     /** TestField representing the greeting text field in the fxml */
     @FXML
     private TextField greettxt;
@@ -121,21 +122,6 @@ public class GreetingController implements Initializable {
      */
     @FXML
     public void goBack() {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
+        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
 }

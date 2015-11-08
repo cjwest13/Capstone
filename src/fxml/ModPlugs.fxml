@@ -16,12 +16,12 @@
 
 <AnchorPane id="anchorMain" fx:id="anchorPane" stylesheets="/styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ModPlugsController">
    <children>
-      <VBox alignment="CENTER" layoutY="53.0" prefHeight="284.0" prefWidth="600.0" visible="false">
+      <VBox alignment="CENTER" layoutY="53.0" visible="false">
          <children>
             <ScrollBar id="mainScroll" orientation="VERTICAL" prefHeight="279.0" prefWidth="602.0" visible="false" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <BorderPane id="borderMain" layoutY="-5.0" prefHeight="400.0" prefWidth="600.0" stylesheets="/styles/main.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+      <BorderPane id="borderMain" layoutY="-5.0" stylesheets="/styles/main.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
          <top>
             <TextArea id="greetTxt" fx:id="greetTxt" editable="false" prefHeight="53.0" prefWidth="600.0" stylesheets="@../styles/main.css" text="Select Plugin To Modify" BorderPane.alignment="CENTER">
                <font>

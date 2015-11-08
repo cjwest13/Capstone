@@ -1,4 +1,4 @@
-package sample;
+package project;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by cjwest on 10/27/15.
  */
-public class ScheduleController implements Initializable {
+public class ScheduleController implements Initializable, NextScreen {
 
     @FXML
     private WebView webView;
@@ -43,20 +44,7 @@ public class ScheduleController implements Initializable {
      */
     @FXML
     public void goBack() {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = Main.getStage();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
+        goToNextScreen("/fxml/main.fxml");
 
     }
 }

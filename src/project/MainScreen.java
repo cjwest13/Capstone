@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ import java.io.IOException;
  * @author  Clifton West, John Burrell
  * @version October 3, 2015
  */
-public class MainScreen extends Application {
+public class MainScreen extends Application implements NextScreen {
 
     /** A static variable containing the current stage */
     private static Stage stage;
@@ -30,22 +31,7 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(root, 600, 400);
-            scene.getStylesheets().add("/styles/main.css");
-            primaryStage.setScene(scene);
-            primaryStage.setFullScreen(true);
-            primaryStage.setFullScreenExitHint("");
-            primaryStage.show();
-        } catch(IOException ioe) {
-            System.out.println("Error In Showing the Main Screen.");
-
-        }
+        NextScreen.super.goToNextScreen("/fxml/Main.fxml");
     }
 
     /**
@@ -53,7 +39,6 @@ public class MainScreen extends Application {
      * @return stage    The current stage.
      */
     public static Stage getStage() {
-        stage.setFullScreen(true);
         return stage;
     }
 

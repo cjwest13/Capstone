@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Permissions: sandbox
-JavaFX-Version: 8.0
-Class-Path: 
-Created-By: JavaFX Packager
-Main-Class: project.MainScreen
-

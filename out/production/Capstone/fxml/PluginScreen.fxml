@@ -39,14 +39,14 @@
          <left>
             <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../project/arrow-left.png" />
+                  <Image url="@../utilities/arrow-left.png" />
                </image>
             </ImageView>
          </left>
          <right>
             <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../project/arrow-right.png" />
+                  <Image url="@../utilities/arrow-right.png" />
                </image></ImageView>
          </right>
       </BorderPane>

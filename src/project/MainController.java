@@ -12,8 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +26,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 3, 2015
  */
-public class MainController implements Initializable {
+public class MainController implements Initializable, NextScreen {
     /** Label representing a label in the fxml */
     @FXML
     private Label label1txt;
@@ -39,6 +41,8 @@ public class MainController implements Initializable {
     private TextArea greetTxt;
     /** String containing the greeting. */
     public static String greeting;
+    @FXML
+    private GridPane gridPane;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -65,6 +69,14 @@ public class MainController implements Initializable {
                 settingbtn.setVisible(true);
             }
         });
+        //dynamically adding
+        int i = 3;
+        int j = 0;
+        while (j < 20) {
+        gridPane.add(new Button(), 1, i);
+            i++;
+            j++;
+        }
     }
 
     /**
@@ -83,32 +95,10 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Goes to the screen according to the fxml file that is passed.
-     * @param fxml path to an fxml file.
-     */
-    private void goToNextScreen(String fxml) {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-    }
-
-    /**
      * Function assigned to a fxml button that goes to the Authorization.fxml screen.
      */
     @FXML
     public void goToSettings() {
-        goToNextScreen("/fxml/Authorization.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Authorization.fxml");
     }
 }

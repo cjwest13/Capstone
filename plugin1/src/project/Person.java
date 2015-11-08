@@ -1,4 +1,4 @@
-package sample;
+package project;
 
 /**
  * Created by cjwest on 10/27/15.

@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.NextScreen;
+import utilities.PasswordEncryption;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +21,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 4, 2015
  */
-public class AuthorizeController implements Initializable {
+public class AuthorizeController implements Initializable, NextScreen {
     /** TestField representing the username text field in the fxml */
     @FXML
     private TextField username;
@@ -67,7 +70,7 @@ public class AuthorizeController implements Initializable {
      */
     @FXML
     public void goToMain() {
-        goToNextScreen("/fxml/Main.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Main.fxml");
     }
 
     /**
@@ -90,7 +93,7 @@ public class AuthorizeController implements Initializable {
      * Function assigned to a fxml button that goes to the Settings.fxml screen.
      */
     private void goToSettings() {
-        goToNextScreen("/fxml/Settings.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
 
     /**
@@ -104,28 +107,5 @@ public class AuthorizeController implements Initializable {
         dialog.setHeight(200);
         dialog.setContentText(message);
         dialog.showAndWait();
-    }
-
-    /**
-     * Goes to the screen according to the fxml file that is passed.
-     * @param fxml path to an fxml file.
-     */
-    private void goToNextScreen(String fxml) {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            Stage stage = MainScreen.getStage();
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-
     }
 }
