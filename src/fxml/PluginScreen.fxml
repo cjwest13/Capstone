@@ -12,7 +12,10 @@
          <center>
             <SplitPane dividerPositions="0.6933797909407665" orientation="VERTICAL" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="381.0" />
+                <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="381.0">
+                     <children>
+                        <HBox fx:id="hbox" alignment="CENTER" prefHeight="250.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="404.0" />
               </items>
             </SplitPane>

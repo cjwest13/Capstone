@@ -2,91 +2,42 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="unnamed" />
+      <artifact name="Capstone" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a98901-e26b-4e71-b252-47bfc62f21d9" name="Default" comment="editing several classes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugin1/src/utilities/ClosingSwipe.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugin1/src/utilities/NextScreen.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/NextScreen.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/AddModPlugs.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/AddPlugs.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/Authorization.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/Greeting.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/Main.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/ModPlugs.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/Password.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/PluginScreen.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/fxml/Settings.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/AddModPlugsController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/AddPlugsController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/AuthorizeController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/GreetingController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/MainController$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/MainController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/MainScreen.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/ModPlugsController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/PasswordController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/PasswordEncryption.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/PluginScreenController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/project/SettingsController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/styles/main.css" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugin1/src/sample/Main.java" afterPath="$PROJECT_DIR$/plugin1/src/project/Main.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugin1/src/sample/MainController.java" afterPath="$PROJECT_DIR$/plugin1/src/project/MainController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugin1/src/sample/Person.java" afterPath="$PROJECT_DIR$/plugin1/src/project/Person.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugin1/src/sample/ScheduleController.java" afterPath="$PROJECT_DIR$/plugin1/src/project/ScheduleController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/project/arrow-left.png" afterPath="$PROJECT_DIR$/src/utilities/arrow-left.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/project/arrow-right.png" afterPath="$PROJECT_DIR$/src/utilities/arrow-right.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/project/PasswordEncryption.java" afterPath="$PROJECT_DIR$/src/utilities/PasswordEncryption.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/project/arrow-left.png" afterPath="$PROJECT_DIR$/src/utilities/arrow-left.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/project/arrow-right.png" afterPath="$PROJECT_DIR$/src/utilities/arrow-right.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AddModPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AddModPlugsController.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/unnamed.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Capstone/Capstone.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Capstone/project/PasswordEncryption.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Capstone/project/arrow-left.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Capstone/project/arrow-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Capstone/project/xspModGuitar-9-Custom.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugin1/src/project/Person.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/plugins/PluginBase.class" afterPath="$PROJECT_DIR$/out/production/Capstone/plugins/PluginBase.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AddPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AddPlugsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/AuthorizeController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/AuthorizeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/GreetingController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/GreetingController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainController$1.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainController$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/MainScreen.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/MainScreen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/ModPlugsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/ModPlugsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/PasswordController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/PasswordController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/PluginScreenController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/PluginScreenController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/project/SettingsController.class" afterPath="$PROJECT_DIR$/out/production/Capstone/project/SettingsController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Capstone.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Capstone.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/AddModPlugs.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/AddModPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/AddPlugs.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/AddPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Authorization.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Authorization.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Greeting.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Greeting.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Main.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Main.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/ModPlugs.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/ModPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Password.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Password.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Capstone.iml" afterPath="$PROJECT_DIR$/Capstone.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/Mainfest.txt" afterPath="$PROJECT_DIR$/out/production/Capstone/Mainfest.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/PluginScreen.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/PluginScreen.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstone/fxml/Settings.fxml" afterPath="$PROJECT_DIR$/out/production/Capstone/fxml/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/.idea/encodings.xml" afterPath="$PROJECT_DIR$/plugin1/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/plugin1/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/src/fxml/main.fxml" afterPath="$PROJECT_DIR$/plugin1/src/fxml/main.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/src/fxml/schedule.fxml" afterPath="$PROJECT_DIR$/plugin1/src/fxml/schedule.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/AddModPlugs.fxml" afterPath="$PROJECT_DIR$/src/fxml/AddModPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/AddPlugs.fxml" afterPath="$PROJECT_DIR$/src/fxml/AddPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Authorization.fxml" afterPath="$PROJECT_DIR$/src/fxml/Authorization.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Greeting.fxml" afterPath="$PROJECT_DIR$/src/fxml/Greeting.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Main.fxml" afterPath="$PROJECT_DIR$/src/fxml/Main.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/ModPlugs.fxml" afterPath="$PROJECT_DIR$/src/fxml/ModPlugs.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Password.fxml" afterPath="$PROJECT_DIR$/src/fxml/Password.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/out/production/plugin1/fxml/main.fxml" afterPath="$PROJECT_DIR$/plugin1/out/production/plugin1/fxml/main.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/out/production/plugin1/fxml/schedule.fxml" afterPath="$PROJECT_DIR$/plugin1/out/production/plugin1/fxml/schedule.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/src/project/Main.java" afterPath="$PROJECT_DIR$/plugin1/src/project/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/src/project/MainController.java" afterPath="$PROJECT_DIR$/plugin1/src/project/MainController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin1/src/project/ScheduleController.java" afterPath="$PROJECT_DIR$/plugin1/src/project/ScheduleController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Mainfest.txt" afterPath="$PROJECT_DIR$/src/Mainfest.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/PluginScreen.fxml" afterPath="$PROJECT_DIR$/src/fxml/PluginScreen.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fxml/Settings.fxml" afterPath="$PROJECT_DIR$/src/fxml/Settings.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/PluginBase.java" afterPath="$PROJECT_DIR$/src/plugins/PluginBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AddModPlugsController.java" afterPath="$PROJECT_DIR$/src/project/AddModPlugsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AddPlugsController.java" afterPath="$PROJECT_DIR$/src/project/AddPlugsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/AuthorizeController.java" afterPath="$PROJECT_DIR$/src/project/AuthorizeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/GreetingController.java" afterPath="$PROJECT_DIR$/src/project/GreetingController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/MainController.java" afterPath="$PROJECT_DIR$/src/project/MainController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/MainScreen.java" afterPath="$PROJECT_DIR$/src/project/MainScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/ModPlugsController.java" afterPath="$PROJECT_DIR$/src/project/ModPlugsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/PasswordController.java" afterPath="$PROJECT_DIR$/src/project/PasswordController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/PluginScreenController.java" afterPath="$PROJECT_DIR$/src/project/PluginScreenController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/SettingsController.java" afterPath="$PROJECT_DIR$/src/project/SettingsController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/NextScreen.java" afterPath="$PROJECT_DIR$/src/utilities/NextScreen.java" />
     </list>
     <ignored path="Capstone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,67 +60,38 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin1/src/project/MainController.java">
+        <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Person.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/plugin1/src/project/Person.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26256078">
-              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NextScreen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin1/src/utilities/NextScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClosingSwipe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin1/src/utilities/ClosingSwipe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PluginBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/plugins/PluginBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin1/src/project/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="49" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#606#607#0" expanded="false" />
-                <element signature="e#634#635#0" expanded="false" />
-                <element signature="e#680#681#0" expanded="false" />
-                <element signature="e#708#709#0" expanded="false" />
+                <element signature="e#4491#4492#0" expanded="true" />
+                <element signature="e#4524#4525#0" expanded="true" />
+                <element signature="e#4565#4566#0" expanded="true" />
+                <element signature="e#4600#4601#0" expanded="true" />
+                <element signature="e#5147#5148#0" expanded="true" />
+                <element signature="e#5222#5223#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PluginScreenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/project/PluginScreenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddPlugsController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/project/AddPlugsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.30560273">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -209,21 +131,24 @@
         <option value="$PROJECT_DIR$/src/project/PasswordEncryption.java" />
         <option value="$PROJECT_DIR$/src/fxml/AddPlugs.fxml" />
         <option value="$PROJECT_DIR$/src/project/AddModPlugsController.java" />
-        <option value="$PROJECT_DIR$/src/project/MainScreen.java" />
-        <option value="$PROJECT_DIR$/src/project/PluginScreenController.java" />
         <option value="$PROJECT_DIR$/src/project/PasswordController.java" />
         <option value="$PROJECT_DIR$/src/project/ModPlugsController.java" />
         <option value="$PROJECT_DIR$/src/project/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/project/GreetingController.java" />
-        <option value="$PROJECT_DIR$/src/utilities/NextScreen.java" />
         <option value="$PROJECT_DIR$/src/project/AuthorizeController.java" />
         <option value="$PROJECT_DIR$/src/fxml/Main.fxml" />
-        <option value="$PROJECT_DIR$/src/project/AddPlugsController.java" />
-        <option value="$PROJECT_DIR$/src/project/MainController.java" />
         <option value="$PROJECT_DIR$/src/plugins/PluginBase.java" />
         <option value="$PROJECT_DIR$/plugin1/src/utilities/ClosingSwipe.java" />
         <option value="$PROJECT_DIR$/plugin1/src/utilities/NextScreen.java" />
         <option value="$PROJECT_DIR$/plugin1/src/project/MainController.java" />
+        <option value="$PROJECT_DIR$/src/project/MainScreen.java" />
+        <option value="$PROJECT_DIR$/src/project/Main.fxml" />
+        <option value="$PROJECT_DIR$/src/resources/1/fxml/Main.fxml" />
+        <option value="$PROJECT_DIR$/src/utilities/NextScreen.java" />
+        <option value="$PROJECT_DIR$/src/Mainfest.txt" />
+        <option value="$PROJECT_DIR$/src/project/AddPlugsController.java" />
+        <option value="$PROJECT_DIR$/src/project/MainController.java" />
+        <option value="$PROJECT_DIR$/src/project/PluginScreenController.java" />
       </list>
     </option>
   </component>
@@ -236,9 +161,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="y" value="52" />
+    <option name="width" value="1291" />
+    <option name="height" value="716" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -265,8 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -335,103 +259,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KioskCapstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KioskCapstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KioskCapstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KioskCapstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Capstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KioskCapstone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -471,6 +302,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources/1/fxml" />
+      <recent name="$PROJECT_DIR$/src/project" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/plugin1/src/utilities" />
     </key>
@@ -916,36 +751,42 @@
       <option name="project" value="LOCAL" />
       <updated>1446163471747</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="editing several classes">
+      <created>1446963380347</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1446963380347</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <frame x="65" y="52" width="1291" height="716" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32766616" sideWeight="0.49875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3323398" sideWeight="0.501875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43134087" sideWeight="0.498125" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14581673" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24738955" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39940387" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32612056" sideWeight="0.49875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23183925" sideWeight="0.498125" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281493" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35379645" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1001,17 +842,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/MainScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/project/PluginScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1086,23 +921,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="116" selection-start-line="41" selection-start-column="116" selection-end-line="41" selection-end-column="116" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fxml/Settings.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fxml/Settings.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
@@ -1120,23 +955,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="116" selection-start-line="41" selection-start-column="116" selection-end-line="41" selection-end-column="116" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fxml/Settings.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fxml/Settings.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
@@ -1154,33 +989,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
@@ -1205,46 +1040,29 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Authorization.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41645244">
           <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fxml/AddPlugs.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fxml/AddPlugs.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17377049">
           <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fxml/PluginScreen.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/SettingsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1528926">
-          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1255,41 +1073,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/ModPlugsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8013582">
-          <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/AuthorizeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2333874">
-          <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/GreetingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0033956">
-          <caret line="124" column="63" selection-start-line="124" selection-start-column="63" selection-end-line="124" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/jdk1.8*/javafx-src.zip!/javafx/event/EventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6126418">
           <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2258065">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1301,72 +1088,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fxml/Settings.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7423971">
           <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/MainScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2706645">
-          <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
-          <folding />
-        </state>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/PluginScreenController.java">
+    <entry file="file://$PROJECT_DIR$/plugin1/src/utilities/NextScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.96272284">
-          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/AddPlugsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1697793">
-          <caret line="99" column="35" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/PasswordController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8336163">
-          <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/NextScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6450567">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding />
+        <state vertical-scroll-proportion="0.05263158">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin1/src/utilities/ClosingSwipe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.11375212">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/PluginBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.5110357">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1374,36 +1122,148 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#606#607#0" expanded="false" />
-            <element signature="e#634#635#0" expanded="false" />
-            <element signature="e#680#681#0" expanded="false" />
-            <element signature="e#708#709#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin1/src/utilities/NextScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/project/SettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.8541329">
+          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin1/src/project/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+        <state vertical-scroll-proportion="-0.22410867">
+          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin1/src/project/Person.java">
+    <entry file="file://$PROJECT_DIR$/src/fxml/Main.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26256078">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        <state vertical-scroll-proportion="2.9">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fxml/AddModPlugs.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fxml/PluginScreen.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5581396">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/NextScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.039049234">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mainfest.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="30" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="49" />
+          <folding>
+            <element signature="e#4491#4492#0" expanded="true" />
+            <element signature="e#4524#4525#0" expanded="true" />
+            <element signature="e#4565#4566#0" expanded="true" />
+            <element signature="e#4600#4601#0" expanded="true" />
+            <element signature="e#5147#5148#0" expanded="true" />
+            <element signature="e#5222#5223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/PasswordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8336163">
+          <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
+          <folding>
+            <element signature="e#2143#2144#0" expanded="true" />
+            <element signature="e#2213#2214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/MainScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1443124">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/ModPlugsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75551784">
+          <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="e#1255#1256#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/GreetingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79286927">
+          <caret line="124" column="60" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="60" />
+          <folding>
+            <element signature="e#3718#3719#0" expanded="true" />
+            <element signature="e#3788#3789#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/AuthorizeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6943973">
+          <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+          <folding>
+            <element signature="e#2167#2168#0" expanded="true" />
+            <element signature="e#2233#2234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/PluginScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/project/AddPlugsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30560273">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1467,6 +1327,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

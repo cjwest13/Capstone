@@ -17,8 +17,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -44,6 +48,11 @@ public class MainController implements Initializable, NextScreen {
     @FXML
     private GridPane gridPane;
 
+    private File file;
+
+    private static List<List<File>>  pluginsMain;
+
+    private static int numOfPlugins;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -52,6 +61,9 @@ public class MainController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pluginsMain = new ArrayList<>();
+        file = new File("/home/cjwest/Documents/Mine/KioskCapstone/resources");
+        isDirectory();
         changeGreeting(greeting);
         label1txt.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             /**
@@ -79,6 +91,55 @@ public class MainController implements Initializable, NextScreen {
         }
     }
 
+    private void isDirectory() {
+        File[] list = file.listFiles();
+        List<List<File>> packages = new ArrayList<>();
+        List<List<File>> files = new ArrayList<>();
+        numOfPlugins = list.length;
+        if (list.length == 0) {
+            System.out.println("Directory is empty");
+        } else {
+            System.out.println("Stuff in Directory");
+            for (int i = 0; i < list.length; i ++) {
+                File[] pack = list[i].listFiles();
+                packages.add(new ArrayList<>());
+                //System.out.println("Stuff in Packages");
+                for (int j = 0; j < pack.length; j++) {
+                    packages.get(i).add(pack[j]);
+                }
+            }
+
+            for (int i = 0; i < packages.size(); i++) {
+                Iterator iterator = packages.get(i).iterator();
+                files.add(new ArrayList<>());
+                while (iterator.hasNext()) {
+                    File file = (File) iterator.next();
+                    System.out.println(file.getName());
+                    if ("fxml".equals(file.getName().toLowerCase())) {
+                        files.get(i).add(file);
+                    }
+                }
+            }
+
+            for (int i = 0; i < files.size(); i ++) {
+                File[] file = (files.get(i).get(0)).listFiles();
+                pluginsMain.add(new ArrayList<>());
+                for (int k = 0; k < file.length; k++) {
+                    if ("main.fxml".equals(file[k].getName().toLowerCase())) {
+                        pluginsMain.get(i).add(file[k]);
+                    }
+                }
+            }
+        }
+    }
+
+    public static List<List<File>> getPluginsMain() {
+       return pluginsMain;
+    }
+
+    public static int getNumOfPlugs() {
+        return numOfPlugins;
+    }
     /**
      * Changes the main Greeting.
      * @param text The text for the new greeting.

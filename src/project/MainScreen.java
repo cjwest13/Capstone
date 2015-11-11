@@ -31,7 +31,7 @@ public class MainScreen extends Application implements NextScreen {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        NextScreen.super.goToNextScreen("/fxml/Main.fxml");
+        goToNextScreen("/fxml/Main.fxml");
     }
 
     /**

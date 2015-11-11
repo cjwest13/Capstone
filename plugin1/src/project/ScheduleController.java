@@ -1,6 +1,7 @@
 package project;
 
 import javafx.animation.FadeTransition;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +25,9 @@ public class ScheduleController implements Initializable, NextScreen {
     @FXML
     private WebView webView;
     private WebEngine webEngine;
-
+    private String person;
+    private ObservableList<String> people;
+    private String url;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -34,10 +37,26 @@ public class ScheduleController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        people= MainController.getCurrentPeople();
+        person = MainController.getPickPerson();
+        url = pickedSchedule(person);
         webEngine = webView.getEngine();
-        webEngine.load("http://agora.cs.wcu.edu/~ascott/schedule.shtml");
+        webEngine.load(url);
     }
 
+    private String pickedSchedule(String person) {
+        String url = "";
+        if (people.get(0).equals(person)) {
+            url = "http://agora.cs.wcu.edu/~sbarlowe/currentSched.html";
+        } else if (people.get(1).equals(person)) {
+            url = "http://agora.cs.wcu.edu/~holliday/";
+        } else if (people.get(2).equals(person)) {
+            url = "http://agora.cs.wcu.edu/~wck/schedule.shtml";
+        } else if (people.get(3).equals(person)) {
+            url = "http://agora.cs.wcu.edu/~ascott/schedule.shtml";
+        }
+        return url;
+    }
 
     /**
      * Function assigned to a fxml button that goes to the Settings.fxml screen.
@@ -45,6 +64,5 @@ public class ScheduleController implements Initializable, NextScreen {
     @FXML
     public void goBack() {
         goToNextScreen("/fxml/main.fxml");
-
     }
 }

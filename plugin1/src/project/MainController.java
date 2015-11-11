@@ -23,8 +23,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.ClosingSwipe;
 import utilities.NextScreen;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,14 +38,21 @@ public class MainController implements Initializable, NextScreen, ClosingSwipe {
 
     private ImageView[] pictures;
 
+    private static String pickPerson;
+
+    private static ObservableList<String> people;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
+     *
      * @param location
      * @param resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        people = FXCollections.observableArrayList();
+        people.addAll("Scott Barlowe", "Mark Holliday", "William Kreahling", "Andrew Scott");
         pictures = new ImageView[3];
         addImages();
         startSlideShow();
@@ -59,20 +64,22 @@ public class MainController implements Initializable, NextScreen, ClosingSwipe {
             }
         });
 
-        choiceBox.setItems(getCurrentPeople());
-        choiceBox.setTooltip((new Tooltip("Select a CS Professor :D")));
+        choiceBox.setItems(people);
+        //choiceBox.setTooltip((new Tooltip("Select a CS Professor :D")));
 
-        choiceBox.valueProperty().addListener(new ChangeListener<Person>() {
+        choiceBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Person> person, Person before, Person selected) {
-                System.out.println(selected);
+            public void changed(ObservableValue<? extends String> person, String before, String selected) {
+                pickPerson = selected;
+                System.out.println(pickPerson);
                 goToNextScreen("/fxml/schedule.fxml");
+                System.out.println("hiii");
             }
         });
 
 
-
     }
+
     private void addImages() {
         Image image1 = new Image(getClass().getResource("/pictures/pic1.jpg").toExternalForm(), 400, 400, true, true);
         Image image2 = new Image(getClass().getResource("/pictures/pic2.jpg").toExternalForm(), 400, 400, true, true);
@@ -110,12 +117,12 @@ public class MainController implements Initializable, NextScreen, ClosingSwipe {
         return ft;
     }
 
-    private ObservableList<Person> getCurrentPeople() {
-        ObservableList<Person> people = FXCollections.observableArrayList();
-
-        people.addAll(new Person("Scott", "Barlowe"), new Person("Mark", "Holliday"),
-        new Person("William", "Kreahling"), new Person("Andrew", "Scott"));
-
+    public static ObservableList<String> getCurrentPeople() {
         return people;
     }
+
+    public static String getPickPerson() {
+        return pickPerson;
+    }
+
 }

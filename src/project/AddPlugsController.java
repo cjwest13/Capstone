@@ -50,6 +50,7 @@ public class AddPlugsController implements Initializable, NextScreen {
     public void initialize(URL location, ResourceBundle resources) {
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
+        num = MainController.getNumOfPlugs();
     }
 
     /**
@@ -69,7 +70,7 @@ public class AddPlugsController implements Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        String resourceDir = "./resources";
+        String resourceDir = "/home/cjwest/Documents/Mine/KioskCapstone/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();
@@ -114,6 +115,10 @@ public class AddPlugsController implements Initializable, NextScreen {
         dialog.setHeight(200);
         dialog.setContentText(message);
         dialog.showAndWait();
+    }
+
+    public int getNum() {
+        return  num;
     }
 
     /**
