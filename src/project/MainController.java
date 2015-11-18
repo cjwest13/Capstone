@@ -1,24 +1,19 @@
 package project;
 
-import javafx.animation.FadeTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import utilities.NextScreen;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,6 +43,9 @@ public class MainController implements Initializable, NextScreen {
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private ImageView imageView;
+
     private File file;
 
     private static List<List<File>>  pluginsMain;
@@ -62,8 +60,16 @@ public class MainController implements Initializable, NextScreen {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pluginsMain = new ArrayList<>();
-        file = new File("/home/cjwest/Documents/Mine/KioskCapstone/resources");
-        isDirectory();
+        file = new File("/home/cjwest/resources");
+        //isDirectory();
+        ClassLoader cldr = this.getClass().getClassLoader();
+        URL url = cldr.getResource("../resources/1/pictures/pic1.jpg");
+        if (url == null) {
+
+        } else {
+            Image image = new Image(url.toString());
+            imageView.setImage(image);
+        }
         changeGreeting(greeting);
         label1txt.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             /**
@@ -72,7 +78,7 @@ public class MainController implements Initializable, NextScreen {
              */
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
-                goToNextScreen("/fxml/PluginScreen.fxml");
+                goToNextScreen("/fxml/PluginInfo.fxml");
             }
         });
         /** Sets the settings button to be visible */
@@ -89,6 +95,7 @@ public class MainController implements Initializable, NextScreen {
             i++;
             j++;
         }
+        //gridPane.add(new ImageIcon(url), 0, 1);
     }
 
     private void isDirectory() {
@@ -114,7 +121,7 @@ public class MainController implements Initializable, NextScreen {
                 files.add(new ArrayList<>());
                 while (iterator.hasNext()) {
                     File file = (File) iterator.next();
-                    System.out.println(file.getName());
+                    //System.out.println(file.getName());
                     if ("fxml".equals(file.getName().toLowerCase())) {
                         files.get(i).add(file);
                     }
@@ -125,7 +132,7 @@ public class MainController implements Initializable, NextScreen {
                 File[] file = (files.get(i).get(0)).listFiles();
                 pluginsMain.add(new ArrayList<>());
                 for (int k = 0; k < file.length; k++) {
-                    if ("main.fxml".equals(file[k].getName().toLowerCase())) {
+                    if ("1/fxml/main.fxml".equals(file[k].getName().toLowerCase())) {
                         pluginsMain.get(i).add(file[k]);
                     }
                 }

@@ -116,11 +116,12 @@ public class MainController implements Initializable, NextScreen, ClosingSwipe {
         ft.setToValue(toValue);
         return ft;
     }
-
+    @FXML
     public static ObservableList<String> getCurrentPeople() {
         return people;
     }
 
+    @FXML
     public static String getPickPerson() {
         return pickPerson;
     }

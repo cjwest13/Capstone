@@ -70,7 +70,7 @@ public class AddPlugsController implements Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        String resourceDir = "/home/cjwest/Documents/Mine/KioskCapstone/resources";
+        String resourceDir = "/home/cjwest/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();

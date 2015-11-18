@@ -63,7 +63,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                              <ImageView fitHeight="95.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageView" fitHeight="67.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fitHeight="96.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
                               <ImageView fitHeight="93.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
                               <Label fx:id="label1txt" contentDisplay="CENTER" prefHeight="94.0" prefWidth="452.0" text="Description of the Plugin " textAlignment="CENTER" GridPane.columnIndex="1" />
