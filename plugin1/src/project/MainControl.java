@@ -26,7 +26,7 @@ import utilities.NextScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable, NextScreen, ClosingSwipe {
+public class MainControl implements Initializable, NextScreen, ClosingSwipe {
 
     @FXML
     private AnchorPane anchorPane;

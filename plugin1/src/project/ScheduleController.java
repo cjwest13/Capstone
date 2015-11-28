@@ -30,8 +30,8 @@ public class ScheduleController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        people= MainController.getCurrentPeople();
-        person = MainController.getPickPerson();
+        people= MainControl.getCurrentPeople();
+        person = MainControl.getPickPerson();
         url = pickedSchedule(person);
         webEngine = webView.getEngine();
         webEngine.load(url);

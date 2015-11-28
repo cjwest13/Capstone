@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -10,14 +11,17 @@
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <SplitPane dividerPositions="0.6933797909407665" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.6933797909407665" orientation="VERTICAL" prefHeight="369.0" prefWidth="351.0" BorderPane.alignment="CENTER">
               <items>
                 <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="381.0">
                      <children>
-                        <HBox fx:id="hbox" alignment="CENTER" prefHeight="250.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <StackPane fx:id="stackPane" prefHeight="250.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="404.0" />
               </items>
+               <BorderPane.margin>
+                  <Insets left="100.0" right="100.0" />
+               </BorderPane.margin>
             </SplitPane>
          </center>
          <bottom>
@@ -40,17 +44,26 @@
             </GridPane>
          </bottom>
          <left>
-            <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../utilities/arrow-left.png" />
                </image>
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
             </ImageView>
          </left>
          <right>
-            <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../utilities/arrow-right.png" />
-               </image></ImageView>
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin></ImageView>
          </right>
       </BorderPane>
    </children>

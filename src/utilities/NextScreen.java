@@ -31,8 +31,8 @@ public interface NextScreen {
             Stage stage = MainScreen.getStage();
             stage.setScene(scene);
             stage.show();
-            //stage.setFullScreenExitHint("");
-            //stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+            stage.setFullScreen(true);
 
         } catch (IOException ioe) {
             System.err.println("File not found");

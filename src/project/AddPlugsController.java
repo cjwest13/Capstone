@@ -50,7 +50,7 @@ public class AddPlugsController implements Initializable, NextScreen {
     public void initialize(URL location, ResourceBundle resources) {
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
-        num = MainController.getNumOfPlugs();
+        num = MainController.getNumOfPlugins();
     }
 
     /**
@@ -93,6 +93,9 @@ public class AddPlugsController implements Initializable, NextScreen {
                         input.close();
                     }
                 }
+                File place = new File("/home/cjwest/resources", number);
+                boolean yes = file.renameTo(new File(place.getPath(), file.getName()));
+                System.out.println(yes);
                 dialog("Confirmation", "Plugin was added");
             } else {
                 txtArea.clear();
