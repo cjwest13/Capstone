@@ -2,6 +2,8 @@ package project;
 
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,13 +22,14 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Controller for the PluginInfo.fxml file.
@@ -46,6 +50,9 @@ public class PluginInfoController implements Initializable, NextScreen {
 
     private ArrayList<ImageView> pics;
 
+    @FXML
+    private Label timeLbl;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -57,6 +64,7 @@ public class PluginInfoController implements Initializable, NextScreen {
         pics = new ArrayList();
         setFiles();
         setSlideShow();
+        time();
         anchorPane.setOnSwipeDown(new EventHandler<SwipeEvent>() {
             @Override
             public void handle(SwipeEvent event) {
@@ -67,7 +75,8 @@ public class PluginInfoController implements Initializable, NextScreen {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    String command = "java -jar "+ jarFile;
+                    String command = "java -Dcom.sun.javafx.virtualKeyboard=javafx -Dcom.sun.javafx.touch=true -jar "
+                                    + jarFile;
                     Runtime.getRuntime().exec(command);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -76,6 +85,17 @@ public class PluginInfoController implements Initializable, NextScreen {
         });
          
     }
+
+    private void time() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+            Calendar calendar = Calendar.getInstance();
+            Date time = calendar.getTime();
+            timeLbl.setText(time.toString());
+        }), new KeyFrame(Duration.seconds(1)));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
     /**
      *
      */
@@ -101,13 +121,16 @@ public class PluginInfoController implements Initializable, NextScreen {
     }
     private void addImages() {
         File[] files = pictures.listFiles();
-        for (File file: files) {
-            String[] string = file.getPath().split("/resources");
-            ImageView view = new ImageView(string[1]);
-            view.setFitHeight(430);
-            view.setPreserveRatio(true);
-            pics.add(view);
-        }
+        try {
+            for (File file : files) {
+                BufferedImage bufimage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufimage, null);
+                ImageView view = new ImageView(image);
+                view.setFitHeight(430);
+                view.setPreserveRatio(true);
+                pics.add(view);
+            }
+        } catch (IOException ioe) {}
     }
     private void setFiles() {
         File[] plugin = MainController.getChosenPlugin();

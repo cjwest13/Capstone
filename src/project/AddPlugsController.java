@@ -1,6 +1,11 @@
 package project;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +22,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 import java.util.jar.JarEntry;
@@ -39,6 +46,8 @@ public class AddPlugsController implements Initializable, NextScreen {
     File file;
     /** Plugin Directory number */
     private static int num = 0;
+    @FXML
+    private Label timeLbl;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -51,6 +60,17 @@ public class AddPlugsController implements Initializable, NextScreen {
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
         num = MainController.getNumOfPlugins();
+        time();
+    }
+
+    private void time() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+            Calendar calendar = Calendar.getInstance();
+            Date time = calendar.getTime();
+            timeLbl.setText(time.toString());
+        }), new KeyFrame(Duration.seconds(1)));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     /**
@@ -70,7 +90,7 @@ public class AddPlugsController implements Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        String resourceDir = "/home/cjwest/resources";
+        String resourceDir = "/home/touchmeister/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();
@@ -93,9 +113,9 @@ public class AddPlugsController implements Initializable, NextScreen {
                         input.close();
                     }
                 }
-                File place = new File("/home/cjwest/resources", number);
+                File place = new File("/home/touchmeister/resources", number);
                 boolean yes = file.renameTo(new File(place.getPath(), file.getName()));
-                System.out.println(yes);
+                //System.out.println(yes);
                 dialog("Confirmation", "Plugin was added");
             } else {
                 txtArea.clear();

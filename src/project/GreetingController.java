@@ -1,15 +1,17 @@
 package project;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -17,6 +19,8 @@ import utilities.NextScreen;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +33,7 @@ import java.util.logging.Logger;
 public class GreetingController implements Initializable, NextScreen {
     /** TestField representing the greeting text field in the fxml */
     @FXML
-    private TextField greettxt;
+    private TextField newgreet;
     /** Dialog popup box */
     private Dialog<String> dialog;
     /** Close Button for the Dialog box */
@@ -38,6 +42,8 @@ public class GreetingController implements Initializable, NextScreen {
     File openfile;
     /** If File is being used */
     private Boolean value;
+    @FXML
+    private Label timeLbl;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -50,6 +56,17 @@ public class GreetingController implements Initializable, NextScreen {
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
         value = false;
+        time();
+    }
+
+    private void time() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+            Calendar calendar = Calendar.getInstance();
+            Date time = calendar.getTime();
+            timeLbl.setText(time.toString());
+        }), new KeyFrame(Duration.seconds(1)));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     /**
@@ -61,7 +78,7 @@ public class GreetingController implements Initializable, NextScreen {
         if (value) {
             MainController.greeting = readFile(openfile);
         } else {
-            MainController.greeting = greettxt.getText();
+            MainController.greeting = newgreet.getText();
         }
         dialog("Confirmation", "Greeting was changed!");
     }
@@ -101,7 +118,7 @@ public class GreetingController implements Initializable, NextScreen {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Choose File");
         openfile = chooser.showOpenDialog(MainScreen.getStage());
-        greettxt.setText(openfile.toString());
+        newgreet.setText(openfile.toString());
     }
 
     /**

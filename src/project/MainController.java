@@ -1,5 +1,10 @@
 package project;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +16,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 import utilities.NextScreen;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javafx.scene.input.MouseEvent;
 /**
  * Controller class for Main.fxml.
  * @author  Clifton West, John Burrell
@@ -53,6 +63,9 @@ public class MainController implements Initializable, NextScreen {
 
     private ArrayList<Label> labels;
 
+    @FXML
+    private Label timeLbl;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -67,9 +80,8 @@ public class MainController implements Initializable, NextScreen {
         icons= new ArrayList();
         addPlugins();
         setEvents();
-        //j = 0;
         changeGreeting(greeting);
-
+        time();
         /** Sets the settings button to be visible */
         anchorPane.setOnKeyPressed(ke-> {
             if (ke.getCode().equals(KeyCode.K)) {
@@ -77,6 +89,17 @@ public class MainController implements Initializable, NextScreen {
             }
         });
     }
+
+    private void time() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+            Calendar calendar = Calendar.getInstance();
+            Date time = calendar.getTime();
+            timeLbl.setText(time.toString());
+        }), new KeyFrame(Duration.seconds(1)));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
     private void setEvents() {
         for (Label label: labels) {
             label.setOnMouseClicked(event ->  {
@@ -91,35 +114,42 @@ public class MainController implements Initializable, NextScreen {
     private void addPlugins() {
         if (isPlugins()) {
             loadPlugins();
-            Image image = new Image("./utilities/cone.png");
+            Image defaultimage = new Image("/utilities/cone.png");
             //dynamically adding
             for (int i = 0; i < plugins.size(); i++) {
                 File[] files;
                 ImageView view;
                 if (icons.size() <= i) {
-                    view = new ImageView(image);
+                    view = new ImageView(defaultimage);
                 } else {
                     files = icons.get(i).listFiles();
+                    //System.out.println(files[0].getPath());
                     if (files.length == 0) {
-                        view = new ImageView(image);
+                        view = new ImageView(defaultimage);
                     } else {
-                        view = new ImageView("/1/icon/Robot_icon.png");
+                        view = new ImageView(defaultimage);
+                        Image image;
+                        try {
+                            BufferedImage bufimage = ImageIO.read(files[0]);
+                            image = SwingFXUtils.toFXImage(bufimage, null);
+                        } catch (IOException ioe) {
+                            image = new Image("/utilities/cone.png");
+                        }
+                        view = new ImageView(image);
                     }
                 }
-                labels.add(new Label("omg"+i));
+                labels.add(new Label("Name of Application "+i));
                 gridPane.add(labels.get(i), 1, i);
-
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);
                 gridPane.add(view, 0, i);
-                System.out.println("nooo");
-
+                //System.out.println("nooo");
             }
         }
     }
 
     private Boolean isPlugins() {
-        File file = new File("/home/cjwest/resources");
+        File file = new File("/home/touchmeister/resources");
         list = file.listFiles();
         numOfPlugins = list.length;
         if (list.length == 0) {
@@ -159,8 +189,6 @@ public class MainController implements Initializable, NextScreen {
                 }
             }
         }
-        System.out.println(plugins.get(0).toString());
-        System.out.println(plugins.get(1).toString());
     }
 
     public static File[] getChosenPlugin() {

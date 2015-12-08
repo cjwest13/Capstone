@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -7,25 +8,28 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.PluginInfoController">
+<AnchorPane stylesheets="@../styles/plugininfo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.PluginInfoController">
    <children>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="border" stylesheets="@../styles/plugininfo.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <SplitPane dividerPositions="0.6933797909407665" orientation="VERTICAL" prefHeight="369.0" prefWidth="351.0" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.6933797909407665" orientation="VERTICAL" prefHeight="369.0" prefWidth="351.0" stylesheets="@../styles/plugininfo.css" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="381.0">
+                <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="381.0" stylesheets="@../styles/plugininfo.css">
                      <children>
                         <StackPane fx:id="stackPane" prefHeight="250.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="404.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="404.0" stylesheets="@../styles/plugininfo.css">
+                     <children>
+                        <Label prefHeight="109.0" prefWidth="349.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
               </items>
                <BorderPane.margin>
-                  <Insets left="100.0" right="100.0" />
+                  <Insets />
                </BorderPane.margin>
             </SplitPane>
          </center>
          <bottom>
-            <GridPane alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="917.0" stylesheets="@../styles/plugininfo.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,12 +38,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="298.0" text="Time, Etc" GridPane.columnIndex="1">
+                  <Label fx:id="timeLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="453.0" stylesheets="@../styles/plugininfo.css" text="Time, Etc" GridPane.columnIndex="1">
                      <font>
                         <Font name="CoolveticaRg-Regular" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backbtn" mnemonicParsing="false" onAction="#goToMain" prefHeight="25.0" prefWidth="101.0" text="Back" textAlignment="CENTER" />
+                  <Button fx:id="backbtn" mnemonicParsing="false" onAction="#goToMain" prefHeight="25.0" prefWidth="101.0" stylesheets="@../styles/plugininfo.css" text="Back" textAlignment="CENTER" />
                </children>
             </GridPane>
          </bottom>

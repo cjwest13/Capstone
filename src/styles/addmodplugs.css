@@ -1,0 +1,27 @@
+#border {
+     -fx-background-color: #CFAB7B;
+}
+
+#btmGrid {
+    -fx-background-color: #592C87;
+}
+
+#timeLbl {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #CFAB7B;
+}
+
+.button {
+    -fx-background-color: #592C87;
+    -fx-text-fill: #CFAB7B;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+#backbtn {
+    -fx-background-color: #CFAB7B;
+    -fx-text-fill: #592C87;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}

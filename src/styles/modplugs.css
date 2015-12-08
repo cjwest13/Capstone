@@ -38,7 +38,14 @@
 }
 
 .button {
+    -fx-background-color: #592C87;
+    -fx-text-fill: #CFAB7B;
+    -fx-font-weight: bold;
+}
+
+#backbtn {
     -fx-background-color: #CFAB7B;
     -fx-text-fill: #592C87;
     -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }

@@ -1,32 +1,44 @@
-.root {
-
-
+.label {
+     -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #592C87;
 }
 
-.background {
-
-}
-
-.grid {
+#gridPane {
+    -fx-focus-color: transparent;
     -fx-alignment: center;
-    -fx-hgap: 10;
-    -fx-vgap: 10;
 }
 
 .text-area {
+    -fx-font-size: 60px;
+    -fx-text-fill: #CFAB7B;
+    -fx-font-weight: bold;
+    -fx-background-color: #592C87;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
-.text-area *.text {
-    -fx-text-alignment: right;
-}
-
-#greetTxt  *.text {
-    -fx-text-alignment: center;
-}
 
 .text-area .content {
-    -fx-font-alignment: center;
-
+    -fx-background-color: #592C87;
 }
 
+.text-area *.text {
+    -fx-text-alignment: center;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+#btmGrid {
+    -fx-background-color: #592C87;
+}
+
+#timeLbl {
+    -fx-font-size: 16px;
+    -fx-text-fill: #CFAB7B;
+}
+
+.button {
+    -fx-background-color: #CFAB7B;
+    -fx-text-fill: #592C87;
+    -fx-font-weight: bold;
+}

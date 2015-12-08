@@ -1,14 +1,3 @@
-.label {
-     -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #592C87;
-}
-
-#gridPane {
-    -fx-focus-color: transparent;
-    -fx-alignment: center;
-}
-
 .text-area {
     -fx-font-size: 60px;
     -fx-text-fill: #CFAB7B;
@@ -27,18 +16,36 @@
     -fx-stroke: black;
     -fx-stroke-width: 1;
 }
+#border {
+    -fx-background-color: #CFAB7B;
+}
 
 #btmGrid {
     -fx-background-color: #592C87;
 }
 
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #592C87;
+}
+
 #timeLbl {
     -fx-font-size: 16px;
+    -fx-font-weight: bold;
     -fx-text-fill: #CFAB7B;
 }
 
 .button {
+    -fx-background-color: #592C87;
+    -fx-text-fill: #CFAB7B;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+#backbtn {
     -fx-background-color: #CFAB7B;
     -fx-text-fill: #592C87;
     -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.AuthorizeController">
+<AnchorPane stylesheets="@../styles/authorize.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.AuthorizeController">
    <children>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane stylesheets="@../styles/authorize.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <GridPane prefHeight="333.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <GridPane fx:id="mldGrid" prefHeight="333.0" prefWidth="600.0" stylesheets="@../styles/authorize.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,9 +22,12 @@
                 <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Enter Username" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button mnemonicParsing="false" onAction="#getInfo" prefHeight="25.0" prefWidth="80.0" text="Submit" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-                  <Label text="Enter Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label stylesheets="@../styles/authorize.css" text="Enter Username" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Button fx:id="submit" mnemonicParsing="false" onAction="#getInfo" prefHeight="43.0" prefWidth="111.0" stylesheets="@../styles/authorize.css" text="Submit" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Button>
+                  <Label stylesheets="@../styles/authorize.css" text="Enter Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <PasswordField fx:id="password" maxWidth="-Infinity" prefHeight="34.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                   <TextField fx:id="username" alignment="CENTER" maxWidth="-Infinity" prefHeight="35.0" prefWidth="249.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
 
@@ -31,7 +35,7 @@
             </GridPane>
          </center>
          <bottom>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane fx:id="btmGrid" prefHeight="45.0" prefWidth="600.0" stylesheets="@../styles/authorize.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,8 +44,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="25.0" prefWidth="72.0" text="Back" GridPane.halignment="LEFT" />
-                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="133.0" text="Time, Date" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                  <Button fx:id="backbtn" mnemonicParsing="false" onAction="#goToMain" prefHeight="25.0" prefWidth="72.0" stylesheets="@../styles/authorize.css" text="Back" GridPane.halignment="LEFT" />
+                  <Label fx:id="timeLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="133.0" stylesheets="@../styles/authorize.css" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
          </bottom>
