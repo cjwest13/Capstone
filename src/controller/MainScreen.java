@@ -1,24 +1,16 @@
-package project;
+package controller;
 
 
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import utilities.NextScreen;
-
-import java.io.IOException;
 
 /**
  * Makes the main and first screen showed.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 3, 2015
  */
-public class MainScreen extends Application implements NextScreen {
+public class MainScreen extends Application implements NextScreen{
 
     /** A static variable containing the current stage */
     private static Stage stage;

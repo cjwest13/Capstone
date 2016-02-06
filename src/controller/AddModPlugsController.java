@@ -1,22 +1,13 @@
-package project;
+package controller;
 
 import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,11 +15,12 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for AddModPlugs.fxml file.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 4, 2015
  */
 public class AddModPlugsController implements Initializable, NextScreen {
 
+    /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
 
@@ -43,6 +35,9 @@ public class AddModPlugsController implements Initializable, NextScreen {
         time();
     }
 
+    /**
+     * Animation to show the time.
+     */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             Calendar calendar = Calendar.getInstance();

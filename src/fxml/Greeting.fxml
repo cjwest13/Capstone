@@ -15,7 +15,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane id="anchorMain" fx:id="anchorPane" stylesheets="@../styles/changegreeting.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GreetingController">
+<AnchorPane id="anchorMain" fx:id="anchorPane" stylesheets="@../styles/changegreeting.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GreetingController">
    <children>
       <BorderPane id="border" fx:id="border" layoutY="-5.0" prefHeight="389.0" prefWidth="600.0" stylesheets="@../styles/changegreeting.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
          <top>

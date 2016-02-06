@@ -1,23 +1,14 @@
-package project;
+package controller;
 
 import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
 import utilities.PasswordEncryption;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,27 +16,35 @@ import java.util.ResourceBundle;
 
 /**
  * Controller class for Authorization.fxml file.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 4, 2015
  */
 public class AuthorizeController implements Initializable, NextScreen {
+
     /** TestField representing the username text field in the fxml */
     @FXML
     private TextField username;
+
     /** PasswordField representing the password password field in the fxml */
     @FXML
     private PasswordField password;
+
     /** String representing the admin username */
     private String adminname;
+
     /** String representing the admin password */
     private static Boolean newAdminPw;
+
     /** String representing the admin password */
     public static String encryptedAdminPw;
+
     /** Dialog popup box */
     private Dialog<String> dialog = new Dialog<>();
+
     /** Close Button for the Dialog box */
     private ButtonType close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
 
+    /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
 
@@ -61,10 +60,13 @@ public class AuthorizeController implements Initializable, NextScreen {
         adminname = "admin";
         if (newAdminPw == null) {
             encryptedAdminPw = PasswordEncryption.getEncryptedPw("touch");
-           newAdminPw = false;
+            newAdminPw = false;
         }
     }
 
+    /**
+     * Animation to show the time.
+     */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             Calendar calendar = Calendar.getInstance();
@@ -83,8 +85,6 @@ public class AuthorizeController implements Initializable, NextScreen {
         encryptedAdminPw = PasswordEncryption.getEncryptedPw(text);
         newAdminPw = true;
     }
-
-
 
     /**
      * Function assigned to a fxml button that goes to the Main.fxml screen.

@@ -1,55 +1,43 @@
-package project;
+package controller;
 
 import javafx.animation.*;
-import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.SwipeEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
 /**
  * Controller for the PluginInfo.fxml file.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 3, 2015
  */
 public class PluginInfoController implements Initializable, NextScreen {
 
-    @FXML
-    private AnchorPane anchorPane;
-
+    /** StackPane respresenting the stackPane in the fxml */
     @FXML
     private StackPane stackPane;
 
+    /** File that will contain the preview folder */
     private File pictures;
 
+    /** The path to the jarFile */
     private String jarFile;
 
+    /** Arraylist of ImageViews representing each preview picture */
     private ArrayList<ImageView> pics;
 
+    /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
 
@@ -65,27 +53,20 @@ public class PluginInfoController implements Initializable, NextScreen {
         setFiles();
         setSlideShow();
         time();
-        anchorPane.setOnSwipeDown(new EventHandler<SwipeEvent>() {
-            @Override
-            public void handle(SwipeEvent event) {
-                Platform.exit();
+        stackPane.setOnMouseClicked(event -> {
+            try {
+                String command = "java -Dcom.sun.javafx.virtualKeyboard=javafx -Dcom.sun.javafx.touch=true -jar "
+                        + jarFile;
+                Runtime.getRuntime().exec(command);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
-        stackPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    String command = "java -Dcom.sun.javafx.virtualKeyboard=javafx -Dcom.sun.javafx.touch=true -jar "
-                                    + jarFile;
-                    Runtime.getRuntime().exec(command);
-                } catch (Exception e) {
-                    e.printStackTrace();
-               }
-            }
-        });
-         
     }
 
+    /**
+     * Animation to show the time.
+     */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             Calendar calendar = Calendar.getInstance();
@@ -97,7 +78,7 @@ public class PluginInfoController implements Initializable, NextScreen {
     }
 
     /**
-     *
+     * Setting the slideshow of the previews.
      */
     private void setSlideShow() {
         addImages();
@@ -119,6 +100,10 @@ public class PluginInfoController implements Initializable, NextScreen {
         slideshow.setCycleCount(Timeline.INDEFINITE);
         slideshow.play();
     }
+
+    /**
+     * Adding the previews to the pics arraylist.
+     */
     private void addImages() {
         File[] files = pictures.listFiles();
         try {
@@ -132,6 +117,10 @@ public class PluginInfoController implements Initializable, NextScreen {
             }
         } catch (IOException ioe) {}
     }
+
+    /**
+     * Set the jar file and the preview folder from the chosenPlugin array.
+     */
     private void setFiles() {
         File[] plugin = MainController.getChosenPlugin();
         String[] string = plugin[0].getName().split("\\.");

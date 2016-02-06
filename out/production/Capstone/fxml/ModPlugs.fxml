@@ -14,7 +14,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane id="anchorMain" fx:id="anchorPane" stylesheets="@../styles/modplugs.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ModPlugsController">
+<AnchorPane id="anchorMain" fx:id="anchorPane" stylesheets="@../styles/modplugs.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModPlugsController">
    <children>
       <VBox alignment="CENTER" layoutY="53.0" visible="false">
          <children>

@@ -1,11 +1,9 @@
-package project;
+package controller;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,18 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import utilities.NextScreen;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * Controller class for Main.fxml.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 3, 2015
  */
 public class MainController implements Initializable, NextScreen {
@@ -45,27 +41,34 @@ public class MainController implements Initializable, NextScreen {
     @FXML
     private TextArea greetTxt;
 
-    /** String containing the greeting. */
-    public static String greeting;
-
+    /** GridPane representing the center grid in the fxml */
     @FXML
     private GridPane gridPane;
 
-    private File[] list;
-
-    private List<List<File>> plugins;
-
-    private ArrayList<File> icons;
-
-    private static File[] chosenPlugin;
-
-    private static int numOfPlugins;
-
-    private ArrayList<Label> labels;
-
+    /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
 
+    /** String containing the greeting. */
+    public static String greeting;
+
+    /** 2D Arraylist containing the jar file, and preview folder for each plugin */
+    private List<List<File>> plugins;
+
+    /** Arraylist of the icon files */
+    private ArrayList<File> icons;
+
+    /** A file array containing the chosen plugin's jar file and preview folder */
+    private static File[] chosenPlugin;
+
+    /** the number of plugins */
+    private static int numOfPlugins;
+
+    /** An arraylist of the labels in the grid */
+    private ArrayList<Label> labels;
+
+    /** An File array containing the folders for each plugin */
+    File[] list;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -77,12 +80,12 @@ public class MainController implements Initializable, NextScreen {
         chosenPlugin = new File[2];
         plugins = new ArrayList();
         labels = new ArrayList();
-        icons= new ArrayList();
+        icons = new ArrayList();
         addPlugins();
         setEvents();
         changeGreeting(greeting);
         time();
-        /** Sets the settings button to be visible */
+        /** Sets the settings button to be visible on key pressed */
         anchorPane.setOnKeyPressed(ke-> {
             if (ke.getCode().equals(KeyCode.K)) {
                 settingbtn.setVisible(true);
@@ -90,6 +93,9 @@ public class MainController implements Initializable, NextScreen {
         });
     }
 
+    /**
+     * Animation to show the time.
+     */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             Calendar calendar = Calendar.getInstance();
@@ -100,6 +106,9 @@ public class MainController implements Initializable, NextScreen {
         timeline.play();
     }
 
+    /**
+     * Sets the events for each label in the grid.
+     */
     private void setEvents() {
         for (Label label: labels) {
             label.setOnMouseClicked(event ->  {
@@ -111,6 +120,9 @@ public class MainController implements Initializable, NextScreen {
         }
     }
 
+    /**
+     * Adds the plugins to the grid.
+     */
     private void addPlugins() {
         if (isPlugins()) {
             loadPlugins();
@@ -123,7 +135,6 @@ public class MainController implements Initializable, NextScreen {
                     view = new ImageView(defaultimage);
                 } else {
                     files = icons.get(i).listFiles();
-                    //System.out.println(files[0].getPath());
                     if (files.length == 0) {
                         view = new ImageView(defaultimage);
                     } else {
@@ -143,11 +154,14 @@ public class MainController implements Initializable, NextScreen {
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);
                 gridPane.add(view, 0, i);
-                //System.out.println("nooo");
             }
         }
     }
 
+    /**
+     * Checks to see if they are plugins in the resource folder.
+     * @return  Boolean returns true if they are plugins, false if its not.
+     */
     private Boolean isPlugins() {
         File file = new File("/home/touchmeister/resources");
         list = file.listFiles();
@@ -159,19 +173,20 @@ public class MainController implements Initializable, NextScreen {
         }
     }
 
+    /**
+     * Adding the appropriate files for each plugin to the plugin 2D arraylist.
+     */
     private void loadPlugins() {
         List<List<File>> packages = new ArrayList<>();
-        //going through each plugin
-
+        //going through each plugin folder
         for (int i = 0; i < list.length; i ++) {
             File[] pack = list[i].listFiles();
             packages.add(new ArrayList());
-            //System.out.println("Stuff in Packages");
             for (int j = 0; j < pack.length; j++) {
                 packages.get(i).add(pack[j]);
             }
         }
-        //looking for pictures folder and jar file.
+        //looking for preview folder, icon folder and jar file for each plugin.
         for (int i = 0; i < packages.size(); i++) {
             Iterator iterator = packages.get(i).iterator();
             plugins.add(new ArrayList());
@@ -191,10 +206,18 @@ public class MainController implements Initializable, NextScreen {
         }
     }
 
+    /**
+     * A static method to get the files of the chosen plugin.
+     * @return  File[] the chosen plugin.
+     */
     public static File[] getChosenPlugin() {
-       return chosenPlugin;
+        return chosenPlugin;
     }
 
+    /**
+     * A static method to get the number of plugins.
+     * @return int the number of plugins.
+     */
     public static int getNumOfPlugins() {
         return numOfPlugins;
     }
@@ -208,8 +231,6 @@ public class MainController implements Initializable, NextScreen {
             greetTxt.setText("Hello!");
         } else {
             greeting = text;
-            //System.out.println(greeting);
-            //System.out.println(text);
             greetTxt.setText(greeting);
         }
     }

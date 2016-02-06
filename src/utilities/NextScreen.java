@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import project.MainScreen;
+import controller.MainScreen;
 
 import java.io.IOException;
 

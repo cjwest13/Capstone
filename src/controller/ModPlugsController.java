@@ -1,24 +1,14 @@
-package project;
+package controller;
 
 import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controller class for ModPlugs.fxml file.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 3, 2015
  */
 public class ModPlugsController implements Initializable, NextScreen {

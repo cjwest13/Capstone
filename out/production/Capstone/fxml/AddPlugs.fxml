@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane stylesheets="@../styles/addplugs.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.AddPlugsController">
+<AnchorPane stylesheets="@../styles/addplugs.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPlugsController">
    <children>
       <BorderPane fx:id="border" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/addplugs.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>

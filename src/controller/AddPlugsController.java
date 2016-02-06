@@ -1,22 +1,14 @@
-package project;
+package controller;
 
 import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.NextScreen;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,21 +23,28 @@ import java.util.jar.JarFile;
 
 /**
  * Controller for the AddPlugs.fxml file.
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 4, 2015
  */
 public class AddPlugsController implements Initializable, NextScreen {
+
     /** TestField representing the file text area in the fxml */
     @FXML
     private TextArea txtArea;
+
     /** Dialog popup box */
     Dialog<String> dialog;
+
     /** Close Button for the Dialog box */
     private ButtonType close;
+
     /** The file selected */
     File file;
+
     /** Plugin Directory number */
     private static int num = 0;
+
+    /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
 
@@ -63,6 +62,9 @@ public class AddPlugsController implements Initializable, NextScreen {
         time();
     }
 
+    /**
+     * Animation to show the time.
+     */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             Calendar calendar = Calendar.getInstance();
@@ -114,9 +116,14 @@ public class AddPlugsController implements Initializable, NextScreen {
                     }
                 }
                 File place = new File("/home/touchmeister/resources", number);
-                boolean yes = file.renameTo(new File(place.getPath(), file.getName()));
-                //System.out.println(yes);
-                dialog("Confirmation", "Plugin was added");
+                boolean rename = file.renameTo(new File(place.getPath(), file.getName()));
+                if (rename) {
+                    txtArea.clear();
+                    dialog("Confirmation", "Plugin was added");
+                } else {
+                    txtArea.clear();
+                    dialog("Error", "Jar file could not be moved");
+                }
             } else {
                 txtArea.clear();
                 dialog("Incorrect", "Issue with creating the directories.");
@@ -138,10 +145,6 @@ public class AddPlugsController implements Initializable, NextScreen {
         dialog.setHeight(200);
         dialog.setContentText(message);
         dialog.showAndWait();
-    }
-
-    public int getNum() {
-        return  num;
     }
 
     /**
