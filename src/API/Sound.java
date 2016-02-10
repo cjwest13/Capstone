@@ -11,17 +11,39 @@ import javax.sound.sampled.*;
  */
 public interface Sound {
 
-    default void uploadSound(File sound, String filename) {
-
+    /**
+     * Plays the audio file from the beginning giving the String of the
+     * file location once.
+     * @param location  String of the file wanted to be played.
+     * @return Clip     The clip that can be used for audio management purposes.
+     */
+    default Clip playOnce(String location) {
+        Clip clip = null;
+        try {
+            File file = new File(location);
+            clip = AudioSystem.getClip();
+            AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+            clip.open(stream);
+            clip.loop(0);
+        } catch (UnsupportedAudioFileException afe) {
+            System.out.println("This Audio File is not supported.");
+        } catch (IOException ioe) {
+            System.out.println("Audio File could not be played.");
+        } catch (LineUnavailableException lue) {
+            System.out.println("Me no play");
+        } catch (NullPointerException npe) {
+            System.out.println("File could not be found.");
+        }
+        return clip;
     }
 
     /**
      * Plays the audio file from the beginning giving the String of the
-     * file location.
+     * file location continuously.
      * @param location  String of the file wanted to be played.
      * @return Clip     The clip that can be used for audio management purposes.
      */
-    default Clip playSound(String location) {
+    default Clip playLoop(String location) {
         Clip clip = null;
         try {
             File file = new File(location);
@@ -69,5 +91,4 @@ public interface Sound {
     default void endSound(Clip clip) {
         clip.stop();
     }
-
 }

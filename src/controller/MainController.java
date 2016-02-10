@@ -22,13 +22,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import API.SystemData;
 
 /**
  * Controller class for Main.fxml.
  * @author  Clifton West
  * @version October 3, 2015
  */
-public class MainController implements Initializable, NextScreen {
+public class MainController implements Initializable, NextScreen, SystemData {
     /** Label representing a label in the fxml */
 
     /** AnchorPane representing the anchorpane in the fxml */
@@ -81,7 +82,7 @@ public class MainController implements Initializable, NextScreen {
         plugins = new ArrayList();
         labels = new ArrayList();
         icons = new ArrayList();
-        addPlugins();
+        //addPlugins();
         setEvents();
         changeGreeting(greeting);
         time();
@@ -98,9 +99,7 @@ public class MainController implements Initializable, NextScreen {
      */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
+            timeLbl.setText(getDateAndTime());
         }), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -149,7 +148,7 @@ public class MainController implements Initializable, NextScreen {
                         view = new ImageView(image);
                     }
                 }
-                labels.add(new Label("Name of Application "+i));
+                labels.add(new Label("Name of AppPersistence "+i));
                 gridPane.add(labels.get(i), 1, i);
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);

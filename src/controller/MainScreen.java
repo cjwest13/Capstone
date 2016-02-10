@@ -23,7 +23,7 @@ public class MainScreen extends Application implements NextScreen{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        goToNextScreen("/fxml/Main.fxml");
+        goToNextScreen("/fxml/Proof.fxml");
     }
 
     /**
