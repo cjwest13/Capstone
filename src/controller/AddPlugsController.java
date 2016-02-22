@@ -92,7 +92,8 @@ public class AddPlugsController implements Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        String resourceDir = "/home/touchmeister/resources";
+        //String resourceDir = "/home/touchmeister/resources";
+        String resourceDir = "/home/cjwest/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();
@@ -115,7 +116,8 @@ public class AddPlugsController implements Initializable, NextScreen {
                         input.close();
                     }
                 }
-                File place = new File("/home/touchmeister/resources", number);
+                //File place = new File("/home/touchmeister/resources", number);
+                File place = new File("/home/cjwest/resources", number);
                 boolean rename = file.renameTo(new File(place.getPath(), file.getName()));
                 if (rename) {
                     txtArea.clear();

@@ -10,7 +10,7 @@ import utilities.NextScreen;
  * @author  Clifton West
  * @version October 3, 2015
  */
-public class MainScreen extends Application implements NextScreen{
+public class MainScreen extends Application implements NextScreen {
 
     /** A static variable containing the current stage */
     private static Stage stage;
@@ -23,7 +23,9 @@ public class MainScreen extends Application implements NextScreen{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        goToNextScreen("/fxml/Proof.fxml");
+        //goToNextScreen("/fxml/Proof.fxml");
+        goToNextScreen("/fxml/Proof2.fxml");
+        //goToNextScreen("/fxml/Main.fxml");
     }
 
     /**

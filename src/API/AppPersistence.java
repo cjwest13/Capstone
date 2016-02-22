@@ -13,11 +13,11 @@ public interface AppPersistence {
     /**
      * Saving the current data of the application.
      */
-    void saveState();
+    //void saveState();
 
     /**
      * Loading the current data of the application.
      */
-    void loadState();
+    //void loadState();
 
 }

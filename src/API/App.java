@@ -1,11 +1,18 @@
 package API;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
+ * Base Case for applications to base themselves off of.
  * API for the accessing the lifecycle methods.
  * @author  Clifton West
  * @version February 1, 2016
  */
-public abstract class Lifecycle {
+public abstract class App implements WebData, AppPersistence, ComponentControl, GestureControl, SystemData, Sound {
 
     /** Boolean to see if the app launched successfully */
     private Boolean launch = false;
@@ -18,6 +25,48 @@ public abstract class Lifecycle {
 
     /** Boolean to see if the app was resumed */
     private Boolean resume = false;
+
+    /**  */
+    private Parent root;
+
+    /** */
+    private static String title;
+
+    /** */
+    private static String fxml;
+
+    /** */
+    private Stage stage;
+
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("HELLOOOOOOO");
+        setRoot("sample.fxml");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+        primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreen(true);
+        stage = primaryStage;
+    }
+
+    /**
+     *
+     * @param fxml
+     * @throws Exception
+     */
+    private void setRoot(String fxml) throws Exception {
+        root = FXMLLoader.load(getClass().getResource(fxml));
+    }
+
+
+    public Stage getStage() {
+        return stage;
+    }
+
+
+    static void help(String title1, String fxml1) {
+        title = title1;
+        fxml = fxml1;
+    }
 
     /**
      * Setter for the launch variable.

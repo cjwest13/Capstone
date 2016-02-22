@@ -1,4 +1,4 @@
-package controller;
+package project;
 
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -20,14 +20,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import utilities.ClosingSwipe;
 import utilities.NextScreen;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class MainControl implements Initializable, NextScreen, ClosingSwipe {
+public class MainControl implements Initializable, NextScreen{
 
     @FXML
     private AnchorPane anchorPane;
@@ -73,7 +72,7 @@ public class MainControl implements Initializable, NextScreen, ClosingSwipe {
         anchorPane.setOnSwipeDown(new EventHandler<SwipeEvent>() {
             @Override
             public void handle(SwipeEvent event) {
-                CloseTheApp();
+                Platform.exit();
             }
         });
 

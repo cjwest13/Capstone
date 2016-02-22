@@ -1,4 +1,4 @@
-package controller;
+package project;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

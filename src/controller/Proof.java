@@ -37,6 +37,7 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
     private static int num = 0;
 
     private Clip clip;
+    private Clip clip2;
 
     private long position;
 
@@ -74,6 +75,11 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
     @FXML
     public void play() {
         clip = playOnce("/home/cjwest/Documents/welcome.wav");
+    }
+
+    @FXML
+    public void playtwo() {
+        clip2 = playOnce("/home/cjwest/Documents/mwkr.wav");
     }
 
     @FXML

@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import controller.Main;
+import project.Main;
 import java.io.IOException;
 
 /**

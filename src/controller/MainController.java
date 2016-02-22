@@ -82,7 +82,7 @@ public class MainController implements Initializable, NextScreen, SystemData {
         plugins = new ArrayList();
         labels = new ArrayList();
         icons = new ArrayList();
-        //addPlugins();
+        addPlugins();
         setEvents();
         changeGreeting(greeting);
         time();
@@ -114,7 +114,8 @@ public class MainController implements Initializable, NextScreen, SystemData {
                 int index = gridPane.getRowIndex(label);
                 chosenPlugin[0] = plugins.get(index).get(0);
                 chosenPlugin[1] = plugins.get(index).get(1);
-                goToNextScreen("/fxml/PluginInfo.fxml");
+                //goToNextScreen("/fxml/PluginInfo.fxml");
+                goToNextScreen("/fxml/Proof2.fxml");
             });
         }
     }
@@ -148,7 +149,7 @@ public class MainController implements Initializable, NextScreen, SystemData {
                         view = new ImageView(image);
                     }
                 }
-                labels.add(new Label("Name of AppPersistence "+i));
+                labels.add(new Label("Name of App "+i));
                 gridPane.add(labels.get(i), 1, i);
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);
@@ -162,7 +163,8 @@ public class MainController implements Initializable, NextScreen, SystemData {
      * @return  Boolean returns true if they are plugins, false if its not.
      */
     private Boolean isPlugins() {
-        File file = new File("/home/touchmeister/resources");
+        //File file = new File("/home/touchmeister/resources");
+        File file = new File("/home/cjwest/resources");
         list = file.listFiles();
         numOfPlugins = list.length;
         if (list.length == 0) {
