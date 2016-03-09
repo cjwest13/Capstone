@@ -51,7 +51,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
-import utilities.robot.FXRobotHandler;
+import utilities.keyb.robot.FXRobotHandler;
 
 
 /**

@@ -21,19 +21,21 @@ import java.util.ResourceBundle;
  * @author  Clifton West
  * @version October 4, 2015
  */
-public class Proof extends AppData implements Initializable, NextScreen, Sound, SystemData {
+public class Proof  {
 
 
-    /** Dialog popup box */
+    /**
+    Dialog popup box
+
     Dialog<String> dialog;
 
-    /** Close Button for the Dialog box */
+    /** Close Button for the Dialog box
     private ButtonType close;
 
-    /** The file selected */
+    /** The file selected
     File file;
 
-    /** Plugin Directory number */
+    /** Plugin Directory number
     private static int num = 0;
 
     private Clip clip;
@@ -41,7 +43,7 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
 
     private long position;
 
-    /** Label representing the label containing the time in the fxml */
+    /** Label representing the label containing the time in the fxml
     @FXML
     private Label timeLbl;
 
@@ -50,7 +52,7 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
      * after the fxml file has been loaded.
      * @param location
      * @param resources
-     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         position = 0;
@@ -63,7 +65,7 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
 
     /**
      * Animation to show the time.
-     */
+
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
             timeLbl.setText(getDateAndTime());
@@ -153,7 +155,7 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
      * Private method to create the dialog popup box.
      * @param title     Title of the dialog box.
      * @param message   Message inside of the dialog box.
-     */
+
     private void dialog(String title, String message) {
         dialog.getDialogPane().getButtonTypes().add(close);
         dialog.setTitle(title);
@@ -164,9 +166,11 @@ public class Proof extends AppData implements Initializable, NextScreen, Sound, 
 
     /**
      * Function assigned to a fxml button that goes to the Settings.fxml screen.
-     */
+
     @FXML
     public void goToSettings() {
         NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
+    */
+
 }

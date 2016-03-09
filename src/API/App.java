@@ -1,10 +1,15 @@
 package API;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Base Case for applications to base themselves off of.
@@ -12,123 +17,161 @@ import javafx.stage.Stage;
  * @author  Clifton West
  * @version February 1, 2016
  */
-public abstract class App implements WebData, AppPersistence, ComponentControl, GestureControl, SystemData, Sound {
+public class App extends Application implements WebData, ComponentControl, GestureControl, SystemData, Sound {
 
-    /** Boolean to see if the app launched successfully */
-    private Boolean launch = false;
+    /** Arraylist of current observers*/
+    private static ArrayList<Observer> observers = new ArrayList<>();
 
-    /** Boolean to see if the app closed */
-    private Boolean close = false;
+    /** TImer Object */
+    Timer timer = new Timer();
 
-    /** Boolean to see if the app was pause */
-    private Boolean pause = false;
-
-    /** Boolean to see if the app was resumed */
-    private Boolean resume = false;
-
-    /**  */
-    private Parent root;
-
-    /** */
+    /** Title of Stage */
     private static String title;
 
-    /** */
+    /** fxml being loaded */
     private static String fxml;
 
-    /** */
-    private Stage stage;
+    /** Window where the screen is being placed */
+    private static Stage stage;
 
+
+    /** Date object that will hold the current date/time */
+    private Date time;
+
+    /**
+     * Initializes the Main screen.
+     * @param primaryStage  The current Stage.
+     * @throws Exception
+     */
+    @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("HELLOOOOOOO");
-        setRoot("sample.fxml");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-        primaryStage.setFullScreenExitHint("");
-        primaryStage.setFullScreen(true);
+        runTime();
         stage = primaryStage;
+        goToNextScreen(primaryStage, title, fxml);
+
     }
 
     /**
-     *
-     * @param fxml
-     * @throws Exception
+     * Method that updates the time each second.
      */
-    private void setRoot(String fxml) throws Exception {
-        root = FXMLLoader.load(getClass().getResource(fxml));
+    public void runTime() {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    Calendar calendar = Calendar.getInstance();
+                    Date date = calendar.getTime();
+                    setTime(date);
+                });
+            }
+        }, 1000, 1000);
     }
 
-
-    public Stage getStage() {
+    /**
+     * Returns the application's current stage.
+     * @return Stage
+     */
+    public static Stage getStage() {
         return stage;
     }
 
+    /**
+     * Sets the fxml of the new screen.
+     * @param fxml1 Path of the fxml.
+     */
+    public void setFxml(String fxml1) {
+        fxml = fxml1;
+    }
 
-    static void help(String title1, String fxml1) {
+    /**
+     * Sets the title of the stage.
+     * @param title1 String containing the title.
+     */
+    public void setTitle(String title1) {
+        title = title1;
+    }
+
+    /**
+     * Method for the Application to set the Fxml and the Title.
+     * @param title1    String containing the title.
+     * @param fxml1     Path of the fxml.
+     */
+    public static void setFxmlAndTitle(String title1, String fxml1) {
         title = title1;
         fxml = fxml1;
     }
 
     /**
-     * Setter for the launch variable.
-     * @param lanch Boolean if the app was launch successfully.
+     * Goes to the screen according to the fxml when called.
+     * @param stage Stage object.
+     * @param title String containing the title.
+     * @param fxml  Path of the fxml.
      */
-    public void launchApp(Boolean lanch) {
-        this.launch = lanch;
+    private void goToNextScreen(Stage stage, String title, String fxml) {
+        Parent loadScreen;
+        try {
+            loadScreen = FXMLLoader.load(getClass().getResource(fxml));
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
+            ft.setFromValue(0.0);
+            ft.setToValue(1.0);
+            ft.play();
+            Scene scene = new Scene(loadScreen);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.show();
+            stage.setFullScreenExitHint("");
+            stage.setFullScreen(true);
+        } catch (IOException ioe) {
+            System.err.println("File not found");
+        }
     }
 
     /**
-     * Setter for the close variable.
-     * @param close Boolean if the app was closed.
+     * Setter for the time.
+     * @param time  Date object containing the current time.
      */
-    public void closeApp(Boolean close) {
-        this.close = close;
+    private void setTime(Date time) {
+        this.time = time;
+        notifyObservers();
     }
 
     /**
-     * Setter for the pause variable.
-     * @param pause Boolean if the app was paused.
+     * Static Method for Application's to add new observers.
+     * @param observer  New Observer.
      */
-    public void pauseApp(Boolean pause) {
-        this.pause = pause;
+    public static void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
     /**
-     * Setter for the resumed variable.
-     * @param resume Boolean if the app was resumed.
+     * Static Method for Applications to remove current Observers.
+     * @param observer Current Observer.
      */
-    public void resumeApp(Boolean resume) {
-        this.resume = resume;
+    public static void removeObserver(Observer observer) {
+        observers.remove(observer);
     }
 
     /**
-     * Getter for the launch variable.
-     * @return Boolean if the app was launched.
+     * Notifies current observers about the time change.
      */
-    public Boolean appDidLaunch() {
-        return launch;
+    private void notifyObservers() {
+        for (Observer ob: observers) {
+            ob.update(time);
+        }
     }
 
     /**
-     * Getter for the closed variable.
-     * @return Boolean if the app was closed.
+     * Saves the state of the application.
      */
-    public Boolean appDidClose() {
-        return close;
+    public static void saveState() {
+
     }
 
     /**
-     * Getter for the paused variable.
-     * @return Boolean if the app was paused.
+     * To load current of an application.
      */
-    public Boolean appDidPause() {
-        return pause;
+    public static void loadState() {
+
     }
 
-    /**
-     * Getter for the resumed variable.
-     * @return Boolean if the app was resumed after pausing.
-     */
-    public Boolean didAppResume() {
-        return resume;
-    }
 }

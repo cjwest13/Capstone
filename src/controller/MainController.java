@@ -18,8 +18,7 @@ import javafx.util.Duration;
 import utilities.NextScreen;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 import API.SystemData;
@@ -59,6 +58,9 @@ public class MainController implements Initializable, NextScreen, SystemData {
     /** Arraylist of the icon files */
     private ArrayList<File> icons;
 
+
+    private  List<List<String>> appData;
+
     /** A file array containing the chosen plugin's jar file and preview folder */
     private static File[] chosenPlugin;
 
@@ -67,6 +69,15 @@ public class MainController implements Initializable, NextScreen, SystemData {
 
     /** An arraylist of the labels in the grid */
     private ArrayList<Label> labels;
+
+
+    private File appTxt;
+
+    private List<List<File>> preview;
+
+    private static File chosenPreview;
+
+    private static String description;
 
     /** An File array containing the folders for each plugin */
     File[] list;
@@ -79,9 +90,11 @@ public class MainController implements Initializable, NextScreen, SystemData {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         chosenPlugin = new File[2];
+        appData = new ArrayList();
         plugins = new ArrayList();
         labels = new ArrayList();
         icons = new ArrayList();
+        preview = new ArrayList();
         addPlugins();
         setEvents();
         changeGreeting(greeting);
@@ -114,43 +127,50 @@ public class MainController implements Initializable, NextScreen, SystemData {
                 int index = gridPane.getRowIndex(label);
                 chosenPlugin[0] = plugins.get(index).get(0);
                 chosenPlugin[1] = plugins.get(index).get(1);
-                //goToNextScreen("/fxml/PluginInfo.fxml");
-                goToNextScreen("/fxml/Proof2.fxml");
+                chosenPreview = preview.get(index).get(0);
+                description = appData.get(index).get(1);
+                goToNextScreen("/fxml/PluginInfo.fxml");
             });
         }
     }
 
     /**
-     * Adds the plugins to the grid.
+     * Adds the icon and name of application to the grid.
      */
     private void addPlugins() {
         if (isPlugins()) {
             loadPlugins();
+            //Default Icon
             Image defaultimage = new Image("/utilities/cone.png");
-            //dynamically adding
+            //Going through the plugin 2d Arraylist
             for (int i = 0; i < plugins.size(); i++) {
                 File[] files;
                 ImageView view;
-                if (icons.size() <= i) {
+                //check to see if there are enough icons in the icons array
+                /**
+                 * FIX CASE (TURN ICONS IN 2D ARRAYLIST SOON)
+                 */
+                if (icons.size() < i || (icons.size() == i && i == 0)) {
                     view = new ImageView(defaultimage);
                 } else {
                     files = icons.get(i).listFiles();
                     if (files.length == 0) {
                         view = new ImageView(defaultimage);
                     } else {
-                        view = new ImageView(defaultimage);
                         Image image;
                         try {
                             BufferedImage bufimage = ImageIO.read(files[0]);
                             image = SwingFXUtils.toFXImage(bufimage, null);
                         } catch (IOException ioe) {
-                            image = new Image("/utilities/cone.png");
+                            image = defaultimage;
                         }
                         view = new ImageView(image);
                     }
                 }
-                labels.add(new Label("Name of App "+i));
+                //adds name of application for each plugin.
+                labels.add(new Label(appData.get(i).get(0)));
                 gridPane.add(labels.get(i), 1, i);
+                //adds icon of application for each plugin
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);
                 gridPane.add(view, 0, i);
@@ -175,28 +195,53 @@ public class MainController implements Initializable, NextScreen, SystemData {
     }
 
     /**
-     * Adding the appropriate files for each plugin to the plugin 2D arraylist.
+     * Adding the appropriate files for each plugin to the plugin 2D Arraylist.
      */
     private void loadPlugins() {
         List<List<File>> packages = new ArrayList<>();
-        //going through each plugin folder
+        //Adds the numbered folder that holds the plugins to the classpath.
         for (int i = 0; i < list.length; i ++) {
+            try {
+                AddPlugsController.addPath(list[i]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //System.out.println(list[i]);
             File[] pack = list[i].listFiles();
             packages.add(new ArrayList());
+            //goes the resources and numbered folders to an arraylist
             for (int j = 0; j < pack.length; j++) {
                 packages.get(i).add(pack[j]);
             }
         }
-        //looking for preview folder, icon folder and jar file for each plugin.
+        //System.out.println(packages.get(0));
+        //This goes through each plugin folder looking for preview folder, icon folder, app.txt file
+        //and jar file for each plugin.
+        int k = 0;
         for (int i = 0; i < packages.size(); i++) {
             Iterator iterator = packages.get(i).iterator();
             plugins.add(new ArrayList());
+            preview.add(new ArrayList());
+
+            //Creates nonexisting folder if no preview folder in first and only plugin
+            if (k > 0 && (preview.get(i).size() < plugins.size())) {
+                preview.get(0).add(new File(""));
+            }
             while (iterator.hasNext()) {
                 File file = (File) iterator.next();
                 if ("preview".equals(file.getName().toLowerCase())) {
-                    plugins.get(i).add(file);
+                    preview.get(i).add(file);
                 } else if ("icon".equals(file.getName().toLowerCase())) {
                     icons.add(file);
+                } else if ("app.txt".equals(file.getName().toLowerCase())) {
+                    appTxt = file;
+                } else if ("fxml".equals(file.getName().toLowerCase())) {
+                    File[] fxmlFiles = file.listFiles();
+                    for (int j = 0; j < fxmlFiles.length; j++) {
+                        if ("main.fxml".equals(fxmlFiles[j].getName().toLowerCase())) {
+                            plugins.get(i).add(fxmlFiles[j]);
+                        }
+                    }
                 } else {
                     String[] string = file.getName().split("\\.");
                     if (string.length > 1 && "jar".equals(string[1])) {
@@ -204,7 +249,46 @@ public class MainController implements Initializable, NextScreen, SystemData {
                     }
                 }
             }
+                k++;
+            try {
+                String[] data = readAppTxt();
+                appData.add(new ArrayList());
+                appData.get(i).add(data[0]);
+                appData.get(i).add(data[1]);
+            } catch (Exception e) {
+                System.out.println(i + " app.txt file could not be found");
+            }
         }
+        //Creates nonexisting folder if no preview folder in first and only plugin
+        if ((preview.get(0).size() < plugins.size()) && (plugins.size() == 1)) {
+
+            preview.get(0).add(new File(""));
+        }
+        /**
+         * Get Case No Preview folder in last added plugin
+         */
+        //if ((preview.get(0).size() < plugins.size()) && (plugins.size() > 1)) {
+                //System.out.println(new File(""));
+           // preview.get(0).add(new File(""));
+        //}
+
+
+
+    }
+
+
+    public String[] readAppTxt() throws Exception {
+        BufferedReader bufReader = new BufferedReader(new FileReader(appTxt));
+        String line = bufReader.readLine();
+        line = line.trim();
+        String[] appData = new String[2];
+        int i = 0;
+        while (line != null && i < 2) {
+            appData[i] = line;
+            i++;
+            line = bufReader.readLine();
+        }
+        return appData;
     }
 
     /**
@@ -215,6 +299,14 @@ public class MainController implements Initializable, NextScreen, SystemData {
         return chosenPlugin;
     }
 
+
+    public static String getDescription() {
+        return description;
+    }
+
+    public static File getPreview() {
+        return chosenPreview;
+    }
     /**
      * A static method to get the number of plugins.
      * @return int the number of plugins.

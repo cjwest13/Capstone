@@ -1,6 +1,7 @@
 package utilities;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +12,9 @@ import controller.MainScreen;
 import java.io.IOException;
 
 /**
- * Created by cjwest on 11/2/15.
+ * Class that goes to the screen specified by the fxml file.
+ * @author Clifton West
+ * @version November 2, 2015
  */
 public interface NextScreen {
 
@@ -30,6 +33,7 @@ public interface NextScreen {
             Scene scene = new Scene(loadScreen);
             Stage stage = MainScreen.getStage();
             stage.setScene(scene);
+            //Platform.setImplicitExit(false);
             stage.show();
             stage.setFullScreenExitHint("");
             stage.setFullScreen(true);

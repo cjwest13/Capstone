@@ -7,4 +7,8 @@ public interface Observer {
 
     void update(String time);
 
+
+
+    //void appClose(Boolean yes);
+
 }

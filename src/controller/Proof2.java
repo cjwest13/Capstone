@@ -1,29 +1,30 @@
 package controller;
 
-
-import API.App;
-import API.SystemData;
+import controller.MainScreen;
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import utilities.JarResources;
-
 import utilities.MultiClassLoader;
-import utilities.demo.VKDemo;
+import utilities.keyb.demo.VKDemo;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 
 /**
@@ -31,13 +32,17 @@ import java.util.ResourceBundle;
  * @author  Clifton West
  * @version October 4, 2015
  */
-public class Proof2 implements Initializable, SystemData {
+public class Proof2 implements Initializable {
 
     /** Dialog popup box */
     Dialog<String> dialog;
 
     /** Close Button for the Dialog box */
+
     private ButtonType close;
+
+    @FXML
+    private Button clos;
 
     /** The file selected */
     //File file;
@@ -73,32 +78,36 @@ public class Proof2 implements Initializable, SystemData {
         vkDemo.start(MainScreen.getStage());
     }
 
-
     /**
      * Animation to show the time.
      */
     private void time() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            timeLbl.setText(getDateAndTime());
+            //timeLbl.setText(getDateAndTime());
         }), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
     }
 
-
-
-
     /**
      * Proof to demostrate the creation on an object
      */
     @FXML
     public void playApp() {
+        String resourceDir = "/home/cjwest/resources";
+        String number = "" + 1;
+        File destDir = new File(resourceDir, number);
+        try {
+            AddPlugsController.addPath(destDir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JarClassLoader jarLoader = new JarClassLoader("/home/cjwest/resources/1/new1.jar");
 
-        JarClassLoader jarLoader = new JarClassLoader("/home/cjwest/resources/new.jar");
         Object object = null;
         try {
-            Class c = jarLoader.loadClass("Main", true);
+            Class c = jarLoader.loadClass("controller.Main", true);
             object = c.newInstance();
         } catch (ClassNotFoundException cnfe) {
             System.out.println("bruuuhh");
@@ -112,23 +121,34 @@ public class Proof2 implements Initializable, SystemData {
         for(Method method : methods) {
             System.out.println("method = " + method.getName());
         }
-
-        //object.getClass().
-        //App app = (App) object;
+        System.out.println(object.getClass().getSuperclass().toString());
         System.out.println(object instanceof App);
         System.out.println(object instanceof Application);
-       // System.out.println(object.getClass().isInterface());
         System.out.println(object instanceof Object);
 
-        /**
-        App app = (App) object;
-        try {
-            app.start(MainScreen.getStage());
-        } catch (Exception ioe) {
-            System.out.println("WHYY JESUS WHYY");
-        }
-         */
 
+        App app = (App) object;
+        app.doSomething();
+        app.doanything();
+        System.out.println(app.getFXML());
+        System.out.println(app.getTitle());
+        app.setFXML("/1/fxml/main.fxml");
+        System.out.println(app.getFXML());
+
+        try {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        app.start(new Stage());
+                    } catch (Exception ioe) {
+                        ioe.printStackTrace();
+                    }
+                }
+            });
+        } catch (Exception ioe) {
+            ioe.printStackTrace();
+        }
 
     }
 

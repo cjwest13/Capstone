@@ -1,14 +1,23 @@
 package controller;
 
 import javafx.animation.*;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import utilities.JarResources;
+import utilities.MultiClassLoader;
 import utilities.NextScreen;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,24 +31,32 @@ import java.util.*;
  * @author  Clifton West
  * @version October 3, 2015
  */
-public class PluginInfoController implements Initializable, NextScreen {
+public class PluginInfoController implements Observer, Initializable, NextScreen {
 
-    /** StackPane respresenting the stackPane in the fxml */
+    /** StackPane representing the stackPane in the fxml */
     @FXML
     private StackPane stackPane;
 
     /** File that will contain the preview folder */
     private File pictures;
 
-    /** The path to the jarFile */
-    private String jarFile;
+    /**
+     * the fxml to be loaded for the first plugin's scrren.
+     */
+    private File fxml;
 
-    /** Arraylist of ImageViews representing each preview picture */
-    private ArrayList<ImageView> pics;
+    /** The path to the jarFile */
+    private File jarFile;
 
     /** Label representing the label containing the time in the fxml */
     @FXML
     private Label timeLbl;
+
+    /** Dialog popup box */
+    Dialog<String> dialog;
+
+    /** Close Button for the Dialog box */
+    private ButtonType close;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -49,41 +66,85 @@ public class PluginInfoController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pics = new ArrayList();
+        dialog = new Dialog<>();
+        close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
+        //pics = new ArrayList();
+        pictures = MainController.getPreview();
         setFiles();
         setSlideShow();
-        time();
-        stackPane.setOnMouseClicked(event -> {
-            try {
-                String command = "java -Dcom.sun.javafx.virtualKeyboard=javafx -Dcom.sun.javafx.touch=true -jar "
-                        + jarFile;
-                Runtime.getRuntime().exec(command);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        setEvents();
+
     }
 
     /**
-     * Animation to show the time.
+     * Sets the event of when the slideshow is clicked, the plugin in be loaded.
      */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+    private void setEvents() {
+        stackPane.setOnMouseClicked(event -> {
+            JarClassLoader jarLoader = new JarClassLoader(jarFile.getAbsolutePath());
+            Object object = null;
+            try {
+                Class c = jarLoader.loadClass("controller.Main", true);
+                object = c.newInstance();
+            } catch (Exception e) {
+                dialog("Error", "Plugin can not be loaded.");
+            }
+            App app = (App) object;
+            app.setTitle("Name");
+            String[] string = fxml.getAbsolutePath().split("/home/cjwest/resources");
+            System.out.println(string[0]);
+            app.setFxml(string[1]);
+            Platform.runLater(() -> {
+                try {
+                    Stage stage = new Stage();
+                    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                            //System.out.println("OMG " + newValue);
+                        }
+                    });
+
+
+                    stage.showingProperty().addListener(new ChangeListener<Boolean>() {
+                        int i = 0;
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                            System.out.println("DSDDS " + i);
+                            i++;
+                            if (i % 2 == 0) {
+                                System.out.println("DSDDS");
+                                stage.close();
+                                MainScreen.getStage().toFront();
+                                MainScreen.getStage().setFullScreen(true);
+                            }
+                        }
+                    });
+                    stage.setOnCloseRequest((windowEvent) -> {
+                        MainScreen.getStage().toFront();
+                        MainScreen.getStage().setFullScreen(true);
+                    });
+                    MainScreen.getStage().toBack();
+                    //app.setMainStage(MainScreen.getStage());
+                    app.start(stage);
+
+                } catch (Exception ioe) {
+                    ioe.printStackTrace();
+                }
+            });
+        });
     }
 
     /**
      * Setting the slideshow of the previews.
      */
     private void setSlideShow() {
-        addImages();
+        ArrayList<ImageView> pics = new ArrayList();
+        pics = addImages();
+        //System.out.println("AAAAA");
         SequentialTransition slideshow = new SequentialTransition();
         for (ImageView slide : pics) {
+
+            System.out.println("AAAAA");
             SequentialTransition transition = new SequentialTransition();
             FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), slide);
             fadeIn.setFromValue(0.0);
@@ -104,18 +165,55 @@ public class PluginInfoController implements Initializable, NextScreen {
     /**
      * Adding the previews to the pics arraylist.
      */
-    private void addImages() {
-        File[] files = pictures.listFiles();
-        try {
-            for (File file : files) {
-                BufferedImage bufimage = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bufimage, null);
-                ImageView view = new ImageView(image);
-                view.setFitHeight(430);
-                view.setPreserveRatio(true);
-                pics.add(view);
+    private ArrayList<ImageView> addImages() {
+        ArrayList<ImageView> pics = new ArrayList();
+
+        if (pictures.exists()) {
+            File[] files = pictures.listFiles();
+            if (files.length != 0) {
+                try {
+                    for (File file : files) {
+                        BufferedImage bufimage = ImageIO.read(file);
+                        Image image = SwingFXUtils.toFXImage(bufimage, null);
+                        ImageView view = new ImageView(image);
+                        view.setFitHeight(430);
+                        view.setPreserveRatio(true);
+                        pics.add(view);
+                    }
+                } catch (IOException ioe) {}
+                return pics;
             }
-        } catch (IOException ioe) {}
+        }
+
+        Image[] images = defaultImages();
+        for (Image image : images) {
+            ImageView view = new ImageView(image);
+            view.setFitHeight(430);
+            view.setPreserveRatio(true);
+            pics.add(view);
+        }
+        return pics;
+    }
+
+    /**
+     * Creates an Image Array of the default images for a preview when necessary.
+     * @return Image[] of default images.
+     */
+    private Image[] defaultImages() {
+        Image[] images = new Image[6];
+        Image image1 = new Image("/utilities/defaultPreviews/one.jpg");
+        Image image2 = new Image("/utilities/defaultPreviews/two.jpg");
+        Image image3 = new Image("/utilities/defaultPreviews/three.jpg");
+        Image image4 = new Image("/utilities/defaultPreviews/four.jpg");
+        Image image5 = new Image("/utilities/defaultPreviews/five.jpg");
+        Image image6 = new Image("/utilities/defaultPreviews/six.jpg");
+        images[0] = image1;
+        images[1] = image2;
+        images[2] = image3;
+        images[3] = image4;
+        images[4] = image5;
+        images[5] = image6;
+        return images;
     }
 
     /**
@@ -123,13 +221,56 @@ public class PluginInfoController implements Initializable, NextScreen {
      */
     private void setFiles() {
         File[] plugin = MainController.getChosenPlugin();
+        //pictures = MainController.getPreview();
         String[] string = plugin[0].getName().split("\\.");
         if (string.length > 1) {
-            jarFile = plugin[0].getPath();
-            pictures = plugin[1];
+            jarFile = plugin[0];
+            fxml = plugin[1];
         } else {
-            jarFile = plugin[1].getPath();
-            pictures = plugin[0];
+            jarFile = plugin[1];
+            fxml = plugin[0];
+        }
+    }
+
+    /**
+     * Private method to create the dialog popup box.
+     * @param title     Title of the dialog box.
+     * @param message   Message inside of the dialog box.
+     */
+    private void dialog(String title, String message) {
+        dialog.getDialogPane().getButtonTypes().add(close);
+        dialog.setTitle(title);
+        dialog.setHeight(200);
+        dialog.setContentText(message);
+        dialog.showAndWait();
+    }
+
+    /**
+     * Sets label to the current time.
+     * @param date  Date object that is passed.
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
+    }
+
+    /**
+     * Inner class to load the
+     */
+    public class JarClassLoader extends MultiClassLoader {
+        private JarResources jarResources;
+        private String jarName;
+
+
+        public JarClassLoader(String jarName) {
+            jarResources = new JarResources (jarName);
+        }
+
+        protected byte[] loadClassBytes (String className) {
+            // Support the MultiClassLoader's class name munging facility.
+            className = formatClassName (className);
+            // Attempt to get the class data from the JarResource.
+            return (jarResources.getResource (className));
         }
     }
 

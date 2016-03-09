@@ -13,7 +13,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
@@ -99,41 +102,48 @@ public class AddPlugsController implements Initializable, NextScreen {
         Boolean success = destDir.mkdir();
         try {
             if (success) {
+                addPath(destDir);
                 JarFile jFile = new JarFile(file);
                 Enumeration<JarEntry> en = jFile.entries();
                 while (en.hasMoreElements()) {
                     JarEntry entry = en.nextElement();
                     File f = new File(destDir.getPath(), entry.getName());
-                    if (entry.isDirectory()) {
-                        f.mkdir();
-                    } else {
-                        InputStream input = jFile.getInputStream(entry);
-                        FileOutputStream output = new FileOutputStream(f);
-                        while (input.available() > 0) {
-                            output.write(input.read());
-                        }
-                        output.close();
-                        input.close();
+                    if (!f.exists()) {
+                        f.getParentFile().mkdirs();
                     }
+                    if (entry.isDirectory()) {
+                        continue;
+                    }
+                    InputStream input = jFile.getInputStream(entry);
+                    FileOutputStream output = new FileOutputStream(f);
+                    while (input.available() > 0) {
+                        output.write(input.read());
+                    }
+                    input.close();
+                    output.close();
                 }
-                //File place = new File("/home/touchmeister/resources", number);
-                File place = new File("/home/cjwest/resources", number);
-                boolean rename = file.renameTo(new File(place.getPath(), file.getName()));
-                if (rename) {
-                    txtArea.clear();
-                    dialog("Confirmation", "Plugin was added");
-                } else {
-                    txtArea.clear();
-                    dialog("Error", "Jar file could not be moved");
-                }
+            }
+            boolean rename = file.renameTo(new File(destDir.getPath(), file.getName()));
+            if (rename) {
+                txtArea.clear();
+                dialog("Confirmation", "Plugin was added");
             } else {
                 txtArea.clear();
-                dialog("Incorrect", "Issue with creating the directories.");
+                dialog("Error", "Jar file could not be moved");
             }
-        } catch (IOException ioe) {
+        } catch (Exception e) {
             txtArea.clear();
             dialog("Incorrect", "Jar File can not be read.");
         }
+    }
+
+    public static void addPath(File f) throws Exception {
+        URI u = f.toURI();
+        URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+        Class<URLClassLoader> urlClass = URLClassLoader.class;
+        Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
+        method.setAccessible(true);
+        method.invoke(urlClassLoader, new Object[]{u.toURL()});
     }
 
     /**

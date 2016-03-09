@@ -2,6 +2,7 @@ package controller;
 
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import utilities.NextScreen;
 
@@ -22,10 +23,11 @@ public class MainScreen extends Application implements NextScreen {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         this.stage = primaryStage;
         //goToNextScreen("/fxml/Proof.fxml");
-        goToNextScreen("/fxml/Proof2.fxml");
-        //goToNextScreen("/fxml/Main.fxml");
+        //goToNextScreen("/fxml/Proof2.fxml");
+        goToNextScreen("/fxml/Main.fxml");
     }
 
     /**
@@ -36,6 +38,12 @@ public class MainScreen extends Application implements NextScreen {
         return stage;
     }
 
+    //@Override
+    //public void stop() {
+        //System.out.println("COME");
+        //goToNextScreen("/fxml/Main.fxml");
+        //System.exit(0);
+    //}
     /**
      * Entry point into the program.
      * @param args
