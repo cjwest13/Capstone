@@ -1,5 +1,7 @@
 package API;
 
+import javafx.animation.PauseTransition;
+
 /**
  * API for the accessing the gesture controls.
  * @author  Clifton West
@@ -8,21 +10,24 @@ package API;
 public interface GestureControl {
 
     /**
-     * If a key was pressed on the keyboard.
-     * @param keyID which key was pressed.
-     */
-    default void keyPressed(int keyID) {
-
-    }
-
-    /**
      * If a user presses down on the screen
-     * @param x coordinate in the x direction
-     * @param y coordinate in the y direction
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
      */
-    default void tapDown(int x, int y) {
+    void singleClick(double X, double Y);
 
-    }
+    PauseTransition pressHold();
+
+    int doubleClick(double X, double Y);
+
+
+    int diagonalSwipe(double X, double Y);
+
+    int horizontalSwipe(double X, double Y);
+
+    int verticalSwipe(double X, double Y);
+
+    void mouseEntered(double X, double Y);
 
     /**
      * If a user releases their finger off the screen

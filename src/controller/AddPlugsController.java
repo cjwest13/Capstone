@@ -86,7 +86,10 @@ public class AddPlugsController implements Initializable, NextScreen {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Choose File");
         file = chooser.showOpenDialog(MainScreen.getStage());
-        txtArea.setText(file.getPath());
+        if (file.exists()) {
+            txtArea.setText(file.getPath());
+        }
+
     }
 
     /**

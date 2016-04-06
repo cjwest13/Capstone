@@ -128,12 +128,12 @@ public class Proof2 implements Initializable {
 
 
         App app = (App) object;
-        app.doSomething();
-        app.doanything();
-        System.out.println(app.getFXML());
-        System.out.println(app.getTitle());
-        app.setFXML("/1/fxml/main.fxml");
-        System.out.println(app.getFXML());
+        //app.doSomething();
+        //app.doanything();
+        //System.out.println(app.getFXML());
+        //System.out.println(app.getTitle());
+        //app.setFXML("/1/fxml/main.fxml");
+        //System.out.println(app.getFXML());
 
         try {
             Platform.runLater(new Runnable() {

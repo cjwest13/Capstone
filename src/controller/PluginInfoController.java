@@ -5,6 +5,8 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonBar;
@@ -13,10 +15,13 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.JarResources;
+import utilities.MainOb.MainControl;
 import utilities.MultiClassLoader;
 import utilities.NextScreen;
 import javax.imageio.ImageIO;
@@ -58,6 +63,25 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
     /** Close Button for the Dialog box */
     private ButtonType close;
 
+    @FXML
+    private Label descripLabel;
+
+    private Gestures gestures = new Gestures();
+
+    private int horzValue;
+
+    private int vertValue;
+
+    private int index;
+
+    private File[] plugin;
+
+    private int numOfPlugins;
+
+    private EventHandler<MouseEvent> handler1;
+
+    private EventHandler<MouseEvent> handler2;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -66,14 +90,66 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        index = MainController.getCurIndex();
+        plugin = MainController.getChosenPlugin();
+        numOfPlugins = MainController.getNumOfPlugins();
+        System.out.println(index);
+        System.out.println(numOfPlugins);
+        handler1 = event -> gestures.mouseEntered(event.getX(), event.getY());
+        handler2 = event -> {
+            horzValue = gestures.horizontalSwipe(event.getX(), event.getY());
+            if (horzValue == 1) {
+                System.out.println("Left to Right Swipe");
+                goToBackPlugin(index);
+            } else if (horzValue == 2) {
+                System.out.println("Right to Left Swipe");
+                goToNextPlugin(index);
+            }
+        };
+        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
+        MainScreen.addNewObserver(this);
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
-        //pics = new ArrayList();
-        pictures = MainController.getPreview();
+        plugin = MainController.getChosenPlugin(index);
+        pictures = MainController.getPreview(index);
+        descripLabel.setText(MainController.getDescription(index));
         setFiles();
         setSlideShow();
         setEvents();
 
+    }
+
+    /**
+     * Going to the previous plugin.
+     * @param index
+     */
+    private void goToBackPlugin(int index) {
+        int i = index - 1;
+        //System.out.println("old index " + index);
+        if ( index > 0) {
+            //System.out.println("new index " + i);
+            MainController.setCurIndex(i);
+            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
+            goToScreenSaver("/fxml/PluginInfo.fxml");
+        }
+    }
+
+    /**
+     * Going to the next plugin.
+     * @param index
+     */
+    private void goToNextPlugin(int index) {
+        int i = index + 1;
+        //System.out.println("cur index " + index);
+        //System.out.println("new index " + i);
+        if (numOfPlugins != i) {
+            MainController.setCurIndex(i);
+            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
+            goToScreenSaver("/fxml/PluginInfo.fxml");
+        }
     }
 
     /**
@@ -89,6 +165,7 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
             } catch (Exception e) {
                 dialog("Error", "Plugin can not be loaded.");
             }
+            
             App app = (App) object;
             app.setTitle("Name");
             String[] string = fxml.getAbsolutePath().split("/home/cjwest/resources");
@@ -103,8 +180,6 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
                             //System.out.println("OMG " + newValue);
                         }
                     });
-
-
                     stage.showingProperty().addListener(new ChangeListener<Boolean>() {
                         int i = 0;
                         @Override
@@ -144,7 +219,7 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
         SequentialTransition slideshow = new SequentialTransition();
         for (ImageView slide : pics) {
 
-            System.out.println("AAAAA");
+            //System.out.println("AAAAA");
             SequentialTransition transition = new SequentialTransition();
             FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), slide);
             fadeIn.setFromValue(0.0);
@@ -220,7 +295,7 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      * Set the jar file and the preview folder from the chosenPlugin array.
      */
     private void setFiles() {
-        File[] plugin = MainController.getChosenPlugin();
+        //File[] plugin = MainController.getChosenPlugin();
         //pictures = MainController.getPreview();
         String[] string = plugin[0].getName().split("\\.");
         if (string.length > 1) {
@@ -251,11 +326,13 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     @Override
     public void update(Date date) {
+        //System.out.println();
+        //System.out.println(date.toString());
         timeLbl.setText(date.toString());
     }
 
     /**
-     * Inner class to load the
+     * Inner class to load the Class from the Jar File
      */
     public class JarClassLoader extends MultiClassLoader {
         private JarResources jarResources;

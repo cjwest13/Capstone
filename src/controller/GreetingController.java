@@ -24,7 +24,7 @@ public class GreetingController implements Initializable, NextScreen {
 
     /** TestField representing the greeting text field in the fxml */
     @FXML
-    private TextField newgreet;
+    private Label newgreet;
 
     /** Dialog popup box */
     private Dialog<String> dialog;

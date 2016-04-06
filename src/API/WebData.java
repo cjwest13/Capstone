@@ -1,5 +1,8 @@
 package API;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
+
 import java.net.URL;
 
 /**
@@ -18,6 +21,9 @@ public interface WebData {
 
     }
 
+    ImageView getWebImage(String url) throws Exception;
+
+    WebView getWebHtml(String url) throws Exception;
     /**
      *
      * @param address   the address on the internet to grab the dat

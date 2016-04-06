@@ -9,7 +9,7 @@
     -fx-alignment: center;
 }
 
-.text-area {
+#topLabel {
     -fx-font-size: 60px;
     -fx-text-fill: #CFAB7B;
     -fx-font-weight: bold;
@@ -41,6 +41,7 @@
     -fx-background-color: #592C87;
     -fx-text-fill: #CFAB7B;
     -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }
 
 #backbtn {

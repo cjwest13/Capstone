@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import utilities.NextScreen;
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ import API.SystemData;
  * @author  Clifton West
  * @version October 3, 2015
  */
-public class MainController implements Initializable, NextScreen, SystemData {
+public class MainController implements Initializable, NextScreen, Observer {
     /** Label representing a label in the fxml */
 
     /** AnchorPane representing the anchorpane in the fxml */
@@ -37,9 +38,9 @@ public class MainController implements Initializable, NextScreen, SystemData {
     /** BUtton representing the settings button in the fxml */
     @FXML
     private Button settingbtn;
-    /** TestAera representing the greeting text area in the fxml */
+    /** Label representing the greeting label in the fxml */
     @FXML
-    private TextArea greetTxt;
+    private Label topLabel;
 
     /** GridPane representing the center grid in the fxml */
     @FXML
@@ -53,13 +54,19 @@ public class MainController implements Initializable, NextScreen, SystemData {
     public static String greeting;
 
     /** 2D Arraylist containing the jar file, and preview folder for each plugin */
-    private List<List<File>> plugins;
+    private static List<List<File>> plugins;
 
-    /** Arraylist of the icon files */
-    private ArrayList<File> icons;
+    /** 2D Arraylist of the icon files */
+    private static List<List<File>> icons;
 
+    /** 2D Arraylist of the icons as ImageViews */
+    private static ArrayList<ImageView> iconsView;
 
-    private  List<List<String>> appData;
+    /** 2D Arraylist of the appData */
+    private static List<List<String>> appData;
+
+    /** 2D Arraylist of the newAppData */
+    private static List<List<String>> newAppData;
 
     /** A file array containing the chosen plugin's jar file and preview folder */
     private static File[] chosenPlugin;
@@ -70,14 +77,32 @@ public class MainController implements Initializable, NextScreen, SystemData {
     /** An arraylist of the labels in the grid */
     private ArrayList<Label> labels;
 
-
+    /** File of appTxt */
     private File appTxt;
 
-    private List<List<File>> preview;
+    /** 2D Arraylist of the preview files */
+    private static List<List<File>> preview;
 
+    /** File representing the chosenPreview */
     private static File chosenPreview;
 
+    /** String represents the description */
     private static String description;
+
+    /** 2D Arraylist of the packages files */
+    private static List<List<File>> packages;
+
+    /** Arraylist of the icon files */
+    private static Boolean change;
+
+    /** Int representing the current index */
+    private static int curIndex;
+
+    /** Arraylist of the icon files */
+    //private Web webView = new Web();
+
+    /** Image representing the default image */
+    private Image defaultimage;
 
     /** An File array containing the folders for each plugin */
     File[] list;
@@ -90,32 +115,38 @@ public class MainController implements Initializable, NextScreen, SystemData {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         chosenPlugin = new File[2];
+        defaultimage = new Image("/utilities/cone.png");
         appData = new ArrayList();
         plugins = new ArrayList();
         labels = new ArrayList();
         icons = new ArrayList();
         preview = new ArrayList();
+        iconsView = new ArrayList();
+        if (change == null || !change) {
+            newAppData = appData;
+            change = false;
+        }
+        System.out.println("HSD");
         addPlugins();
+
         setEvents();
         changeGreeting(greeting);
-        time();
+
         /** Sets the settings button to be visible on key pressed */
         anchorPane.setOnKeyPressed(ke-> {
             if (ke.getCode().equals(KeyCode.K)) {
                 settingbtn.setVisible(true);
             }
         });
-    }
-
-    /**
-     * Animation to show the time.
-     */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            timeLbl.setText(getDateAndTime());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        //ImageView imageView = null;
+        //WebView broswer = null;
+        //try {
+            //imageView = webView.getWebHtml("https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png");
+            //broswer = webView.getWebHtml("https://www.google.com");
+        //} catch (Exception e) {}
+        //labels.add(new Label(imageView));
+        //gridPane.add(imageView, 1, 0);
+        //gridPane.add(broswer, 1, 0);
     }
 
     /**
@@ -126,6 +157,7 @@ public class MainController implements Initializable, NextScreen, SystemData {
             label.setOnMouseClicked(event ->  {
                 int index = gridPane.getRowIndex(label);
                 chosenPlugin[0] = plugins.get(index).get(0);
+                curIndex = index;
                 chosenPlugin[1] = plugins.get(index).get(1);
                 chosenPreview = preview.get(index).get(0);
                 description = appData.get(index).get(1);
@@ -135,44 +167,112 @@ public class MainController implements Initializable, NextScreen, SystemData {
     }
 
     /**
+     * Method use to edit a plugin's information.
+     * @param index
+     * @param name
+     * @param data
+     */
+    public static void changeAppData(int index, Boolean name, String data) {
+        if (name) {
+            newAppData.get(index).add(0, data);
+            newAppData.get(index).remove(1);
+        } else {
+            newAppData.get(index).add(1, data);
+            newAppData.get(index).remove(2);
+        }
+        change = true;
+    }
+
+    /**
+     * Gets all of the plugins
+     * @return
+     */
+    public static List<List<File>> getPlugins() {
+        return packages;
+    }
+
+    /**
+     * Gets all of the icons.
+     * @return
+     */
+    public static ArrayList<ImageView> getIcons() {
+        return iconsView;
+    }
+
+    /**
+     * Gets the current index.
+     * @return
+     */
+    public static int getCurIndex() {
+        return curIndex;
+    }
+
+    /**
+     * Sets the current index.
+     * @param i
+     */
+    public static void setCurIndex(int i) {
+        curIndex = i;
+    }
+
+    /**
+     * Gets all of the appData.
+     * @return
+     */
+    public static List<List<String>> getAppNames() {
+        //if (change) {
+         //   return newAppData;
+        //} else {
+            return appData;
+       // }
+    }
+
+    /**
      * Adds the icon and name of application to the grid.
      */
     private void addPlugins() {
         if (isPlugins()) {
             loadPlugins();
             //Default Icon
-            Image defaultimage = new Image("/utilities/cone.png");
+
             //Going through the plugin 2d Arraylist
             for (int i = 0; i < plugins.size(); i++) {
-                File[] files;
+                File files;
                 ImageView view;
                 //check to see if there are enough icons in the icons array
                 /**
-                 * FIX CASE (TURN ICONS IN 2D ARRAYLIST SOON)
+                 * FIX CASE (TURN ICONS IN 2D ARRAYLIST SOON)  (ITS FIXED)!!!
                  */
-                if (icons.size() < i || (icons.size() == i && i == 0)) {
+                files = icons.get(i).get(0);
+
+
+                if (!files.exists()) {
                     view = new ImageView(defaultimage);
+
                 } else {
-                    files = icons.get(i).listFiles();
-                    if (files.length == 0) {
-                        view = new ImageView(defaultimage);
-                    } else {
-                        Image image;
-                        try {
-                            BufferedImage bufimage = ImageIO.read(files[0]);
-                            image = SwingFXUtils.toFXImage(bufimage, null);
-                        } catch (IOException ioe) {
-                            image = defaultimage;
-                        }
-                        view = new ImageView(image);
+                    File[] listFiles = files.listFiles();
+                    File file = listFiles[0];
+                    Image image;
+                    try {
+                        BufferedImage bufimage = ImageIO.read(file);
+                        image = SwingFXUtils.toFXImage(bufimage, null);
+                    } catch (IOException ioe) {
+                        image = defaultimage;
                     }
+                    view = new ImageView(image);
+
                 }
                 //adds name of application for each plugin.
-                labels.add(new Label(appData.get(i).get(0)));
+                if (!change) {
+                    labels.add(new Label(newAppData.get(i).get(0)));
+                } else {
+                    labels.add(new Label(appData.get(i).get(0)));
+                }
                 gridPane.add(labels.get(i), 1, i);
                 //adds icon of application for each plugin
                 view.setFitHeight(150);
                 view.setPreserveRatio(true);
+                iconsView.add(view);
                 gridPane.add(view, 0, i);
             }
         }
@@ -198,7 +298,7 @@ public class MainController implements Initializable, NextScreen, SystemData {
      * Adding the appropriate files for each plugin to the plugin 2D Arraylist.
      */
     private void loadPlugins() {
-        List<List<File>> packages = new ArrayList<>();
+        packages = new ArrayList<>();
         //Adds the numbered folder that holds the plugins to the classpath.
         for (int i = 0; i < list.length; i ++) {
             try {
@@ -219,20 +319,29 @@ public class MainController implements Initializable, NextScreen, SystemData {
         //and jar file for each plugin.
         int k = 0;
         for (int i = 0; i < packages.size(); i++) {
+            System.out.println("AHH");
             Iterator iterator = packages.get(i).iterator();
             plugins.add(new ArrayList());
             preview.add(new ArrayList());
+            icons.add(new ArrayList());
 
             //Creates nonexisting folder if no preview folder in first and only plugin
             if (k > 0 && (preview.get(i).size() < plugins.size())) {
-                preview.get(0).add(new File(""));
+                preview.get(i).add(new File(""));
+            }
+            //if (icons.size() < i || (icons.size() == i && i == 0)) {
+            if (k > 0 && (icons.get(i).size() < plugins.size())) {
+                icons.get(k -1).add(new File(""));
+                //File file = new File("/utilities/cone.png");
+                //icons.get(k - 1).add(file);
+               // view = new ImageView(defaultimage);
             }
             while (iterator.hasNext()) {
                 File file = (File) iterator.next();
                 if ("preview".equals(file.getName().toLowerCase())) {
                     preview.get(i).add(file);
                 } else if ("icon".equals(file.getName().toLowerCase())) {
-                    icons.add(file);
+                    icons.get(i).add(file);
                 } else if ("app.txt".equals(file.getName().toLowerCase())) {
                     appTxt = file;
                 } else if ("fxml".equals(file.getName().toLowerCase())) {
@@ -251,21 +360,35 @@ public class MainController implements Initializable, NextScreen, SystemData {
             }
                 k++;
             try {
+                /**GET CASE IF ITS NOT APPDATA FILE*/
                 String[] data = readAppTxt();
                 appData.add(new ArrayList());
-                appData.get(i).add(data[0]);
-                appData.get(i).add(data[1]);
+                if (!change) {
+                    appData.get(i).add(data[0]);
+                    appData.get(i).add(data[1]);
+                } else {
+                    appData.get(i).add(newAppData.get(i).get(0));
+                    appData.get(i).add(newAppData.get(i).get(1));
+                }
+                //appData.get(i).add(data[0]);
+               // appData.get(i).add(data[1]);
             } catch (Exception e) {
                 System.out.println(i + " app.txt file could not be found");
             }
         }
         //Creates nonexisting folder if no preview folder in first and only plugin
         if ((preview.get(0).size() < plugins.size()) && (plugins.size() == 1)) {
-
             preview.get(0).add(new File(""));
         }
+
+        if ((icons.get(0).size() < plugins.size()) && (plugins.size() == 1)) {
+
+            icons.get(0).add(new File("/utilities/cone.png"));
+        }
+        //System.out.println(icons.get(0).get(0).getAbsolutePath());
+        //System.out.println(icons.get(1).get(0).getAbsolutePath());
         /**
-         * Get Case No Preview folder in last added plugin
+         * Get Case No Preview folder & Icon Folder in last added plugin
          */
         //if ((preview.get(0).size() < plugins.size()) && (plugins.size() > 1)) {
                 //System.out.println(new File(""));
@@ -276,18 +399,29 @@ public class MainController implements Initializable, NextScreen, SystemData {
 
     }
 
-
+    /**
+     * Readss akk
+     * @return
+     * @throws Exception
+     */
     public String[] readAppTxt() throws Exception {
         BufferedReader bufReader = new BufferedReader(new FileReader(appTxt));
-        String line = bufReader.readLine();
-        line = line.trim();
+        StringBuilder stringBuilder = new StringBuilder();
+        //String line = bufReader.readLine();
+        //line = line.trim();
         String[] appData = new String[2];
         int i = 0;
-        while (line != null && i < 2) {
-            appData[i] = line;
+        String line;
+        while ((line = bufReader.readLine()) != null) {
+            if (i == 0) {
+                appData[0] = line;
+            } else {
+                stringBuilder.append(line);
+            }
             i++;
-            line = bufReader.readLine();
+            //line = bufReader.readLine();
         }
+        appData[1] = stringBuilder.toString();
         return appData;
     }
 
@@ -298,13 +432,18 @@ public class MainController implements Initializable, NextScreen, SystemData {
     public static File[] getChosenPlugin() {
         return chosenPlugin;
     }
-
-
-    public static String getDescription() {
+    public static File[] getChosenPlugin(int i) {
+        chosenPlugin[0] = plugins.get(i).get(0);
+        chosenPlugin[1] = plugins.get(i).get(1);
+        return chosenPlugin;
+    }
+    public static String getDescription(int i) {
+        description = appData.get(i).get(1);
         return description;
     }
 
-    public static File getPreview() {
+    public static File getPreview(int i) {
+        chosenPreview = preview.get(i).get(0);
         return chosenPreview;
     }
     /**
@@ -321,18 +460,32 @@ public class MainController implements Initializable, NextScreen, SystemData {
      */
     private void changeGreeting(String text) {
         if (greeting == null) {
-            greetTxt.setText("Hello!");
+            topLabel.setText("Hello!");
         } else {
             greeting = text;
-            greetTxt.setText(greeting);
+            topLabel.setText(greeting);
         }
     }
 
     /**
      * Function assigned to a fxml button that goes to the Authorization.fxml screen.
      */
+    //@FXML
+    //public void goToSettings() {
+       //NextScreen.super.goToNextScreen("/fxml/Authorization.fxml");
+   // }
+
     @FXML
     public void goToSettings() {
-        NextScreen.super.goToNextScreen("/fxml/Authorization.fxml");
+        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
+    }
+
+    /**
+     * Shows the time
+     * @param date
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
     }
 }

@@ -17,19 +17,6 @@
 <AnchorPane id="anchorMain" fx:id="anchorPane" prefHeight="399.0" prefWidth="600.0" stylesheets="/styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
     <children>
         <BorderPane id="borderMain" layoutY="-5.0" prefHeight="407.0" prefWidth="600.0" stylesheets="/styles/main.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
-            <top>
-                <TextArea id="greetTxt" fx:id="greetTxt" editable="false" prefHeight="10.0" prefWidth="600.0" stylesheets="@../styles/main.css" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font name="CoolveticaRg-Regular" size="43.0" />
-                    </font>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-                </TextArea>
-            </top>
             <bottom>
                 <GridPane fx:id="btmGrid" alignment="CENTER_RIGHT" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../styles/main.css" BorderPane.alignment="CENTER">
                     <columnConstraints>
@@ -68,6 +55,9 @@
                </content>
             </ScrollPane>
          </center>
+         <top>
+            <Label id="topLabel" fx:id="topLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="646.0" stylesheets="@../styles/main.css" text="Select Plugin To Modify" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </top>
         </BorderPane>
     </children>
 </AnchorPane>
