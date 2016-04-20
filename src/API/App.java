@@ -1,11 +1,8 @@
 package API;
 
-import controller.ComponentControl;
 import controller.GestureControl;
-import controller.*;
+import controller.Gestures;
 import controller.Observer;
-import controller.Sound;
-import controller.SystemData;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,12 +21,24 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Base Case for applications to base themselves off of.
- * API for the accessing the lifecycle methods.
+ * Base Case for JavaFX applications to base themselves off of.
+ * Folders/Packages should be setup and named in this way if needed to run on the kiosk: <br>
+ * fxml: package containing fxml for screens; your first screen <b>MUST </b> be called main.fxml
+ * (Capitalization doesn't matter). <br>
+ * controller: package containing controller classes for fxml screens. Controller for first class
+ * <b>MUST </b>be called Main.java or your plugin will not run (Capitalization DOES MATTER in this case). <br>
+ * App.txt: (Capitalization doesn't matter) Not in any package; should contain: <br>
+ * First line: Name of Application (Do not put "Name: blah blah blah", only "blah blah blah")<br>
+ * Rest of the lines in the file: Are available for the description (Again do not put "description: blahhh",
+ * only "blahhh") <br>
+ * preview: folder containing the preview picture of the application.(Capitalization doesn't matter). <br>
+ * icon: folder containing the icon photo of the application.(Capitalization doesn't matter). <br>
+ * Use stage.close method to exit the application or use the {@link #close()} method in this Class. <br>
+ * Other than that, go crazy!!!!!!!!!!!!!!!  (: #TeamJavaFX
  * @author  Clifton West
  * @version February 1, 2016
  */
-public class App extends Application implements ComponentControl, SystemData, Sound {
+public class App extends Application {
 
     /** Arraylist of current observers*/
     private static ArrayList<Observer> observers = new ArrayList<>();
@@ -46,10 +55,10 @@ public class App extends Application implements ComponentControl, SystemData, So
     /** Window where the screen is being placed */
     private static Stage stage;
 
-
     /** Date object that will hold the current date/time */
     private Date time;
 
+    /** Gesture object */
     private GestureControl gestures = new Gestures();
 
     /**
@@ -107,16 +116,17 @@ public class App extends Application implements ComponentControl, SystemData, So
 
     /**
      * Method for the Application to set the Fxml and the Title.
+     * @param fxml1     Path of the fxml
      * @param title1    String containing the title.
-     * @param fxml1     Path of the fxml.
      */
-    public static void setFxmlAndTitle(String title1, String fxml1) {
+    public static void setFxmlAndTitle(String fxml1, String title1) {
         title = title1;
         fxml = fxml1;
     }
 
     /**
      * Goes to the screen according to the fxml when called.
+     * Close pattern is automatically implemented.
      * @param stage Stage object.
      * @param title String containing the title.
      * @param fxml1  Path of the fxml.
@@ -145,7 +155,7 @@ public class App extends Application implements ComponentControl, SystemData, So
             stage.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
                 int value = gestures.diagonalSwipe(event.getX(), event.getY());
                 if (value == 3) {
-                    System.out.println("AYY CLOSEEE");
+                    //System.out.println("AYY CLOSEEE");
                     stage.close();
                 }
             });
@@ -161,8 +171,46 @@ public class App extends Application implements ComponentControl, SystemData, So
     }
 
     /**
+     * Goes to the screen according to the fxml when called.
+     * Close pattern is not automatically implemented, but screensaver is.<br>
+     * Should be used for testing purposes or uses that doesn't required the swiping
+     * motion of the closing of an JavaFX Application.
+     * @param stage Stage object.
+     * @param title String containing the title.
+     * @param fxml1  Path of the fxml.
+     */
+    public void goToScreen(Stage stage, String title, String fxml1) {
+        Parent loadScreen;
+        Timeline timeline = new Timeline();
+        EventHandler handler = event1 -> { timeline.stop(); timeline.play(); };
+        KeyFrame key = new KeyFrame(Duration.seconds(20), event -> {
+            stage.removeEventHandler(MouseEvent.ANY, handler);
+            goToScreenSaver("Screensaver.fxml", fxml);
+        });
+        timeline.getKeyFrames().add(key);
+        try {
+            loadScreen = FXMLLoader.load(getClass().getResource(fxml1));
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
+            ft.setFromValue(0.0);
+            ft.setToValue(1.0);
+            ft.play();
+            Scene scene = new Scene(loadScreen);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.addEventHandler(MouseEvent.ANY, handler);
+            //addEvents(stage);
+            timeline.play();
+            stage.show();
+            stage.setFullScreenExitHint("");
+            stage.setFullScreen(true);
+        } catch (IOException ioe) {
+            System.err.println("File not found");
+        }
+    }
+
+    /**
      * Setter for the time.
-     * @param time  Date object containing the current time.
+     * @param time Date object containing the current time.
      */
     private void setTime(Date time) {
         this.time = time;
@@ -171,7 +219,7 @@ public class App extends Application implements ComponentControl, SystemData, So
 
     /**
      * Static Method for Application's to add new observers.
-     * @param observer  New Observer.
+     * @param observer New Observer.
      */
     public static void addObserver(Observer observer) {
         observers.add(observer);
@@ -209,7 +257,8 @@ public class App extends Application implements ComponentControl, SystemData, So
     }
 
     /**
-     * A default method that goes to the screensaver screen via the fxml file that is passed.
+     * A private method that goes to the screensaver screen via the fxml file that is passed.
+     * Goes back to the screen that is currently loaded in the curfxml variable.
      * @param fxml      path to an fxml file.
      * @param curfxml   path to fxml file that left of on.
      */
@@ -240,4 +289,10 @@ public class App extends Application implements ComponentControl, SystemData, So
         }
     }
 
+    /**
+     * Close method.
+     */
+    public static void close() {
+        stage.close();
+    }
 }

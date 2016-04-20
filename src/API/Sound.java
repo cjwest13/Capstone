@@ -1,15 +1,17 @@
 package API;
 
+import controller.SoundInterface;
+
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import javax.sound.sampled.*;
 
 /**
- * API for accessing the sound capabilities of the terminal.
- * @author  Clifton West
- * @version February 1, 2016
+ * Sound Class that contains Sound Management Methods.
+ * @author Clifton West
+ * @version April 17, 2016.
  */
-public interface Sound {
+public class Sound implements SoundInterface {
 
     /**
      * Plays the audio file from the beginning giving the String of the
@@ -17,7 +19,8 @@ public interface Sound {
      * @param location  String of the file wanted to be played.
      * @return Clip     The clip that can be used for audio management purposes.
      */
-    default Clip playOnce(String location) {
+    @Override
+    public Clip playOnce(String location) {
         Clip clip = null;
         try {
             File file = new File(location);
@@ -43,7 +46,8 @@ public interface Sound {
      * @param location  String of the file wanted to be played.
      * @return Clip     The clip that can be used for audio management purposes.
      */
-    default Clip playLoop(String location) {
+    @Override
+    public Clip playLoop(String location) {
         Clip clip = null;
         try {
             File file = new File(location);
@@ -68,7 +72,8 @@ public interface Sound {
      * @param clip  The clip associated with the audio file.
      * @return long The time where the clip was paused.
      */
-    default long pauseSound(Clip clip) {
+    @Override
+    public long pauseSound(Clip clip) {
         long cliptime = clip.getMicrosecondPosition();
         clip.stop();
         return cliptime;
@@ -79,7 +84,8 @@ public interface Sound {
      * @param clip      The clip associated with the audio file.
      * @param position  The time where the clip was paused.
      */
-    default void resumeSound(Clip clip, long position) {
+    @Override
+    public void resumeSound(Clip clip, long position) {
         clip.setMicrosecondPosition(position);
         clip.start();
     }
@@ -88,7 +94,8 @@ public interface Sound {
      * Ends the audio file associated with the provided clip.
      * @param clip  The clip associated with the audio file.
      */
-    default void endSound(Clip clip) {
+    @Override
+    public void endSound(Clip clip) {
         clip.stop();
     }
 }

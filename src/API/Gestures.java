@@ -2,105 +2,189 @@ package API;
 
 import controller.GestureControl;
 import javafx.animation.PauseTransition;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import org.omg.CORBA.BooleanHolder;
+
+import java.util.Observable;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Created by cjwest on 4/2/16.
+ * Class methods for certain gesture controls.
+ * Is the Subject for the Observer pattern of Single/Double Click events.
+ * @author  Clifton West
+ * @version March 20, 2016
  */
-public class Gestures implements GestureControl {
+public class Gestures extends Observable implements GestureControl {
 
+    /** First Coordinate in the X Direction */
     private double firstX;
+
+    /** First Coordinate in the Y Direction */
     private double firstY;
+
+    /** Second Coordinate in the X Direction */
     private double secX;
+
+    /** Second Coordinate in the Y Direction */
     private double secY;
-    private double firstClickX;
-    private double firstClickY;
-    private double secClickX;
-    private double secClickY;
+
+    /** The time when the User Pressed Down on the Screen */
     private long time1;
-    private long clickTime;
-    private int clicks = 0;
-    private int clicknum = 0;
+
+    /** The contains value of single/double click event */
+    private int click;
+
+    /** Flag to detect A Drag Event */
+    private boolean dragFlag;
+
+    /** Contains value if press and hold was detected */
+    private BooleanHolder press;
+
+    /** Schedule Commands to run after a given delay */
+    private ScheduledThreadPoolExecutor executor;
+
+    /** A delayed action caused by ScheduleThreadPoolExecutor */
+    private ScheduledFuture<?> scheduledFuture;
 
     /**
-     * If a user presses down on the screen
-     *
-     * @param X coordinate in the x direction
-     * @param Y coordinate in the y direction
+     * Constructor for the Gestures class.
+     */
+    public Gestures() {
+        executor = new ScheduledThreadPoolExecutor(1);
+        executor.setRemoveOnCancelPolicy(true);
+        press = new BooleanHolder(false);
+        dragFlag = false;
+        secX = 0;
+        secY = 0;
+        click = 0;
+    }
+
+    /**
+     * Handler for the press and hold event. Duration is set to 1 Second.
+     * @param node      Node that the user wants the press and hold event to apply too.
+     * @param handler   MouseEvent EventHandler that details that desire event when event occurs.
      */
     @Override
-    public void singleClick(double X, double Y) {
+    public void pressHoldHandler(Node node, EventHandler<MouseEvent> handler) {
+        //Wrapper class for the event fired.
+        class Wrapper<T> {T content ; }
+        Wrapper<MouseEvent> eventWrapper = new Wrapper<>();
 
-
-    }
-
-    @Override
-    public PauseTransition pressHold() {
         PauseTransition holdTimer = new PauseTransition(Duration.seconds(1));
-        return holdTimer;
+        holdTimer.setOnFinished(event -> {
+            press.value = true;
+            handler.handle(eventWrapper.content);
+        });
+
+        node.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            eventWrapper.content = event;
+            holdTimer.playFromStart();
+        });
+
+        node.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            press.value = false;
+            holdTimer.stop();
+        });
+        node.addEventHandler(MouseEvent.DRAG_DETECTED, event -> {
+            press.value = false;
+            holdTimer.stop();
+        });
     }
 
-    //Mouse Click Event
+    /**
+     * Detects vertical swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_CLICKED} event.
+     * @param e MouseEvent MouseEvent triggered.
+     */
     @Override
-    public int doubleClick(double X, double Y) {
-        double bufferX = 30.0;
-        double bufferY = 30.0;
-        if (clicks == 0) {
-            firstClickX = X;
-            firstClickY = Y;
-            clicks = clicks + 1;
-            clickTime = System.currentTimeMillis();
-            clicknum = 1;
-        } else if (clicks == 1) {
-            long time2 = System.currentTimeMillis();
-            long diff = time2 - clickTime;
-            if ((diff/1000) < 1) {
-                //)
-                secClickX = X;
-                secClickY = Y;
-                if (firstClickX == secClickX && secClickY == firstClickY) {
-                    clicknum = 2;
-                } else if (Math.abs(firstClickX - secClickX) <= bufferX &&
-                        Math.abs(firstClickY - secClickY) <= bufferY) {
-                    clicknum = 2;
-                }
-            } else {
-                clicks = 1;
-                clickTime = time2;
-                firstClickX = X;
-                firstClickY = Y;
-                clicknum = 1;
+    public void clicks(MouseEvent e) {
+        if (e.getButton().equals(MouseButton.PRIMARY)) {
+            time1 = System.currentTimeMillis();
+            if (e.getClickCount() == 2) {
+                scheduledFuture.cancel(false);
+                doubleClick();
+            } else if (e.getClickCount() == 1) {
+                scheduledFuture = executor.schedule(() -> singleClick(), 1000, TimeUnit.MILLISECONDS);
             }
         }
-        return clicknum;
     }
 
-    //mouse_released & close
+    /**
+     * Private method to detect single click, notify observers when single click event occurs.
+     */
+    private void singleClick() {
+        if (!press.value && !dragFlag ) {
+            synchronized (this) {
+                click = 1;
+            }
+            setChanged();
+            notifyObservers();
+            click = 0;
+        } else {
+            dragFlag = false;
+            press.value = false;
+        }
+        //return 1;
+    }
+
+    /**
+     * Method use by observers to get single or double click.
+     * @return Integer value that represents single of double click event. The integer values are as follows:<br>
+     * 1: Single Click.<br>
+     * 2: Double Click.
+     */
+    public synchronized int getClick() {
+        return click;
+    }
+
+    /**
+     * Private method to detect double click, notify observers when double click event occurs.
+     */
+    private void doubleClick() {
+        synchronized (this) {
+            click = 2;
+        }
+        setChanged();
+        notifyObservers();
+        click = 0;
+    }
+
+    /**
+     * Detecting swiping from the diagonal from the top towards to the bottom.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return  Integer value that represents diagonal swipe event. The integer values are as follows:<br>
+     * 1 = Left to Right Diagonal Swipe<br>
+     * 2 = Right to Left Diagonal Swipe<br>
+     * 3 = Close Event
+     */
     @Override
     public int diagonalSwipe(double X, double Y) {
         secX = X;
         secY = Y;
         int value = 0;
-        if ((firstClickX - secClickX) <= 30.0 && (firstClickY - secClickY) <= 30.0) {
-            value = 0;
-        } else if (firstX == secX && firstY == secY) {
+        if (firstX == secX && firstY == secY) {
             value = 0;
         } else {
-            double bufferX = 31.0;
-            double bufferY = 31.0;
+            dragFlag = true;
+            double buffer = 50.1;
             //Detecting CLOSE
-            if ((firstX + bufferX) < secX && (firstY + bufferY) < secY) {
-                //System.out.println("Left to Right Diagonal Swipe");
+            if ((firstX + buffer) < secX && (firstY + buffer) < secY) {
                 time1 = System.currentTimeMillis();
                 value = 1;
             }
-            if ((firstX - bufferX) > secX && (firstY + bufferY) < secY) {
-                //System.out.println("Right to Left Diagonal Swipe");
+            if ((firstX - buffer) > secX && (firstY + buffer) < secY) {
                 long time2 = System.currentTimeMillis();
                 long diff = time2 - time1;
                 if ((diff/1000) < 1) {
                     value = 3;
-                    //System.out.println("AYYYEE CLOSE");
                 } else {
                     time1 = 0;
                     value = 2;
@@ -109,41 +193,41 @@ public class Gestures implements GestureControl {
         }
         return value;
     }
-    //mouse_released & closev
+
+    /**
+     * Detects vertical swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return Integer value that represents direction of swiping. The integer values are as follows:<br>
+     * 1 = Up to Down Swipe.<br>
+     * 2 = Down to Up Swipe.
+     */
     @Override
     public int verticalSwipe(double X, double Y) {
         secX = X;
         secY = Y;
         int value = 0;
-        if ((firstClickX - secClickX) <= 30.0 && (firstClickY - secClickY) <= 30.0) {
+        if (firstX == secX && firstY == secY) {
             value = 0;
-            //   event.consume();
-        } else if (firstX == secX && firstY == secY) {
-            value = 0;
-            // event.consume();
         } else {
-            double vertbuff=40.0;
-            //Detecting Vertical Swiping
+            dragFlag = true;
+            double vertBuff = 50.0;
             if (firstX >= secX) {
-                if (firstX - vertbuff <= secX) {
+                if (firstX - vertBuff <= secX) {
                     if (secY > firstY) {
-                        //System.out.println("Up to Down Swipe");
                         value = 1;
                     } else {
                         value = 2;
-                        //System.out.println("Down to Up Swipe");
                     }
                 }
-               // event.consume();
             }
             if (firstX <= secX) {
-                if (firstX + vertbuff >= secX) {
+                if (firstX + vertBuff >= secX) {
                     if (secY < firstY) {
                         value = 2;
-                        //System.out.println("Down to Up Swipe");
                     } else {
                         value = 1;
-                        //System.out.println("Up to Down Swipe");
                     }
                 }
             }
@@ -151,54 +235,57 @@ public class Gestures implements GestureControl {
         return value;
     }
 
-    //Mouse Pressed
+    /**
+     * Gets the first two coordinates of when user first clicks the screen to help detect drag events.
+     * Must be implemented in the {@link MouseEvent#MOUSE_PRESSED} event and have to be implemented for {@link #verticalSwipe},
+     * {@link #horizontalSwipe}, and {@link #diagonalSwipe} methods to work properly.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     */
     @Override
     public void mouseEntered(double X, double Y) {
         firstX = X;
         firstY = Y;
     }
 
-    //Mouse_released
+    /**
+     * Detects horizontal swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return Integer value that represents direction of swiping. The integer values are as follows:<br>
+     * 1 = Left To Right Swipe.<br>
+     * 2 = Right To Left Swipe.
+     */
     @Override
     public int horizontalSwipe(double X, double Y) {
         secX = X;
         secY = Y;
         int value = 0;
-        double buffer = 31.0;
-       // if ((firstClickX - secClickX) <= 30.0 && (firstClickY - secClickY) <= 30.0) {
-        //    value = 0;
-            //   event.consume();
-        //} else
-            if (firstX == secX && firstY == secY) {
+        double buffer = 50.0;
+        if (firstX == secX && firstY == secY) {
             value = 0;
-            // event.consume();
         } else {
+            dragFlag = true;
             if (firstY >= secY) {
-                if (firstY - buffer <= secY) {
+                if ((firstY - buffer) <= secY) {
                     if (secX > firstX) {
                         value = 1;
-                        //System.out.println("Left To Right Swipe");
                     } else {
                         value = 2;
-                        //System.out.println("Right To Left Swipe");
                     }
                 }
-                //event.consume();
             }
-
             if (firstY <= secY) {
-                if (firstY + buffer >= secY) {
+                if ((firstY + buffer) >= secY) {
                     if (secX < firstX) {
                         value = 2;
-                        //System.out.println("Right To Left Swipe");
                     } else {
                         value = 1;
-                        //System.out.println("Left To Right Swipe");
                     }
                 }
             }
         }
-
         return value;
     }
 }

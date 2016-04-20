@@ -1,0 +1,10 @@
+#nameLbl {
+     -fx-font-size: 60px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #592C87;
+}
+
+#timeLbl {
+    -fx-font-size: 16px;
+    -fx-text-fill: #592C87;
+}

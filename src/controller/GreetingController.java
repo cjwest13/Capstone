@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West
  * @version October 5, 2015
  */
-public class GreetingController implements Initializable, NextScreen {
+public class GreetingController implements Observer, Initializable, NextScreen {
 
     /** TestField representing the greeting text field in the fxml */
     @FXML
@@ -50,23 +50,10 @@ public class GreetingController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MainScreen.addObserver(this);
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
         value = false;
-        time();
-    }
-
-    /**
-     * Animation to show the time.
-     */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
     }
 
     /**
@@ -139,6 +126,16 @@ public class GreetingController implements Initializable, NextScreen {
      */
     @FXML
     public void goBack() {
+        MainScreen.removeObserver(this);
         NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
+    }
+
+    /**
+     * Update the time to the time label.
+     * @param date Date object that is passed.
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
     }
 }

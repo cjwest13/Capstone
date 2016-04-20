@@ -3,8 +3,6 @@ package API;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
 
-import java.net.URL;
-
 /**
  * API for the accessing web data.
  * @author  Clifton West
@@ -13,23 +11,18 @@ import java.net.URL;
 public interface WebData {
 
     /**
-     * Getting data off the internet.
-     * @param address   the address on the internet to grab date
-     * @param params    Any parameters needed.
+     * Get the requested Image from the Internet.
+     * @param url Url of image from the Web. <br><b>(NEED "http://" in front)</b>
+     * @return ImageView that contains the requested Image.
+     * @throws Exception If the Image couldn't be loaded for any reason.
      */
-    default void getData(URL address, String params) {
-
-    }
-
     ImageView getWebImage(String url) throws Exception;
 
-    WebView getWebHtml(String url) throws Exception;
     /**
-     *
-     * @param address   the address on the internet to grab the dat
-     * @param params    Any parameters needed.
+     * Gets the requested Website from the Internet.
+     * @param url Url of website from the Web. <br><b>(NEED "http://" in front)</b>
+     * @return WebView that is the screen that will display
+     * @throws Exception If the WebView crashed or the html couldn't be loaded for any reason.
      */
-    default void putData(URL address, String params) {
-
-    }
+    WebView getWebHtml(String url) throws Exception;
 }

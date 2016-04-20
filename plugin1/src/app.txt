@@ -1,0 +1,3 @@
+Schedule Viewer
+Views the Agora TimeSheet pages, via the Internet, of the
+Professors in the Computer Science Department.

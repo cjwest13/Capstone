@@ -1,67 +1,73 @@
 package API;
 
-import javafx.animation.PauseTransition;
+import controller.Gestures;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 
 /**
- * API for the accessing the gesture controls.
+ * Interface that contains empty methods for certain gesture controls.
+ * <br> This interface doesn't not implement observer pattern. Only in {@link Gestures}.
  * @author  Clifton West
  * @version February 1, 2016
  */
 public interface GestureControl {
 
     /**
-     * If a user presses down on the screen
+     * Handler for the press and hold event. Duration is set to 1 Second.
+     * @param node      Node that the user wants the press and hold event to apply too.
+     * @param handler   MouseEvent EventHandler that details that desire event when event occurs.
+     */
+    void pressHoldHandler(Node node, EventHandler<MouseEvent> handler);
+
+    /**
+     * Detects vertical swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_CLICKED} event.
+     * @param e MouseEvent triggered.
+     */
+    void clicks(MouseEvent e);
+
+    /**
+     * Detecting swiping from the diagonal from the top towards to the bottom.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return  Integer value that represents diagonal swipe event. The integer values are as follows:<br>
+     * 1 = Left to Right Diagonal Swipe<br>
+     * 2 = Right to Left Diagonal Swipe<br>
+     * 3 = Close Event
+     */
+    int diagonalSwipe(double X, double Y);
+
+    /**
+     * Detects vertical swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return Integer value that represents direction of swiping. The integer values are as follows:<br>
+     * 1 = Up to Down Swipe.<br>
+     * 2 = Down to Up Swipe.
+     */
+    int verticalSwipe(double X, double Y);
+
+    /**
+     * Gets the first two coordinates of when user first clicks the screen to help detect drag events.
+     * Must be implemented in the {@link MouseEvent#MOUSE_PRESSED} event and have to be implemented for {@link #verticalSwipe},
+     * {@link #horizontalSwipe}, and {@link #diagonalSwipe} methods to work properly.
      * @param X coordinate in the x direction
      * @param Y coordinate in the y direction
      */
-    void singleClick(double X, double Y);
-
-    PauseTransition pressHold();
-
-    int doubleClick(double X, double Y);
-
-
-    int diagonalSwipe(double X, double Y);
-
-    int horizontalSwipe(double X, double Y);
-
-    int verticalSwipe(double X, double Y);
-
     void mouseEntered(double X, double Y);
 
     /**
-     * If a user releases their finger off the screen
-     * @param x coordinate in the x direction
-     * @param y coordinate in the y direction
+     * Detects horizontal swiping.
+     * Must be implemented in {@link MouseEvent#MOUSE_RELEASED} event.
+     * @param X coordinate in the x direction
+     * @param Y coordinate in the y direction
+     * @return Integer value that represents direction of swiping. The integer values are as follows:<br>
+     * 1 = Left To Right Swipe.<br>
+     * 2 = Right To Left Swipe.
      */
-    default void tapUp(int x, int y) {
+    int horizontalSwipe(double X, double Y);
 
-    }
-
-    /**
-     * If a user slides their finger across the screen.
-     * @param x     first coordinate in the x direction
-     * @param x2    last coordinate in the x direction
-     * @param y     first coordinate in the y direction
-     * @param y2    second coordinate in the y direction
-     */
-    default void slide(int x, int x2, int y, int y2) {
-
-    }
-
-    /**
-     * When a user taps the screen, drags their finger across the screen in whatever motion that they wish.
-     * @param x array of coordinates in the x direction
-     * @param y array of coordinates in the y direction
-     */
-    default void tapDragStopped(int[] x, int[] y) {
-
-    }
-
-    /**
-     * Seeing if their where multiply taps on the Screen within a certain amount of time.
-     */
-    default void mutlitaps() {
-
-    }
 }

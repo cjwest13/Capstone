@@ -1,23 +1,17 @@
 package controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import utilities.NextScreen;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
@@ -29,7 +23,7 @@ import java.util.jar.JarFile;
  * @author  Clifton West
  * @version October 4, 2015
  */
-public class AddPlugsController implements Initializable, NextScreen {
+public class AddPlugsController implements Observer, Initializable, NextScreen {
 
     /** TestField representing the file text area in the fxml */
     @FXML
@@ -59,23 +53,10 @@ public class AddPlugsController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MainScreen.addObserver(this);
         dialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
         num = MainController.getNumOfPlugins();
-        time();
-    }
-
-    /**
-     * Animation to show the time.
-     */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
     }
 
     /**
@@ -86,10 +67,9 @@ public class AddPlugsController implements Initializable, NextScreen {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Choose File");
         file = chooser.showOpenDialog(MainScreen.getStage());
-        if (file.exists()) {
+        if (file != null && file.exists()) {
             txtArea.setText(file.getPath());
         }
-
     }
 
     /**
@@ -98,14 +78,14 @@ public class AddPlugsController implements Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        //String resourceDir = "/home/touchmeister/resources";
-        String resourceDir = "/home/cjwest/resources";
+        String resourceDir = "/home/touchmeister/resources";
+        //String resourceDir = "/home/cjwest/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();
         try {
             if (success) {
-                addPath(destDir);
+                //addPath(destDir);
                 JarFile jFile = new JarFile(file);
                 Enumeration<JarEntry> en = jFile.entries();
                 while (en.hasMoreElements()) {
@@ -140,6 +120,11 @@ public class AddPlugsController implements Initializable, NextScreen {
         }
     }
 
+    /**
+     * Adding file to the classpath.
+     * @param f File
+     * @throws Exception
+     */
     public static void addPath(File f) throws Exception {
         URI u = f.toURI();
         URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
@@ -147,6 +132,7 @@ public class AddPlugsController implements Initializable, NextScreen {
         Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
         method.setAccessible(true);
         method.invoke(urlClassLoader, new Object[]{u.toURL()});
+        System.out.println("WHII");
     }
 
     /**
@@ -167,6 +153,16 @@ public class AddPlugsController implements Initializable, NextScreen {
      */
     @FXML
     public void goToSettings() {
-        NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
+        MainScreen.removeObserver(this);
+        goToNextScreen("/fxml/Settings.fxml");
+    }
+
+    /**
+     * Update the time to the time label.
+     * @param date Date object that is passed.
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
     }
 }

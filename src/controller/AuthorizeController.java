@@ -1,16 +1,11 @@
 package controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.util.Duration;
 import utilities.NextScreen;
 import utilities.PasswordEncryption;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -19,7 +14,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West
  * @version October 4, 2015
  */
-public class AuthorizeController implements Initializable, NextScreen {
+public class AuthorizeController implements Observer, Initializable, NextScreen {
 
     /** TestField representing the username text field in the fxml */
     @FXML
@@ -56,25 +51,12 @@ public class AuthorizeController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        time();
+        MainScreen.addObserver(this);
         adminname = "admin";
         if (newAdminPw == null) {
             encryptedAdminPw = PasswordEncryption.getEncryptedPw("touch");
             newAdminPw = false;
         }
-    }
-
-    /**
-     * Animation to show the time.
-     */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
     }
 
     /**
@@ -91,6 +73,7 @@ public class AuthorizeController implements Initializable, NextScreen {
      */
     @FXML
     public void goToMain() {
+        MainScreen.removeObserver(this);
         NextScreen.super.goToNextScreen("/fxml/Main.fxml");
     }
 
@@ -114,6 +97,7 @@ public class AuthorizeController implements Initializable, NextScreen {
      * Function assigned to a fxml button that goes to the Settings.fxml screen.
      */
     private void goToSettings() {
+        MainScreen.removeObserver(this);
         NextScreen.super.goToNextScreen("/fxml/Settings.fxml");
     }
 
@@ -128,5 +112,14 @@ public class AuthorizeController implements Initializable, NextScreen {
         dialog.setHeight(200);
         dialog.setContentText(message);
         dialog.showAndWait();
+    }
+
+    /**
+     * Update the time to the time label.
+     * @param date Date object that is passed.
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
     }
 }

@@ -1,17 +1,12 @@
 package controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
 import utilities.NextScreen;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -20,7 +15,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West, John Burrell
  * @version October 3, 2015
  */
-public class SettingsController implements Initializable, NextScreen {
+public class SettingsController implements Observer, Initializable, NextScreen {
 
     /** Button representing the back Button in the fxml */
     @FXML
@@ -38,20 +33,7 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        time();
-    }
-
-    /**
-     * Animation to show the time.
-     */
-    private void time() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-            Calendar calendar = Calendar.getInstance();
-            Date time = calendar.getTime();
-            timeLbl.setText(time.toString());
-        }), new KeyFrame(Duration.seconds(1)));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        MainScreen.addObserver(this);
     }
 
     /**
@@ -59,7 +41,8 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @FXML
     public void goToMain() {
-        NextScreen.super.goToNextScreen("/fxml/Main.fxml");
+        MainScreen.removeObserver(this);
+        goToNextScreen("/fxml/Main.fxml");
     }
 
     /**
@@ -67,6 +50,7 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @FXML
     public void goToOS() {
+        MainScreen.removeObserver(this);
         Platform.exit();
     }
 
@@ -75,7 +59,8 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @FXML
     public void goToChangePw() {
-        NextScreen.super.goToNextScreen("/fxml/Password.fxml");
+        MainScreen.removeObserver(this);
+        goToNextScreen("/fxml/Password.fxml");
     }
 
     /**
@@ -83,8 +68,8 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @FXML
     public void goToAddModPlugs() {
-        NextScreen.super.goToNextScreen("/fxml/AddModPlugs.fxml");
-
+        MainScreen.removeObserver(this);
+        goToNextScreen("/fxml/AddModPlugs.fxml");
     }
 
     /**
@@ -92,6 +77,16 @@ public class SettingsController implements Initializable, NextScreen {
      */
     @FXML
     public  void goToGreeting() {
-        NextScreen.super.goToNextScreen("/fxml/Greeting.fxml");
+        MainScreen.removeObserver(this);
+        goToNextScreen("/fxml/Greeting.fxml");
+    }
+
+    /**
+     * Update the time to the time label.
+     * @param date Date object that is passed.
+     */
+    @Override
+    public void update(Date date) {
+        timeLbl.setText(date.toString());
     }
 }
