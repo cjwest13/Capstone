@@ -1,6 +1,6 @@
-package API;
+package API.Interface;
 
-import controller.Gestures;
+import controller.Classes.Gestures;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;

@@ -21,52 +21,20 @@ public interface NextScreen {
      * @param fxml path to an fxml file.
      */
     default void goToNextScreen(String fxml) {
-        Parent loadScreen;
-        Stage stage = MainScreen.getCurrentStage();
+        Parent loadScreen = null;
+        Stage stage = MainScreen.getStage();
         try {
             loadScreen = FXMLLoader.load(getClass().getResource(fxml));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(3000), loadScreen);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
             Scene scene = new Scene(loadScreen);
             stage.setScene(scene);
             stage.show();
             stage.setFullScreenExitHint("");
             stage.setFullScreen(true);
-            //MainScreen.setFxml(fxml);
-        } catch (IOException ioe) {
-            System.err.println("File not found");
-        }
-    }
-
-    default void NewScreen(Stage stage, String title, String fxml1) {
-        Parent loadScreen;
-        try {
-            loadScreen = FXMLLoader.load(getClass().getResource(fxml1));
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), loadScreen);
-            ft.setFromValue(0.0);
-            ft.setToValue(1.0);
-            ft.play();
-            Scene scene = new Scene(loadScreen);
-            stage.setScene(scene);
-            stage.setTitle(title);
-//            stage.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-//                gestures.mouseEntered(event.getX(), event.getY());
-//            });
-//            stage.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-//                int value = gestures.diagonalSwipe(event.getX(), event.getY());
-//                if (value == 3) {
-//                    //System.out.println("AYY CLOSEEE");
-//                    stage.close();
-//                }
-//            });
-            //stage.addEventHandler(MouseEvent.ANY, handler);
-            //addEvents(stage);
-            //timeline.play();
-            stage.show();
-            stage.setFullScreenExitHint("");
-            stage.setFullScreen(true);
+            MainScreen.setFxml(fxml);
         } catch (IOException ioe) {
             System.err.println("File not found");
         }

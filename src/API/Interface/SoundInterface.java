@@ -1,4 +1,4 @@
-package API;
+package API.Interface;
 
 import javax.sound.sampled.Clip;
 

@@ -10,12 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import sun.misc.URLClassPath;
 import utilities.NextScreen;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
@@ -28,14 +26,14 @@ import java.util.*;
  * @version October 3, 2015
  */
 public class MainController implements Initializable, NextScreen, Observer {
-    /** Label representing a label in the fxml */
-
     /** AnchorPane representing the anchorpane in the fxml */
     @FXML
     private AnchorPane anchorPane;
+    
     /** BUtton representing the settings button in the fxml */
     @FXML
     private Button settingbtn;
+    
     /** Label representing the greeting label in the fxml */
     @FXML
     private Label topLabel;
@@ -99,7 +97,6 @@ public class MainController implements Initializable, NextScreen, Observer {
     /** An File array containing the folders for each plugin */
     static File[] list;
 
-    private Sound sound;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -108,47 +105,28 @@ public class MainController implements Initializable, NextScreen, Observer {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	//System.out.println("ONE");
-        sound = new Sound();
-        //File file = new File("/home/cjwest/Documents/mwkr.mp3");
-        //System.out.println(file.exists());
-        //sound.playLoop("/home/cjwest/Documents/mwkr.wav");
         MainScreen.addObserver(this);
         chosenPlugin = new File[2];
-        //System.out.println("TWO");
         defaultimage = new Image("/utilities/cone.png");
-        //System.out.println("THREE");
         appData = new ArrayList();
         plugins = new ArrayList();
         labels = new ArrayList();
         icons = new ArrayList();
         preview = new ArrayList();
         iconsView = new ArrayList();
-        //System.out.println("FOUR");
         if (change == null || !change) {
             newAppData = appData;
             change = false;
         }
-        //System.out.println("FIVE");
         addPlugins();
         setEvents();
         changeGreeting(greeting);
-
         /** Sets the settings button to be visible on key pressed */
         anchorPane.setOnKeyPressed(ke-> {
             if (ke.getCode().equals(KeyCode.K)) {
                 settingbtn.setVisible(true);
             }
         });
-        //ImageView imageView = null;
-        //WebView broswer = null;
-        //try {
-            //imageView = webView.getWebHtml("https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png");
-            //broswer = webView.getWebHtml("https://www.google.com");
-        //} catch (Exception e) {}
-        //labels.add(new Label(imageView));
-        //gridPane.add(imageView, 1, 0);
-        //gridPane.add(broswer, 1, 0);
     }
 
     /**
@@ -163,13 +141,19 @@ public class MainController implements Initializable, NextScreen, Observer {
                 chosenPlugin[1] = plugins.get(index).get(1);
                 chosenPreview = preview.get(index).get(0);
                 description = appData.get(index).get(1);
-                try {
-                    addPath(list[index]);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 goToNextScreen("/fxml/PluginInfo.fxml");
             });
+        }
+        for (ImageView image: iconsView) {
+        	image.setOnMouseClicked(event -> {
+        		int index = gridPane.getRowIndex(image);
+                chosenPlugin[0] = plugins.get(index).get(0);
+                curIndex = index;
+                chosenPlugin[1] = plugins.get(index).get(1);
+                chosenPreview = preview.get(index).get(0);
+                description = appData.get(index).get(1);
+                goToNextScreen("/fxml/PluginInfo.fxml");
+        	});
         }
     }
 
@@ -244,8 +228,6 @@ public class MainController implements Initializable, NextScreen, Observer {
     private void addPlugins() {
         if (isPlugins()) {
             loadPlugins();
-            //Default Icon
-
             //Going through the plugin 2d Arraylist
             for (int i = 0; i < plugins.size(); i++) {
                 File files;
@@ -288,12 +270,9 @@ public class MainController implements Initializable, NextScreen, Observer {
      * @return  Boolean returns true if they are plugins, false if its not.
      */
     private Boolean isPlugins() {
-        File file = new File("/home/touchmeister/resources");
-        //File file = new File("/home/cjwest/resources");
+        //File file = new File("/home/touchmeister/resources");
+        File file = new File("/home/cjwest/resources");
         list = file.listFiles();
-        //System.out.println("ISPLUGINS");
-        //System.out.println("DAFUCK");
-       // System.out.println("NAME " + file.exists());
         numOfPlugins = list.length;
         if (list.length == 0) {
             return false;
@@ -310,49 +289,40 @@ public class MainController implements Initializable, NextScreen, Observer {
         File appTxt = null;
         //Adds the numbered folder that holds the plugins to the classpath.
         for (int i = 0; i < list.length; i ++) {
-//        	try {
-//                AddPlugsController.addPath(list[i]);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-            //System.out.println(list[i]);
             File[] pack = list[i].listFiles();
             packages.add(new ArrayList());
             //goes the resources and numbered folders to an arraylist
             for (int j = 0; j < pack.length; j++) {
                 packages.get(i).add(pack[j]);
                 try {
-                    //addPath(packages.get(i).get(j));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        //System.out.println(packages.get(0));
         //This goes through each plugin folder looking for preview folder, icon folder, app.txt file
         //and jar file for each plugin.
         int k = 0;
         for (int i = 0; i < packages.size(); i++) {
             appTxt = null;
-            //System.out.println("AHH");
-            //System.out.println("Package " + i);
             Iterator iterator = packages.get(i).iterator();
             plugins.add(new ArrayList());
             preview.add(new ArrayList());
             icons.add(new ArrayList());
 
             //Creates nonexisting folder if no preview folder in first and only plugin
-            if (k > 0 && (preview.get(i).size() < plugins.size())) {
+            if (k > 0 && (preview.size() < plugins.size())) {
                 preview.get(i).add(new File(""));
             }
             //if (icons.size() < i || (icons.size() == i && i == 0)) {
-            if (k > 0 && (icons.get(i).size() < plugins.size())) {
-                icons.get(k -1).add(new File(""));
+            if (k > 0 && (icons.size() < plugins.size())) {
+                icons.get(k-1).add(new File(""));
             }
             while (iterator.hasNext()) {
                 File file = (File) iterator.next();
                 if ("preview".equals(file.getName().toLowerCase())) {
                     preview.get(i).add(file);
+                    //System.out.println(file.toString());
                 } else if ("icon".equals(file.getName().toLowerCase())) {
                     icons.get(i).add(file);
                 } else if ("app.txt".equals(file.getName().toLowerCase())) {
@@ -399,12 +369,7 @@ public class MainController implements Initializable, NextScreen, Observer {
             }catch(Exception e){
                 System.out.println(i + " :Something bad happen. ");
             }
-            //System.out.println(plugins.get(i).get(0).getAbsolutePath());
-
         }
-
-        //System.out.println(icons.size());
-        //System.out.println(plugins.size());
         /** Checking the last added plugin's icons/preview folders /*/
         Iterator iconIterator = icons.get(k-1).iterator();
         Iterator preIterator = preview.get(k-1).iterator();
@@ -435,48 +400,6 @@ public class MainController implements Initializable, NextScreen, Observer {
             icons.get(k-1).add(new File(""));
         }
     }
-
-    /**
-     * Adding file to the classpath.
-     * @param f File
-     * @throws Exception
-     */
-    public static void addPath(File f) throws Exception {
-        URI u = f.toURI();
-        URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-        Class<URLClassLoader> urlClass = URLClassLoader.class;
-        Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
-        method.setAccessible(true);
-        method.invoke(urlClassLoader, new Object[]{u.toURL()});
-    }
-    
-    public static void removePath(File f) throws Exception {
-//    	URI u = f.toURI();
-//    	ClassLoader cl = ClassLoader.getSystemClassLoader();
-//    	Class<URLClassLoader> urlClass = URLClassLoader.class;
-//    	String classPath = System.getenv("CLASSPATH");
-//    	String remainingPath = classPath.replace(f.getPath(), "");
-//    	//        URL url = f.toURI().toURL();
-//        System.out.println(url.toString());
-//        URLClassLoader urlClassLoader = (URLClassLoader) 
-//            ClassLoader.getSystemClassLoader();
-//        Class<?> urlClass = URLClassLoader.class;
-//        Field ucpField = urlClass.getDeclaredField("ucp");
-//        ucpField.setAccessible(true);
-//        URLClassPath ucp = (URLClassPath) ucpField.get(urlClassLoader);
-//        Class<?> ucpClass = URLClassPath.class;
-//        Field urlsField = ucpClass.getDeclaredField("urls");
-//        urlsField.setAccessible(true);
-//        Stack urls = (Stack) urlsField.get(ucp);
-//        urls.remove(url);
-        //urls = ((URLClassLoader)cl).getURLs();
-
-        //for(URL hi: urls){
-            //System.out.println("HI" + hi.getFile());
-            //System.out.println("ADSS " + url.getFile().toString());
-        //}
-    }
-
 
     /**
      * Reads App.txt file and gets the name and description of the plugin.
@@ -563,16 +486,10 @@ public class MainController implements Initializable, NextScreen, Observer {
     /**
      * Function assigned to a fxml button that goes to the Authorization.fxml screen.
      */
-    //@FXML
-    //public void goToSettings() {
-    //MainScreen.removeNewObserver(this);
-       //NextScreen.super.goToNextScreen("/fxml/Authorization.fxml");
-   // }
-
     @FXML
     public void goToSettings() {
         MainScreen.removeObserver(this);
-        goToNextScreen("/fxml/ModPlugs.fxml");
+        goToNextScreen("/fxml/Authorization.fxml");
     }
 
     /**

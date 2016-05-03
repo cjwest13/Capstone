@@ -1,21 +1,21 @@
 package controller;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.stage.Modality;
 import utilities.JarResources;
 import utilities.MultiClassLoader;
 import utilities.NextScreen;
@@ -23,6 +23,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
@@ -78,6 +80,9 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
 
     /** Eventhandler */
     private EventHandler<MouseEvent> handler2;
+    
+    /** Confirmation Popbox */
+    private Alert alert;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -87,9 +92,9 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	System.out.println("WHATTT");
+    	alert = new Alert(AlertType.CONFIRMATION, "Do you wish to exit this plugin?", ButtonType.YES, ButtonType.NO);
+    	alert.initModality(Modality.WINDOW_MODAL);
     	MainScreen.addObserver(this);
-        
         gestures = new Gestures();
         index = MainController.getCurIndex();
         plugin = MainController.getChosenPlugin();
@@ -103,40 +108,25 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
         setSlideShow();
         setEvents();
         try {
-			MainController.addPath(MainController.getList()[index]);
+			addPath(MainController.getList()[index]);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//        ClassLoader cl = ClassLoader.getSystemClassLoader();
-//        URL[] urls = ((URLClassLoader)cl).getURLs();
-//        for(URL url: urls){
-//        System.out.println("BACK LIKE BLACK" + url.getFile());
-//            //System.out.println("ADSS " + url.getFile().toString());
-//        }
-        //System.out.println(fxml.getAbsolutePath());
-        //System.out.println(index);
-        //System.out.println(numOfPlugins);
         handler1 = event -> gestures.mouseEntered(event.getX(), event.getY());
         handler2 = event -> {
             int horzValue = gestures.horizontalSwipe(event.getX(), event.getY());
-            //System.out.println("HIII");
             if (horzValue == 1) {
                 if (index != 0) {
-                    //System.out.println("Left to Right Swipe");
                     goToBackPlugin(index);
                 }
             } else if (horzValue == 2) {
                 if ((numOfPlugins != (index+1))) {
-                    //System.out.println("Right to Left Swipe");
                     goToNextPlugin(index);
                 }
             }
         };
-        //System.out.println("VISSS");
-        MainScreen.getCurrentStage().addEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
-        MainScreen.getCurrentStage().addEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
-        //System.out.println("HI");
+        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
     }
 
     /**
@@ -145,19 +135,10 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     private void goToBackPlugin(int index) {
         int i = index - 1;
-            MainController.setCurIndex(i);
-            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
-            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
-        try {
-            //MainController.removePath(MainController.getList()[index]);
-           //MainController.addPath(MainController.getList()[i]);
-            
-
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-           goToNextScreen("/fxml/PluginInfo.fxml");
+        MainController.setCurIndex(i);
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
+        goToNextScreen("/fxml/PluginInfo.fxml");
     }
 
     /**
@@ -166,22 +147,10 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     private void goToNextPlugin(int index) {
         int i = index + 1;
-            MainController.setCurIndex(i);
-            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
-            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
-        try {
-        	//MainController.removePath(MainController.getList()[index]); 
-//          
-//            ClassLoader cl = ClassLoader.getSystemClassLoader();
-//            URL[] urls = ((URLClassLoader)cl).getURLs();
-//            for(URL url: urls){
-//            System.out.println(url.getFile());
-//                //System.out.println("ADSS " + url.getFile().toString());
-//            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-            goToNextScreen("/fxml/PluginInfo.fxml");
+        MainController.setCurIndex(i);
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
+        goToNextScreen("/fxml/PluginInfo.fxml");
     }
 
     /**
@@ -189,14 +158,8 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     private void setEvents() {
         stackPane.setOnMouseClicked(event -> {
-//        	ClassLoader cl = ClassLoader.getSystemClassLoader();
-//
-//            URL[] urls = ((URLClassLoader)cl).getURLs();
-//
-//            for(URL url: urls){
-//                System.out.println("HI" + url.getFile());
-//                //System.out.println("ADSS " + url.getFile().toString());
-//            }
+        	MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+            MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
             JarClassLoader jarLoader = new JarClassLoader(jarFile.getAbsolutePath());
             Object object = null;
             try {
@@ -207,67 +170,47 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
             }
             
             App app = (App) object;
-            //app.setTitle("Name");
-            //String[] string = fxml.getAbsolutePath().split("/home/cjwest");
+            String[] string = fxml.getAbsolutePath().split("/home/cjwest");
             //String[] string = fxml.getAbsolutePath().split("/home/cjwest/resources");
             //String[] string = fxml.getAbsolutePath().split("/home/touchmeister/resources");
-            String[] string = fxml.getAbsolutePath().split("/home/touchmeister");
-            System.out.println(string[0]);
-            System.out.println(string[1]);
-            //app.setFxmlAndTitle(string[1], "NAMEEE");
-
-            //app.setTitle("HII");a
-            //app.setFxml(string[1]);
-            //System.out.println(app.);
+            //String[] string = fxml.getAbsolutePath().split("/home/touchmeister");
+            EventHandler<MouseEvent> handler3 = event1 -> gestures.mouseEntered(event1.getX(), event1.getY());
+            EventHandler<MouseEvent> handler4 = new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					int value = gestures.diagonalSwipe(event.getX(), event.getY());
+	            	if (value == 3) {
+	            		alert.showAndWait();
+	            		if (alert.getResult() == ButtonType.YES) {
+	            			Sound sound = MainScreen.getSound();
+	            			if (sound != null) {
+	            				sound.endAllSounds();
+	            			}
+	            			
+	            			MainScreen.getStage().setFullScreen(true);
+	            			MainScreen.getStage().requestFocus();
+	            			MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler3);
+	            			MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, this);
+	            			goToNextScreen("/fxml/PluginInfo.fxml");
+	            			MainScreen.getStage().setFullScreen(true);
+	            			
+	            		}
+	            	}					
+				}
+            };
+            MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_PRESSED, handler3);
+            MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_RELEASED, handler4);
             Platform.runLater(() -> {
-                try {
-                    Stage stage = new Stage();
-                    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-                        @Override
-                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            //System.out.println("OMG " + newValue);
-                        }
-                    });
-                    stage.showingProperty().addListener(new ChangeListener<Boolean>() {
-                        int i = 0;
-                        @Override
-                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            System.out.println("DSDDS " + i);
-                            i++;
-                            if (i % 2 == 0) {
-                                System.out.println("CLOSE");
-                                stage.close();
-                                MainScreen.getCurrentStage().toFront();
-                                MainScreen.getCurrentStage().setFullScreen(true);
-                            }
-                        }
-                    });
-                    stage.setOnCloseRequest((windowEvent) -> {
-                        MainScreen.getCurrentStage().toFront();
-                        MainScreen.getCurrentStage().setFullScreen(true);
-                    });
-                    MainScreen.getCurrentStage().toBack();
-                   //System.out.println(this.getClass().getResource(string[1]).toString());
-                    //System.out.println("OMG");
-                    
-                    //Works for jar file
-                  //app.goToScreen(stage, "HII", "/resources/1/fxml/main.fxml");
-                    
-                   app.setFxmlAndTitle(string[1], "Capstone");
-                    //app.setFxml(this.getClass().getResource(string[1]).toString());
-                    //app.setMainStage(MainScreen.getStage());
-                   //MainScreen.getTimeline().stop();
-                   //MainScreen.getCurrentStage().removeEventHandler(MouseEvent.ANY, MainScreen.getEvent());
-                    app.start(stage);
-                    
-                    
+                try { 
+                	app.setFxmlAndTitle(string[1], "Capstone");
+                	//System.out.println(string[1]);
+                    app.start(MainScreen.getStage());
                 } catch (Exception ioe) {
                     ioe.printStackTrace();
                 }
             });
         });
     }
-
     /**
      * Setting the slideshow of the previews.
      */
@@ -275,28 +218,6 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
         ArrayList<ImageView> pics = new ArrayList();
         pics = addImages();
         stackPane.getChildren().add(pics.get(0));
-        //System.out.println("AAAAA");
-        /**
-        SequentialTransition slideshow = new SequentialTransition();
-        for (ImageView slide : pics) {
-
-            //System.out.println("AAAAA");
-            SequentialTransition transition = new SequentialTransition();
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), slide);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            PauseTransition stayOn = new PauseTransition(Duration.millis(2000));
-            FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), slide);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
-            transition.getChildren().addAll(fadeIn, stayOn, fadeOut);
-            slide.setOpacity(0);
-            stackPane.getChildren().add(slide);
-            slideshow.getChildren().add(transition);
-        }
-        slideshow.setCycleCount(Timeline.INDEFINITE);
-        slideshow.play();
-         */
     }
 
     /**
@@ -304,6 +225,8 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      */
     private ArrayList<ImageView> addImages() {
         ArrayList<ImageView> pics = new ArrayList();
+//        System.out.println(pictures.getAbsolutePath());
+//        System.out.println(pictures.exists());
         if (pictures.exists()) {
             File[] files = pictures.listFiles();
             if (files.length != 0) {
@@ -317,15 +240,14 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
                         pics.add(view);
                     }
                 } catch (IOException ioe) {}
-                return pics;
+                //return pics;
             }
-        }
+        } else { 
         Image[] images = defaultImages();
-        for (Image image : images) {
-            ImageView view = new ImageView(image);
-            view.setFitHeight(430);
-            view.setPreserveRatio(true);
-            pics.add(view);
+        ImageView view = new ImageView(images[0]);
+        view.setFitHeight(430);
+        view.setPreserveRatio(true);
+        pics.add(view);
         }
         return pics;
     }
@@ -335,7 +257,7 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      * @return Image[] of default images.
      */
     private Image[] defaultImages() {
-        Image[] images = new Image[6];
+        Image[] images = new Image[1];
         Image image1 = new Image("/utilities/defaultPreviews/one.jpg");
         images[0] = image1;
         return images;
@@ -345,22 +267,14 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
      * Set the main and the fxml from the chosenPlugin array.
      */
     private void setFiles() {
-        //System.out.println(plugin[0].getName());
-        //System.out.println(plugin[1].getName());
         String[] string = plugin[0].getName().split("\\.");
-        //System.out.println(string[0]);
         String first = string[0].trim();
-
-        //System.out.println(first);
         if (first.toLowerCase().equals("main")) {
             jarFile = plugin[1];
             fxml = plugin[0];
-            //System.out.println(fxml.getAbsolutePath());
         } else {
             jarFile = plugin[0];
             fxml = plugin[1];
-            //System.out.println("FDSSS" + jarFile.getAbsolutePath());
-            //System.out.println("FDS" + fxml.getAbsolutePath());
         }
     }
 
@@ -412,11 +326,22 @@ public class PluginInfoController implements Observer, Initializable, NextScreen
     @FXML
     public void goToMain() {
         MainScreen.removeObserver(this);
-        try {
-            MainController.removePath(MainController.getList()[index]);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
+        MainScreen.getStage().removeEventHandler(MouseEvent.MOUSE_RELEASED, handler2);
         goToNextScreen("/fxml/Main.fxml");
+    }
+    
+    /**
+     * Adding file to the classpath.
+     * @param f File
+     * @throws Exception
+     */
+    public void addPath(File f) throws Exception {
+        URI u = f.toURI();
+        URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+        Class<URLClassLoader> urlClass = URLClassLoader.class;
+        Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
+        method.setAccessible(true);
+        method.invoke(urlClassLoader, new Object[]{u.toURL()});
     }
 }

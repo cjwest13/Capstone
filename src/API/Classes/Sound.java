@@ -1,18 +1,26 @@
-package API;
-
-import controller.SoundInterface;
+package API.Classes;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Sound Class that contains Sound Management Methods.
  * @author Clifton West
  * @version April 17, 2016.
  */
-public class Sound implements SoundInterface {
+public class Sound implements controller.Interface.SoundInterface {
 
+    /** Arraylist for the all of the clips */
+    private static ArrayList<Clip> sound;
+
+    /**
+     * Constructor for the Sound Class.
+     */
+    public Sound() {
+        sound = new ArrayList();
+    }
     /**
      * Plays the audio file from the beginning giving the String of the
      * file location once.
@@ -37,6 +45,7 @@ public class Sound implements SoundInterface {
         } catch (NullPointerException npe) {
             System.out.println("File could not be found.");
         }
+        sound.add(clip);
         return clip;
     }
 
@@ -64,6 +73,7 @@ public class Sound implements SoundInterface {
         } catch (NullPointerException npe) {
             System.out.println("File could not be found.");
         }
+        sound.add(clip);
         return clip;
     }
 
@@ -98,4 +108,14 @@ public class Sound implements SoundInterface {
     public void endSound(Clip clip) {
         clip.stop();
     }
+    /**
+     * Stops all Sounds.
+     */
+    public void endAllSounds() {
+        for (Clip clip: sound) {
+            clip.stop();
+        }
+        sound.clear();
+    }
+
 }

@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  * @author  Clifton West
  * @version November 3, 2015
  */
-public class MainController implements Observer, Initializable, NextScreen{
+public class Controller implements Observer, Initializable, NextScreen{
 
     /** AnchorPane of the main.fxml */
     @FXML
@@ -77,24 +77,11 @@ public class MainController implements Observer, Initializable, NextScreen{
         pictures = new ImageView[3];
         addImages();
         startSlideShow();
-        //closes application on swipeDown
-        /**
-        anchorPane.setOnSwipeDown(new EventHandler<SwipeEvent>() {
-            @Override
-            public void handle(SwipeEvent event) {
-                Platform.exit();
-            }
-        });
-        */
-        borderPane.setOnSwipeDown(event -> Platform.exit());
-        stackPane.setOnSwipeDown(event -> Platform.exit());
         choiceBox.setItems(people);
-        //choiceBox.setTooltip((new Tooltip("Select a CS Professor :D")));
         choiceBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> person, String before, String selected) {
                 pickPerson = selected;
-                //System.out.println(pickPerson);
                 goToNextScreen("/fxml/schedule.fxml");
             }
         });

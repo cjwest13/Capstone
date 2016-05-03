@@ -51,8 +51,8 @@ public class ScheduleController implements Observer, Initializable, NextScreen {
     public void initialize(URL location, ResourceBundle resources) {
         Main.addObserver(this);
         time = new SystemData();
-        people= MainController.getCurrentPeople();
-        person = MainController.getPickPerson();
+        people= Controller.getCurrentPeople();
+        person = Controller.getPickPerson();
         url = pickedSchedule(person);
         webEngine = webView.getEngine();
         webEngine.load(url);
@@ -67,13 +67,13 @@ public class ScheduleController implements Observer, Initializable, NextScreen {
     private String pickedSchedule(String person) {
         String url = "";
         if (people.get(0).equals(person)) {
-            url = "http://agora.cs.wcu.edu/~sbarlowe/currentSched.html";
+            url = this.getClass().getResource("/html/Barlowe.html").toExternalForm();
         } else if (people.get(1).equals(person)) {
-            url = "http://agora.cs.wcu.edu/~holliday/";
+            url = this.getClass().getResource("/html/Holliday.html").toExternalForm();
         } else if (people.get(2).equals(person)) {
-            url = "http://agora.cs.wcu.edu/~wck/schedule.shtml";
+            url = this.getClass().getResource("/html/Kreahling.html").toExternalForm();
         } else if (people.get(3).equals(person)) {
-            url = "http://agora.cs.wcu.edu/~ascott/schedule.shtml";
+            url = this.getClass().getResource("/html/Scott.html").toExternalForm();
         }
         return url;
     }

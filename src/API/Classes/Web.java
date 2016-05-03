@@ -1,6 +1,5 @@
-package API;
+package API.Classes;
 
-import controller.WebData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
@@ -10,7 +9,7 @@ import javafx.scene.web.WebView;
  * @author Clifton West
  * @version April 3, 2016.
  */
-public class Web implements WebData {
+public class Web implements controller.Interface.WebData {
 
     /** Viewer to display html content */
     private WebView browser;

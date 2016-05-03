@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 /**
  * Class that's encrypts the password
- * @author  Clifton West, John Burrell
+ * @author  Clifton West
  * @version October 15, 2015
  */
 public class PasswordEncryption {

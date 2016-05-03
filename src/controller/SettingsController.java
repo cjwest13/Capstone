@@ -52,6 +52,7 @@ public class SettingsController implements Observer, Initializable, NextScreen {
     public void goToOS() {
         MainScreen.removeObserver(this);
         Platform.exit();
+        System.exit(0);
     }
 
     /**

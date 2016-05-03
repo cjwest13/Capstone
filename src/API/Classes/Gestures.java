@@ -1,6 +1,5 @@
-package API;
+package API.Classes;
 
-import controller.GestureControl;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author  Clifton West
  * @version March 20, 2016
  */
-public class Gestures extends Observable implements GestureControl {
+public class Gestures extends Observable implements controller.Interface.GestureControl {
 
     /** First Coordinate in the X Direction */
     private double firstX;
@@ -37,6 +36,8 @@ public class Gestures extends Observable implements GestureControl {
     /** The time when the User Pressed Down on the Screen */
     private long time1;
 
+    private long time3;
+
     /** The contains value of single/double click event */
     private int click;
 
@@ -52,17 +53,21 @@ public class Gestures extends Observable implements GestureControl {
     /** A delayed action caused by ScheduleThreadPoolExecutor */
     private ScheduledFuture<?> scheduledFuture;
 
+    /** Flag to detected the amount of clicks */
+    private boolean clickFlag;
+
     /**
      * Constructor for the Gestures class.
      */
     public Gestures() {
-        executor = new ScheduledThreadPoolExecutor(1);
-        executor.setRemoveOnCancelPolicy(true);
-        press = new BooleanHolder(false);
-        dragFlag = false;
         secX = 0;
         secY = 0;
         click = 0;
+        clickFlag = false;
+        dragFlag = false;
+        executor = new ScheduledThreadPoolExecutor(1);
+        executor.setRemoveOnCancelPolicy(true);
+        press = new BooleanHolder(false);
     }
 
     /**
@@ -80,6 +85,7 @@ public class Gestures extends Observable implements GestureControl {
         holdTimer.setOnFinished(event -> {
             press.value = true;
             handler.handle(eventWrapper.content);
+            //System.out.println(press.value);
         });
 
         node.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
@@ -88,11 +94,11 @@ public class Gestures extends Observable implements GestureControl {
         });
 
         node.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-            press.value = false;
+            //press.value = false;
             holdTimer.stop();
         });
         node.addEventHandler(MouseEvent.DRAG_DETECTED, event -> {
-            press.value = false;
+            //press.value = false;
             holdTimer.stop();
         });
     }
@@ -106,12 +112,17 @@ public class Gestures extends Observable implements GestureControl {
     public void clicks(MouseEvent e) {
         if (e.getButton().equals(MouseButton.PRIMARY)) {
             time1 = System.currentTimeMillis();
-            if (e.getClickCount() == 2) {
+            //System.out.println(press.value);
+            if (e.getClickCount() == 2 && !press.value && !dragFlag) {
+                clickFlag = true;
                 scheduledFuture.cancel(false);
                 doubleClick();
-            } else if (e.getClickCount() == 1) {
+            } else if (e.getClickCount() == 1 && !press.value && !dragFlag) {
+                clickFlag = true;
                 scheduledFuture = executor.schedule(() -> singleClick(), 1000, TimeUnit.MILLISECONDS);
             }
+            press.value = false;
+            dragFlag =false;
         }
     }
 
@@ -140,6 +151,7 @@ public class Gestures extends Observable implements GestureControl {
      * 2: Double Click.
      */
     public synchronized int getClick() {
+        clickFlag = false;
         return click;
     }
 
@@ -153,6 +165,7 @@ public class Gestures extends Observable implements GestureControl {
         setChanged();
         notifyObservers();
         click = 0;
+        clickFlag = false;
     }
 
     /**
@@ -161,37 +174,56 @@ public class Gestures extends Observable implements GestureControl {
      * @param X coordinate in the x direction
      * @param Y coordinate in the y direction
      * @return  Integer value that represents diagonal swipe event. The integer values are as follows:<br>
-     * 1 = Left to Right Diagonal Swipe<br>
-     * 2 = Right to Left Diagonal Swipe<br>
-     * 3 = Close Event
+     * 1 = Left to Right Diagonal Swipe(From the Top)<br>
+     * 2 = Right to Left Diagonal Swipe(From the Top)<br>
+     * 3 = Close Event(From the Top)<br>
+     * 4 = Right to Left Diagonal Swipe(From the Bottom)<br>
+     * 5 = Left to Right Diagonal Swipe(From the Bottom)<br>
+     * 6 = Close Event(From the Bottom)
      */
     @Override
     public int diagonalSwipe(double X, double Y) {
-        secX = X;
-        secY = Y;
-        int value = 0;
-        if (firstX == secX && firstY == secY) {
-            value = 0;
-        } else {
-            dragFlag = true;
-            double buffer = 50.1;
-            //Detecting CLOSE
-            if ((firstX + buffer) < secX && (firstY + buffer) < secY) {
-                time1 = System.currentTimeMillis();
-                value = 1;
-            }
-            if ((firstX - buffer) > secX && (firstY + buffer) < secY) {
-                long time2 = System.currentTimeMillis();
-                long diff = time2 - time1;
-                if ((diff/1000) < 1) {
-                    value = 3;
-                } else {
-                    time1 = 0;
-                    value = 2;
+        if (!clickFlag) { //&& !press.value) {
+            secX = X;
+            secY = Y;
+            int value = 0;
+            if (firstX == secX && firstY == secY) {
+                value = 0;
+            } else if (Math.abs(firstX - secX) <= 15 && Math.abs(firstY - secY) <= 15) {
+                value = 0;
+            } else {
+                dragFlag = true;
+                double buffer = 90.1;
+                //Detecting CLOSE
+                if ((firstX + buffer) < secX && (firstY + buffer) < secY) {
+                    time1 = System.currentTimeMillis();
+                    value = 1;
+                } else if ((firstX - buffer) > secX && (firstY + buffer) < secY) {
+                    long time2 = System.currentTimeMillis();
+                    long diff = time2 - time1;
+                    if ((diff / 1000) < 1) {
+                        value = 3;
+                    } else {
+                        time1 = 0;
+                        value = 2;
+                    }
+                } else if ((firstX - buffer) < secX && (firstY + buffer) > secY) {
+                    time3 = System.currentTimeMillis();
+                    value = 4;
+                } else if ((firstX + buffer) > secX && (firstY + buffer) > secY) {
+                    long time2 = System.currentTimeMillis();
+                    long diff = time2 - time3;
+                    if ((diff / 1000) < 1) {
+                        value = 6;
+                    } else {
+                        time3 = 0;
+                        value = 5;
+                    }
                 }
             }
+            return value;
         }
-        return value;
+        return 0;
     }
 
     /**
@@ -205,34 +237,39 @@ public class Gestures extends Observable implements GestureControl {
      */
     @Override
     public int verticalSwipe(double X, double Y) {
-        secX = X;
-        secY = Y;
-        int value = 0;
-        if (firstX == secX && firstY == secY) {
-            value = 0;
-        } else {
-            dragFlag = true;
-            double vertBuff = 50.0;
-            if (firstX >= secX) {
-                if (firstX - vertBuff <= secX) {
-                    if (secY > firstY) {
-                        value = 1;
-                    } else {
-                        value = 2;
+        if (!clickFlag) { //&& !press.value) {
+            secX = X;
+            secY = Y;
+            int value = 0;
+            if (firstX == secX && firstY == secY) {
+                value = 0;
+            } else if (Math.abs(firstX - secX) <= 15 && Math.abs(firstY - secY) <= 15) {
+                value = 0;
+            } else {
+                dragFlag = true;
+                double vertBuff = 90.0;
+                if (firstX >= secX) {
+                    if (firstX - vertBuff <= secX) {
+                        if (secY > firstY) {
+                            value = 1;
+                        } else {
+                            value = 2;
+                        }
+                    }
+                }
+                if (firstX <= secX) {
+                    if (firstX + vertBuff >= secX) {
+                        if (secY < firstY) {
+                            value = 2;
+                        } else {
+                            value = 1;
+                        }
                     }
                 }
             }
-            if (firstX <= secX) {
-                if (firstX + vertBuff >= secX) {
-                    if (secY < firstY) {
-                        value = 2;
-                    } else {
-                        value = 1;
-                    }
-                }
-            }
+            return value;
         }
-        return value;
+        return 0;
     }
 
     /**
@@ -259,33 +296,38 @@ public class Gestures extends Observable implements GestureControl {
      */
     @Override
     public int horizontalSwipe(double X, double Y) {
-        secX = X;
-        secY = Y;
-        int value = 0;
-        double buffer = 50.0;
-        if (firstX == secX && firstY == secY) {
-            value = 0;
-        } else {
-            dragFlag = true;
-            if (firstY >= secY) {
-                if ((firstY - buffer) <= secY) {
-                    if (secX > firstX) {
-                        value = 1;
-                    } else {
-                        value = 2;
+        if (!clickFlag) { //&& !press.value) {
+            secX = X;
+            secY = Y;
+            int value = 0;
+            double buffer = 50.0;
+            if (firstX == secX && firstY == secY) {
+                value = 0;
+            } else if (Math.abs(firstX - secX) <= 15 && Math.abs(firstY - secY) <= 15) {
+                value = 0;
+            } else {
+                dragFlag = true;
+                if (firstY >= secY) {
+                    if ((firstY - buffer) <= secY) {
+                        if (secX > firstX) {
+                            value = 1;
+                        } else {
+                            value = 2;
+                        }
+                    }
+                }
+                if (firstY <= secY) {
+                    if ((firstY + buffer) >= secY) {
+                        if (secX < firstX) {
+                            value = 2;
+                        } else {
+                            value = 1;
+                        }
                     }
                 }
             }
-            if (firstY <= secY) {
-                if ((firstY + buffer) >= secY) {
-                    if (secX < firstX) {
-                        value = 2;
-                    } else {
-                        value = 1;
-                    }
-                }
-            }
+            return value;
         }
-        return value;
+        return 0;
     }
 }

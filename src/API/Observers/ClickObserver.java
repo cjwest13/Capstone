@@ -1,13 +1,13 @@
-package API;
+package API.Observers;
 
-import controller.Gestures;
+import controller.Classes.Gestures;
 
 import java.util.Observer;
 
 /**
  * Wrapper for the java.util.Observer class, used to detect the Clicks in the Gesture Class. <br>
  * Implement this class to detected single and doubles. <br>
- * After Implementation, you have to added your class to the {@link controller.Gestures} observer pattern by
+ * After Implementation, you have to added your class to the {@link Gestures} observer pattern by
  * Creating a instance of gestures class, adding your class to the Gestures object's
  * observer list.
  * Implementing this class will force you utilize the update observer method. Which if

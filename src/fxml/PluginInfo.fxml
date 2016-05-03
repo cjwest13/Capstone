@@ -20,7 +20,7 @@
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="404.0" stylesheets="@../styles/plugininfo.css">
                      <children>
-                        <Label fx:id="descripLabel" prefHeight="109.0" prefWidth="349.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="descripLabel" prefHeight="109.0" prefWidth="349.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>
               </items>
                <BorderPane.margin>
@@ -48,7 +48,7 @@
             </GridPane>
          </bottom>
          <left>
-            <ImageView fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="image1" fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../utilities/arrow-left.png" />
                </image>
@@ -58,7 +58,7 @@
             </ImageView>
          </left>
          <right>
-            <ImageView fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="image2" fitHeight="171.0" fitWidth="163.0" pickOnBounds="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../utilities/arrow-right.png" />
                </image>

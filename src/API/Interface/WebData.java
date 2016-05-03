@@ -1,4 +1,4 @@
-package API;
+package API.Interface;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;

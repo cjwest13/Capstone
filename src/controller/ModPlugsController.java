@@ -21,7 +21,7 @@ import java.util.*;
  * @author  Clifton West
  * @version October 3, 2015
  */
-public class ModPlugsController extends ClickObserver implements Observer, Initializable, NextScreen {
+public class ModPlugsController implements Observer, Initializable, NextScreen {
 
     /** Label representing the time in the screen */
     @FXML
@@ -70,7 +70,6 @@ public class ModPlugsController extends ClickObserver implements Observer, Initi
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         MainScreen.addObserver(this);
-        observe();
         labels = new ArrayList();
         confirmDialog = new Dialog<>();
         close = new ButtonType("Close", ButtonBar.ButtonData.OK_DONE);
@@ -78,42 +77,7 @@ public class ModPlugsController extends ClickObserver implements Observer, Initi
         icons = MainController.getIcons();
         appData = MainController.getAppNames();
         buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
-        System.out.println(appData.size());
-        EventHandler<MouseEvent> handler2 = event1 -> System.out.println("PRESS THAT TAP");
-        gestures.pressHoldHandler(timeLbl, handler2);
-        handler1 = event -> gestures.mouseEntered(event.getX(), event.getY());
-        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_PRESSED, handler1);
-        //Testing stuff heere (Proof by doing gestures) Make sure to delete later
-        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_RELEASED, event1 -> {
-            int horzValue = gestures.horizontalSwipe(event1.getX(), event1.getY());
-            int diaValue = gestures.diagonalSwipe(event1.getX(), event1.getY());
-            int vertValue = gestures.verticalSwipe(event1.getX(), event1.getY());
-            if (horzValue == 1) {
-                System.out.println("Left To Right Swipe");
-            } else if (horzValue == 2) {
-                System.out.println("Right To Left Swipe");
-            }
-            if (diaValue == 1) {
-                System.out.println("Left To Right Diagonal Swipe");
-            } else if (diaValue == 2) {
-                System.out.println("Right To Left Diagonal Swipe");
-            } else if (diaValue == 3) {
-                System.out.println("Close");
-                Platform.exit();
-            }
-            if (vertValue == 1) {
-                System.out.println("Up to Down Swipe");
-            } else if (vertValue == 2) {
-                System.out.println("Down to Up Swipe");
-            }
-                });
-        MainScreen.getStage().addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            gestures.clicks(event);
-        });
         addPlugins();
-    }
-    public void observe() {
-        gestures.addObserver(this);
     }
     /**
      * Creating the Context Menu
@@ -225,21 +189,9 @@ public class ModPlugsController extends ClickObserver implements Observer, Initi
      * Setting events for the labels.
      */
     private void setEvents() {
-        /**
-        PauseTransition[] pauses = new PauseTransition[labels.size()];
-        for (PauseTransition pause: pauses) {
-            pause = new PauseTransition(Duration.seconds(1));
-        }
-         */
-        //System.out.println(pauses.length);
         for (Label label: labels) {
             ContextMenu contextMenu = createContextMenu(label);
-
             label.setContextMenu(contextMenu);
-            //label.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
-                //contextMenu.show(label, label.getLayoutX(), label.getLayoutY() - 50)
-           // );
-            //PauseTransition holdTimer = pauses[gridPane.getRowIndex(label)];
             PauseTransition holdTimer = new PauseTransition(Duration.seconds(1));
 
             holdTimer.setOnFinished(event -> contextMenu.show(label, label.getLayoutX(), label.getLayoutY() - 50));
@@ -254,21 +206,6 @@ public class ModPlugsController extends ClickObserver implements Observer, Initi
             });
 
         }
-    }
-    /**
-     * Changes the following plugin.
-     */
-    @FXML
-    public void editPlugin() {
-
-    }
-
-    /**
-     * Deletes the following plugin.
-     */
-    @FXML
-    public void deletePlugin() {
-
     }
 
     /**
@@ -329,24 +266,5 @@ public class ModPlugsController extends ClickObserver implements Observer, Initi
     @Override
     public void update(Date date) {
         timeLbl.setText(date.toString());
-    }
-
-    /**
-     * This method is called whenever the observed object is changed. An
-     * application calls an <tt>Observable</tt> object's
-     * <code>notifyObservers</code> method to have all the object's
-     * observers notified of the change.
-     *
-     * @param o   the observable object.
-     * @param arg an argument passed to the <code>notifyObservers</code>
-     */
-    //@Override
-    public void update(Observable o, Object arg) {
-        int value = ((Gestures) o).getClick();
-        if (value == 1) {
-            System.out.println("Single Click");
-        } else if (value == 2) {
-            System.out.println("Double Click");
-        }
     }
 }

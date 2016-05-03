@@ -78,8 +78,8 @@ public class AddPlugsController implements Observer, Initializable, NextScreen {
     @FXML
     public void addPlugin() {
         num++;
-        String resourceDir = "/home/touchmeister/resources";
-        //String resourceDir = "/home/cjwest/resources";
+        //String resourceDir = "/home/touchmeister/resources";
+        String resourceDir = "/home/cjwest/resources";
         String number = "" + num;
         File destDir = new File(resourceDir, number);
         Boolean success = destDir.mkdir();

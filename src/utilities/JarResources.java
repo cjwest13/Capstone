@@ -6,7 +6,7 @@ import java.util.zip.*;
 
 /**
  * JarResources: JarResources maps all resources included in a
- * Zip or Jar file. Additionaly, it provides a method to extract one
+ * Zip or Jar file. Additionally, it provides a method to extract one
  * as a blob.
  */
 public final class JarResources

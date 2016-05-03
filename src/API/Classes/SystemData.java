@@ -1,6 +1,4 @@
-package API;
-
-import controller.SystemDataInterface;
+package API.Classes;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +8,7 @@ import java.util.Date;
  * @author Clifton West
  * @version April 17, 2016.
  */
-public class SystemData implements SystemDataInterface {
+public class SystemData implements controller.Interface.SystemDataInterface {
 
     /**
      * Gets the date and time (24 hour) in the format of "DayOfTheWeek Month Day
