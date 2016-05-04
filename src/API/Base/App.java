@@ -25,10 +25,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import API.Observers.Observer;
 import java.io.IOException;
 import java.util.*;
-
+import API.Classes.Sound;
 import static java.lang.Math.random;
 
 /**
@@ -52,7 +52,7 @@ import static java.lang.Math.random;
 public class App extends Application {
 
     /** Arraylist of current observers*/
-    private static ArrayList<controller.Observers.Observer> observers = new ArrayList<>();
+    private static ArrayList<Observer> observers = new ArrayList<>();
 
     /** TImer Object */
     Timer timer = new Timer();
@@ -69,7 +69,8 @@ public class App extends Application {
     /** Date object that will hold the current date/time */
     private Date time;
 
-    private static controller.Classes.Sound sound;
+    /** Sound Object */
+    private static Sound sound;
     /**
      * Initializes the Main screen.
      * @param primaryStage  The current Stage.
@@ -102,7 +103,7 @@ public class App extends Application {
      * Setting the Sound
      * @param s the sound object begin set.
      */
-    public static void setSound(controller.Classes.Sound s) {
+    public static void setSound(Sound s) {
         sound = s;
     }
 
@@ -110,7 +111,7 @@ public class App extends Application {
      * Returns sound object.
      * @return sound
      */
-    public static controller.Classes.Sound getSound() {
+    public static Sound getSound() {
         return sound;
     }
 
@@ -196,7 +197,7 @@ public class App extends Application {
      * Static Method for Application's to add new observers.
      * @param observer New Observer.
      */
-    public static void addObserver(controller.Observers.Observer observer) {
+    public static void addObserver(Observer observer) {
         observers.add(observer);
     }
 
@@ -204,7 +205,7 @@ public class App extends Application {
      * Static Method for Applications to remove current Observers.
      * @param observer Current Observer.
      */
-    public static void removeObserver(controller.Observers.Observer observer) {
+    public static void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
@@ -212,7 +213,7 @@ public class App extends Application {
      * Notifies current observers about the time change.
      */
     private void notifyObservers() {
-        for (controller.Observers.Observer ob: observers) {
+        for (Observer ob: observers) {
             ob.update(time);
         }
     }
@@ -234,6 +235,12 @@ public class App extends Application {
         buildScreenSaver();
     }
 
+    /**
+     * Copyright (c) 2011, 2014 Oracle and/or its affiliates.
+     * All rights reserved. Use is subject to license terms.
+     * Modified a Java Class from Oracle to provide a screensaver using
+     * constant moving colored circles.
+     */
     public void buildScreenSaver() {
         if (sound != null) {
             sound.endAllSounds();
@@ -242,7 +249,6 @@ public class App extends Application {
         fd.setOnFinished(event -> {});
         Group root = new Group();
         Scene scene = new Scene(root, 1000, 1000, Color.BLACK);
-
         stage.setScene(scene);
         stage.setFullScreenExitHint("");
         stage.setFullScreen(true);

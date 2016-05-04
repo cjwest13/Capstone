@@ -7,7 +7,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import org.omg.CORBA.BooleanHolder;
-
+import API.Interface.GestureControl;
 import java.util.Observable;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author  Clifton West
  * @version March 20, 2016
  */
-public class Gestures extends Observable implements controller.Interface.GestureControl {
+public class Gestures extends Observable implements GestureControl {
 
     /** First Coordinate in the X Direction */
     private double firstX;

@@ -3,13 +3,13 @@ package API.Classes;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
-
+import API.Interface.WebData;
 /**
  * Class to get Images, html from the Web.
  * @author Clifton West
  * @version April 3, 2016.
  */
-public class Web implements controller.Interface.WebData {
+public class Web implements WebData {
 
     /** Viewer to display html content */
     private WebView browser;

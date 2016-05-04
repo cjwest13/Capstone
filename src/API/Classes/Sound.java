@@ -1,5 +1,6 @@
 package API.Classes;
 
+import API.Interface.SoundInterface;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * @author Clifton West
  * @version April 17, 2016.
  */
-public class Sound implements controller.Interface.SoundInterface {
+public class Sound implements SoundInterface {
 
     /** Arraylist for the all of the clips */
     private static ArrayList<Clip> sound;
@@ -108,6 +109,7 @@ public class Sound implements controller.Interface.SoundInterface {
     public void endSound(Clip clip) {
         clip.stop();
     }
+
     /**
      * Stops all Sounds.
      */

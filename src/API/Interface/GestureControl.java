@@ -1,13 +1,12 @@
 package API.Interface;
 
-import controller.Classes.Gestures;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 /**
  * Interface that contains empty methods for certain gesture controls.
- * <br> This interface doesn't not implement observer pattern. Only in {@link Gestures}.
+ * <br> This interface doesn't not implement observer pattern. Only in {@link API.Classes.Gestures} class.
  * @author  Clifton West
  * @version February 1, 2016
  */

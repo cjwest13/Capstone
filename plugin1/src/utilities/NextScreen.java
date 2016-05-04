@@ -34,7 +34,6 @@ public interface NextScreen {
             stage.show();
             stage.setFullScreenExitHint("");
             stage.setFullScreen(true);
-            //Main.setFxml(fxml);
         } catch (IOException ioe) {
             System.err.println("File not found");
         }
@@ -49,20 +48,6 @@ public interface NextScreen {
             ft.play();
             Scene scene = new Scene(loadScreen);
             stage.setScene(scene);
-            stage.setTitle(title);
-//            stage.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-//                gestures.mouseEntered(event.getX(), event.getY());
-//            });
-//            stage.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
-//                int value = gestures.diagonalSwipe(event.getX(), event.getY());
-//                if (value == 3) {
-//                    //System.out.println("AYY CLOSEEE");
-//                    stage.close();
-//                }
-//            });
-            //stage.addEventHandler(MouseEvent.ANY, handler);
-            //addEvents(stage);
-            //timeline.play();
             stage.show();
             stage.setFullScreenExitHint("");
             stage.setFullScreen(true);

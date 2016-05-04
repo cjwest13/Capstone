@@ -105,10 +105,6 @@ public class ModPlugsController implements Observer, Initializable, NextScreen {
                 MainController.changeAppData(gridPane.getRowIndex(label), true, result);
             }
         });
-        //MenuItem item2 = new MenuItem("Change Icon");
-        //item2.setOnAction(event -> {
-
-      //  });
         MenuItem item3 = new MenuItem("Change Description");
         item3.setOnAction(event -> {
             TextInputDialog dialog = makeDialog("Change Description", "Enter a new description for the plugin.", appData.get(gridPane.getRowIndex(label)).get(1));
@@ -143,7 +139,6 @@ public class ModPlugsController implements Observer, Initializable, NextScreen {
             Boolean check = numFile.delete();
             if (check) {
                 makeconfirmDialog("Deletion", "Deletion was successful");
-                //gridPane.getChildren().remove(label);
                 gridPane.getChildren().remove(label);
                 gridPane.getChildren().remove(icons.get(index));
             } else {

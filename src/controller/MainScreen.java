@@ -1,12 +1,8 @@
 package controller;
 
 
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import utilities.NextScreen;
+
 /**
  * Makes the main and first screen showed.
  * @author  Clifton West

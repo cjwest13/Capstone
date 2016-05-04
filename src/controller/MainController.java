@@ -26,6 +26,7 @@ import java.util.*;
  * @version October 3, 2015
  */
 public class MainController implements Initializable, NextScreen, Observer {
+
     /** AnchorPane representing the anchorpane in the fxml */
     @FXML
     private AnchorPane anchorPane;
